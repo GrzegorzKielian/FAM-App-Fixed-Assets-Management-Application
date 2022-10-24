@@ -40,9 +40,9 @@ namespace FAM_App
                 password = PasswdTxtBox.Password.ToString();
                 MessageBox.Show(password);
 
-                //MainMenu mainMenu = new MainMenu();
-                //mainMenu.Show();
-                //this.Close();
+                MainMenu mainMenu = new MainMenu();
+                mainMenu.Show();
+                this.Close();
             }
             catch (Exception ex)
             {

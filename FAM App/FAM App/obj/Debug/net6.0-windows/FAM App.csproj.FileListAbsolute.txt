@@ -19,3 +19,5 @@ C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\FAM App.pdb
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\FAM App.genruntimeconfig.cache
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\ref\FAM App.dll
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\MainMenu.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\MainMenu.baml
