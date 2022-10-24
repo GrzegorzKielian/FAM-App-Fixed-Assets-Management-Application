@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FAM_App"
         mc:Ignorable="d"
-         Title="LoginWindow" Height="600" Width="500" WindowStartupLocation="CenterScreen">
+        Title="LoginWindow" Height="600" Width="500" 
+        WindowStartupLocation="CenterScreen"
+        Background="#152238">
     <Window.Resources>
     </Window.Resources>
     <Grid>
-        <Border x:Name="BorderLoginWindow" Background="Black"  >
-
-        </Border>
-        <Border x:Name="Border2LoginWindow" Height="540" Width="440" >
+        <Border x:Name="Border2LoginWindow" Height="540" Width="440" 
+                BorderBrush="WhiteSmoke" BorderThickness="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.5*"/>
@@ -35,20 +35,31 @@
                     <RowDefinition Height="0.5*"/>
                     <RowDefinition Height="0.5*"/>
                 </Grid.RowDefinitions>
-                <Border x:Name="Border3LoginWindow" Grid.ColumnSpan="8" Grid.RowSpan="9" BorderBrush="#FF707070" BorderThickness="1"  Background="#FF4191E0"  
-                        Opacity="0.3"/>
-                <Label Content="Login:" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,0,0,0" FontSize="20" Foreground="#FF4191E0"/>
-                <TextBox x:Name="LoginTxtBox" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4" Margin="0,0,0,40" FontSize="20" 
-                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                <Label Content="Login:" Grid.Row="1" Grid.Column="2" 
+                       Grid.ColumnSpan="2" Margin="0,0,0,0" FontSize="20" 
+                       Foreground="WhiteSmoke"/>
+                <TextBox x:Name="LoginTxtBox" Grid.Row="2" Grid.Column="2" 
+                         Grid.ColumnSpan="4" Margin="0,0,0,40" FontSize="20" 
+                         VerticalContentAlignment="Center" 
+                         HorizontalContentAlignment="Center"/>
 
-                <Label Content="Haslo:" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,0,0,0" FontSize="20" Foreground="#FF4191E0"/>
-                <PasswordBox x:Name="PasswdTxtBox" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="4" Margin="0,0,0,40" FontSize="20" 
-                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Content="Haslo:" Grid.Row="3" Grid.Column="2" 
+                       Grid.ColumnSpan="2" Margin="0,0,0,0" FontSize="20" 
+                       Foreground="WhiteSmoke"/>
+                <PasswordBox x:Name="PasswdTxtBox" Grid.Row="4" 
+                             Grid.Column="2" Grid.ColumnSpan="4" 
+                             Margin="0,0,0,40" FontSize="20" 
+                             HorizontalContentAlignment="Center" 
+                             VerticalContentAlignment="Center"/>
 
-                <Button x:Name="ClearButton" Content="Wyczysc pola" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="4" Margin="10,0,10,40" 
-                        FontSize="20" Click="ClearButton_Click" Foreground="#FF4191E0"/>
-                <Button x:Name="LoginButton" Content="Zaloguj" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="6" Margin="5,5,5,5" 
-                        FontSize="35" Click="LoginButton_Click" Foreground="#FF4191E0"/>
+                <Button x:Name="ClearButton" Content="Wyczysc pola" 
+                        Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="4" 
+                        Margin="10,0,10,40" FontSize="20" 
+                        Click="ClearButton_Click" Foreground="#152238"/>
+                <Button x:Name="LoginButton" Content="Zaloguj" Grid.Row="6" 
+                        Grid.Column="1" Grid.ColumnSpan="6" Margin="5,5,5,5" 
+                        FontSize="35" Click="LoginButton_Click" 
+                        Foreground="#152238"/>
             </Grid>
         </Border>
     </Grid>
