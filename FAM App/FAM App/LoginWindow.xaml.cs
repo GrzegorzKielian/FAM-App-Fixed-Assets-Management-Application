@@ -19,9 +19,36 @@ namespace FAM_App
     /// </summary>
     public partial class LoginWindow : Window
     {
+        string login;
+        string password;
         public LoginWindow()
         {
             InitializeComponent();
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            LoginTxtBox.Text = String.Empty;
+            PasswdTxtBox.Clear();
+        }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                login = LoginTxtBox.Text;
+                password = PasswdTxtBox.Password.ToString();
+                MessageBox.Show(password);
+
+                //MainMenu mainMenu = new MainMenu();
+                //mainMenu.Show();
+                //this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("db error");
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
