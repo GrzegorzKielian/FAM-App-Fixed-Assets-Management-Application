@@ -34,7 +34,7 @@ namespace FAM_App
 
         private void ShowFixedAssets_Click(object sender, RoutedEventArgs e)
         {
-            //MainFrame.Content = new ShowFixedAssetsPage();
+            MainFrame.Content = new ShowFixedAssetsPage();
 
         }
 

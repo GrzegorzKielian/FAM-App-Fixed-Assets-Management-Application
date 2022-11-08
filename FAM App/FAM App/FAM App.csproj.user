@@ -16,6 +16,9 @@
     <Compile Update="MainMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="ShowFixedAssetsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="AddFixedAssetsPage.xaml">
@@ -25,6 +28,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainMenu.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ShowFixedAssetsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
