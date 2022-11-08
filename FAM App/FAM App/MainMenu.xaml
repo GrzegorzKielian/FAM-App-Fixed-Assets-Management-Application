@@ -7,11 +7,7 @@
         mc:Ignorable="d"
         Title="MainMenu" Height="1080" Width="1920" WindowStartupLocation="CenterScreen"
         WindowState="Maximized">
-    <Window.Resources>
-        <Style x:Key="dark" TargetType="DataGrid">
-            <Setter Property="Background" Value="#152238"/>
-        </Style>
-    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
@@ -25,37 +21,26 @@
         </Grid.RowDefinitions>
 
 
-        <DockPanel Grid.Row="0" Grid.ColumnSpan="2"
-                    Background="#152238">
-            <Menu DockPanel.Dock="Top" Background="WhiteSmoke" FontSize="15">
-                <MenuItem Header="Przegladaj srodki trwale" Click="ShowFixedAssets_Click"/>
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="2">
+            <Menu DockPanel.Dock="Top" Background="#dddddd" Foreground="#152238" FontSize="15" FontFamily="Tahoma" >
+                <MenuItem Header="Przegladaj srodki trwale" Click="ShowFixedAssets_Click" Height="30" />
                 <MenuItem Header="Dodaj nowe srodki trwale" Click="AddFixedAssets_Click">
-                    <MenuItem Header="Srodek trwały"/>
-                    <MenuItem Header="Pozostałe srodki trwale"/>
+                    <MenuItem Header="Srodek trwaly"/>
+                    <MenuItem Header="Pozostale srodki trwale"/>
                 </MenuItem>
-                <MenuItem Header="Edytuj srodki trwale" Click="EditFixedAssets_Click"/>
+                <MenuItem Header="Dodaj produkt" Click="AddProduct_Click"/>
                 <MenuItem Header="Raport" Click="Report_Click">
                     <MenuItem Header="Zestawienie"/>
-                    <MenuItem Header="Karta środka"/>
+                    <MenuItem Header="Karta srodka"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
 
         <Button x:Name="LogOut" Grid.Column="2"  Content="Wyloguj" FontSize="15" 
-                    Foreground="#152238" Click="LogOut_Click"/>
+                    Foreground="#152238" BorderThickness="0" Click="LogOut_Click" FontFamily="Tahoma" MouseEnter="LogOut_MouseEnter" MouseLeave="LogOut_MouseLeave"/>
 
-        <Border x:Name="BorderPanel" BorderBrush="WhiteSmoke" BorderThickness="1"  
-                Background="#152238" 
-                Grid.Column="0" Grid.Row="1"/>
+        <Frame x:Name="MainFrame" Grid.Row="1" Grid.ColumnSpan="3" Background="#152238" NavigationUIVisibility="Hidden"/>
 
-        <StackPanel Grid.Row="1" Margin="0,20">
-
-        </StackPanel>
-
-        <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
-            <DataGrid x:Name="datagrid1" Style="{StaticResource dark}" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-
-        </Border>
 
     </Grid>
 </Window>

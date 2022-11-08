@@ -11,8 +11,7 @@
     <Window.Resources>
     </Window.Resources>
     <Grid>
-        <Border x:Name="Border2LoginWindow" Height="540" Width="440" 
-                BorderBrush="WhiteSmoke" BorderThickness="1">
+        <Border x:Name="Border2LoginWindow" Height="540" Width="440" BorderBrush="#dddddd" BorderThickness="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.5*"/>
@@ -37,30 +36,31 @@
                 </Grid.RowDefinitions>
                 <Label Content="Login:" Grid.Row="1" Grid.Column="2" 
                        Grid.ColumnSpan="2" Margin="0,0,0,0" FontSize="20" 
-                       Foreground="WhiteSmoke"/>
+                       Foreground="#dddddd" FontFamily="Tahoma"/>
                 <TextBox x:Name="LoginTxtBox" Grid.Row="2" Grid.Column="2" 
                          Grid.ColumnSpan="4" Margin="0,0,0,40" FontSize="20" 
                          VerticalContentAlignment="Center" 
-                         HorizontalContentAlignment="Center"/>
+                         HorizontalContentAlignment="Center" Background="#dddddd"/>
 
                 <Label Content="Haslo:" Grid.Row="3" Grid.Column="2" 
                        Grid.ColumnSpan="2" Margin="0,0,0,0" FontSize="20" 
-                       Foreground="WhiteSmoke"/>
+                       Foreground="#dddddd" FontFamily="Tahoma"/>
                 <PasswordBox x:Name="PasswdTxtBox" Grid.Row="4" 
                              Grid.Column="2" Grid.ColumnSpan="4" 
                              Margin="0,0,0,40" FontSize="20" 
                              HorizontalContentAlignment="Center" 
-                             VerticalContentAlignment="Center"/>
+                             VerticalContentAlignment="Center" Background="#dddddd"/>
 
                 <Button x:Name="ClearButton" Content="Wyczysc pola" 
                         Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="4" 
-                        Margin="10,0,10,40" FontSize="20" 
+                        Margin="10,0,10,40" FontSize="20" FontFamily="Tahoma"
                         Click="ClearButton_Click" Foreground="#152238"/>
                 <Button x:Name="LoginButton" Content="Zaloguj" Grid.Row="6" 
                         Grid.Column="1" Grid.ColumnSpan="6" Margin="5,5,5,5" 
-                        FontSize="35" Click="LoginButton_Click" 
-                        Foreground="#152238"/>
+                        FontSize="35" FontFamily="Tahoma" 
+                        Click="LoginButton_Click" Foreground="#152238"/>
             </Grid>
         </Border>
     </Grid>
 </Window>
+
