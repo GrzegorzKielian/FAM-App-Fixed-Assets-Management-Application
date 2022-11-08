@@ -34,10 +34,7 @@ namespace FAM_App
 
         private void ShowFixedAssets_Click(object sender, RoutedEventArgs e)
         {
-            //DataBase dataBase = new DataBase();
-            DataTable FixedAssets = new DataTable("emp");
-            //FixedAssets = dataBase.DataBaseConnection(FixedAssets, 1);
-            datagrid1.ItemsSource = FixedAssets.DefaultView;
+
         }
 
         private void AddFixedAssets_Click(object sender, RoutedEventArgs e)

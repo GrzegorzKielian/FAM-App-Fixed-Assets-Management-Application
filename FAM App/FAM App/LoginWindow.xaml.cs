@@ -36,9 +36,6 @@ namespace FAM_App
         {
             try
             {
-                login = LoginTxtBox.Text;
-                password = PasswdTxtBox.Password.ToString();
-                MessageBox.Show(password);
 
                 MainMenu mainMenu = new MainMenu();
                 mainMenu.Show();
