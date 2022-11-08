@@ -28,12 +28,12 @@
         <DockPanel Grid.Row="0" Grid.ColumnSpan="2"
                     Background="#152238">
             <Menu DockPanel.Dock="Top" Background="WhiteSmoke" FontSize="15">
-                <MenuItem Header="Przegladaj środki trwałe" Click="ShowFixedAssets_Click"/>
-                <MenuItem Header="Dodaj nowe środki trwałe" Click="AddFixedAssets_Click">
-                    <MenuItem Header="Środek trwały"/>
-                    <MenuItem Header="Pozostałe środki trwałe"/>
+                <MenuItem Header="Przegladaj srodki trwale" Click="ShowFixedAssets_Click"/>
+                <MenuItem Header="Dodaj nowe srodki trwale" Click="AddFixedAssets_Click">
+                    <MenuItem Header="Srodek trwały"/>
+                    <MenuItem Header="Pozostałe srodki trwale"/>
                 </MenuItem>
-                <MenuItem Header="Edytuj środeki trwałe" Click="EditFixedAssets_Click"/>
+                <MenuItem Header="Edytuj srodki trwale" Click="EditFixedAssets_Click"/>
                 <MenuItem Header="Raport" Click="Report_Click">
                     <MenuItem Header="Zestawienie"/>
                     <MenuItem Header="Karta środka"/>
