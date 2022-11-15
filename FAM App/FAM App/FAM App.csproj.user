@@ -10,10 +10,10 @@
     <Compile Update="Pages\AddFixedAssetsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="LoginWindow.xaml.cs">
+    <Compile Update="Windows\LoginWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MainMenu.xaml.cs">
+    <Compile Update="Windows\MainMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\AddProductsPage.xaml.cs">
@@ -30,10 +30,10 @@
     <Page Update="Pages\AddFixedAssetsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="LoginWindow.xaml">
+    <Page Update="Windows\LoginWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainMenu.xaml">
+    <Page Update="Windows\MainMenu.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\AddProductsPage.xaml">

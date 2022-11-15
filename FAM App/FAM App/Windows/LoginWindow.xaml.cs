@@ -19,8 +19,6 @@ namespace FAM_App
     /// </summary>
     public partial class LoginWindow : Window
     {
-        string login;
-        string password;
         public LoginWindow()
         {
             InitializeComponent();
