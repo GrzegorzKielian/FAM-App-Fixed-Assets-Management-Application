@@ -1,0 +1,20 @@
+﻿FAM App
+
+
+winexe
+C#
+.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\
+FAM_App
+none
+false
+TRACE;RELEASE;NET;NET6_0;NETCOREAPP
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\App.xaml
+6149289080
+
+96158608
+195494334426
+Pages\AddFixedAssetsPage.xaml;Pages\AddProductsPage.xaml;Pages\ShowFixedAssetsPage.xaml;Pages\ShowProductsPage.xaml;Windows\LoginWindow.xaml;Windows\MainMenu.xaml;
+
+False
+

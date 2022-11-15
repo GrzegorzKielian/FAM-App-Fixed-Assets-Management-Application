@@ -1,0 +1,38 @@
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\bin\Release\net6.0-windows\FAM App.exe
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\bin\Release\net6.0-windows\FAM App.deps.json
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\bin\Release\net6.0-windows\FAM App.runtimeconfig.json
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\bin\Release\net6.0-windows\FAM App.dll
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\bin\Release\net6.0-windows\FAM App.pdb
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\bin\Release\net6.0-windows\System.Data.SqlClient.dll
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\bin\Release\net6.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\bin\Release\net6.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\bin\Release\net6.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\bin\Release\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\bin\Release\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\FAM App.csproj.AssemblyReference.cache
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\AddFixedAssetsPage.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\AddProductsPage.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\ShowFixedAssetsPage.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\ShowProductsPage.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Windows\LoginWindow.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Windows\MainMenu.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\App.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\FAM App_MarkupCompile.cache
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\FAM App_MarkupCompile.lref
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\AddFixedAssetsPage.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\AddProductsPage.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\ShowFixedAssetsPage.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\ShowProductsPage.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Windows\LoginWindow.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Windows\MainMenu.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\FAM App.g.resources
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\FAM App.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\FAM App.AssemblyInfoInputs.cache
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\FAM App.AssemblyInfo.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\FAM App.csproj.CoreCompileInputs.cache
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\FAM App.csproj.CopyComplete
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\FAM App.dll
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\refint\FAM App.dll
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\FAM App.pdb
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\FAM App.genruntimeconfig.cache
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\ref\FAM App.dll

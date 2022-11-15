@@ -62,11 +62,11 @@ namespace FAM_App
         }
         private void ShowSupplier_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Content = new ShowSupplierPage();
         }
         private void AddSupplier_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Content = new AddSupplierPage();
         }
 
         private void LogOut_MouseEnter(object sender, RoutedEventArgs e)

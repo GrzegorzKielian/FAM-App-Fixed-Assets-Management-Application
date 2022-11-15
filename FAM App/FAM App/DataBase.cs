@@ -52,7 +52,7 @@ namespace FAM_App
             return dataTable;
         }
 
-        public void AddSupplierToBase()
+        public void AddSupplierToBase(String Name, String City, String PostCode, String Street)
         {
             //SqlCommand cmd = DataBaseConnection();
         }
@@ -60,7 +60,7 @@ namespace FAM_App
         public DataTable DataBaseShowSuppliers(DataTable dataTable)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT * FROM Dostawcy;";
+            String data = "SELECT * FROM Dostawca;";
             cmd.CommandText = data;
 
             SqlDataAdapter sda = new SqlDataAdapter(cmd);

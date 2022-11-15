@@ -10,6 +10,12 @@
     <Compile Update="Pages\AddFixedAssetsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\AddSupplierPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ShowSupplierPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\LoginWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,6 +34,12 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\AddFixedAssetsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\AddSupplierPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ShowSupplierPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\LoginWindow.xaml">

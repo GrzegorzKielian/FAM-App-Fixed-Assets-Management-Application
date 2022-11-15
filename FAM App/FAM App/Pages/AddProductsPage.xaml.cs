@@ -29,7 +29,7 @@ namespace FAM_App.Pages
         {
             try
             {
-                if (MessageBox.Show("Czy na pewno chcesz dodać produkt do bazy?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Czy na pewno chcesz dodać nowy produkt do bazy danych?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     string Name = NameTextBox.Text;
                     string Brand = BrandTextBox.Text;
