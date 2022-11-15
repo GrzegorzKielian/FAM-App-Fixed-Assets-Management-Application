@@ -34,3 +34,5 @@ C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\ShowFixedAssetsPage.baml
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\AddProductsPage.g.cs
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\AddProductsPage.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\ShowProductsPage.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\ShowProductsPage.baml

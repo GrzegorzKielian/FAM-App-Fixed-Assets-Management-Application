@@ -14,24 +14,25 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FAM_App
+namespace FAM_App.Pages
 {
     /// <summary>
-    /// Logika interakcji dla klasy ShowFixedAssetsPage.xaml
+    /// Logika interakcji dla klasy ShowProductsPage.xaml
     /// </summary>
-    public partial class ShowFixedAssetsPage : Page
+    public partial class ShowProductsPage : Page
     {
-        public ShowFixedAssetsPage()
+        public ShowProductsPage()
         {
             InitializeComponent();
             LoadData();
         }
+
         private void LoadData()
         {
             DataBase dataBase = new DataBase();
-            DataTable FixedAssets = new DataTable("emp");
-            FixedAssets = dataBase.DataBaseShowFixedAssets(FixedAssets);
-            FixedAssetsDataGrid.ItemsSource = FixedAssets.DefaultView;
+            DataTable Products = new DataTable("emp");
+            Products = dataBase.DataBaseShowProducts(Products);
+            ProductsDataGrid.ItemsSource = Products.DefaultView;
         }
     }
 }

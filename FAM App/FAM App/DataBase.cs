@@ -35,5 +35,17 @@ namespace FAM_App
             //SqlCommand cmd = DataBaseConnection();
         }
 
+        public DataTable DataBaseShowProducts(DataTable dataTable)
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = "SELECT * FROM Produkty;";
+            cmd.CommandText = data;
+
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dataTable = new DataTable("emp");
+            sda.Fill(dataTable);
+            return dataTable;
+        }
+
     }
 }

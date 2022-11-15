@@ -29,12 +29,12 @@
                     <MenuItem Header="Pozostale srodki trwale"/>
                 </MenuItem>
                 <MenuItem Header="Produkty">
-                    <MenuItem Header="Przegladaj produkty"/>
+                    <MenuItem Header="Przegladaj produkty" Click="ShowProducts_Click"/>
                     <MenuItem Header="Dodaj produkt" Click="AddProduct_Click"/>
                 </MenuItem>
-                <MenuItem Header="Raport" Click="Report_Click">
-                    <MenuItem Header="Zestawienie"/>
-                    <MenuItem Header="Karta srodka"/>
+                <MenuItem Header="Raport" >
+                    <MenuItem Header="Zestawienie" Click="FixedAssetsGroupList_Click"/>
+                    <MenuItem Header="Karta srodka" Click="MenuItem_Click"/>
                 </MenuItem>
             </Menu>
         </DockPanel>

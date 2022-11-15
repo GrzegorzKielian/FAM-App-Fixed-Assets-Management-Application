@@ -9,6 +9,20 @@
         WindowStartupLocation="CenterScreen"
         Background="#152238">
     <Window.Resources>
+        <Style x:Key="darkLabel" TargetType="Label">
+            <Setter Property="Foreground" Value="#dddddd"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style x:Key="darkTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="#dddddd"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style x:Key="darkButton" TargetType="Button">
+            <Setter Property="Foreground" Value="#152238"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Border x:Name="Border2LoginWindow" Height="540" Width="440" BorderBrush="#dddddd" BorderThickness="1">
@@ -35,16 +49,14 @@
                     <RowDefinition Height="0.5*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Login:" Grid.Row="1" Grid.Column="2" 
-                       Grid.ColumnSpan="2" Margin="0,0,0,0" FontSize="20" 
-                       Foreground="#dddddd" FontFamily="Tahoma"/>
+                       Grid.ColumnSpan="2" Style="{StaticResource darkLabel}" />
                 <TextBox x:Name="LoginTxtBox" Grid.Row="2" Grid.Column="2" 
-                         Grid.ColumnSpan="4" Margin="0,0,0,40" FontSize="20" 
+                         Grid.ColumnSpan="4" Margin="0,0,0,40" 
                          VerticalContentAlignment="Center" 
-                         HorizontalContentAlignment="Center" Background="#dddddd"/>
+                         HorizontalContentAlignment="Center" Style="{StaticResource darkTextBox}"/>
 
                 <Label Content="Haslo:" Grid.Row="3" Grid.Column="2" 
-                       Grid.ColumnSpan="2" Margin="0,0,0,0" FontSize="20" 
-                       Foreground="#dddddd" FontFamily="Tahoma"/>
+                       Grid.ColumnSpan="2" Style="{StaticResource darkLabel}"/>
                 <PasswordBox x:Name="PasswdTxtBox" Grid.Row="4" 
                              Grid.Column="2" Grid.ColumnSpan="4" 
                              Margin="0,0,0,40" FontSize="20" 
@@ -53,12 +65,12 @@
 
                 <Button x:Name="ClearButton" Content="Wyczysc pola" 
                         Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="4" 
-                        Margin="10,0,10,40" FontSize="20" FontFamily="Tahoma"
-                        Click="ClearButton_Click" Foreground="#152238"/>
+                        Margin="10,0,10,40" FontSize="20" Style="{StaticResource darkButton}"
+                        Click="ClearButton_Click" />
                 <Button x:Name="LoginButton" Content="Zaloguj" Grid.Row="6" 
                         Grid.Column="1" Grid.ColumnSpan="6" Margin="5,5,5,5" 
-                        FontSize="35" FontFamily="Tahoma" 
-                        Click="LoginButton_Click" Foreground="#152238"/>
+                        FontSize="35" Style="{StaticResource darkButton}" 
+                        Click="LoginButton_Click" />
             </Grid>
         </Border>
     </Grid>

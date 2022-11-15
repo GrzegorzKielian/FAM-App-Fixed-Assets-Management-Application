@@ -36,7 +36,6 @@ namespace FAM_App
         private void ShowFixedAssets_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new ShowFixedAssetsPage();
-
         }
 
         private void AddFixedAssets_Click(object sender, RoutedEventArgs e)
@@ -48,12 +47,19 @@ namespace FAM_App
         {
             MainFrame.Content = new AddProductsPage();
         }
+        private void ShowProducts_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new ShowProductsPage();
+        }
 
-        private void Report_Click(object sender, RoutedEventArgs e)
+        private void FixedAssetsGroupList_Click(object sender, RoutedEventArgs e)
         {
 
         }
+        private void ChosenFixedAssetsCard_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
         private void LogOut_MouseEnter(object sender, RoutedEventArgs e)
         {
             LogOut.BorderThickness = new Thickness(1);
@@ -63,5 +69,7 @@ namespace FAM_App
         {
             LogOut.BorderThickness = new Thickness(0);
         }
+
+
     }
 }
