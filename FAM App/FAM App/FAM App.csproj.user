@@ -7,7 +7,7 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="AddFixedAssetsPage.xaml.cs">
+    <Compile Update="Pages\AddFixedAssetsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="LoginWindow.xaml.cs">
@@ -16,12 +16,12 @@
     <Compile Update="MainMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ShowFixedAssetsPage.xaml.cs">
+    <Compile Update="Pages\ShowFixedAssetsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="AddFixedAssetsPage.xaml">
+    <Page Update="Pages\AddFixedAssetsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="LoginWindow.xaml">
@@ -30,7 +30,7 @@
     <Page Update="MainMenu.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="ShowFixedAssetsPage.xaml">
+    <Page Update="Pages\ShowFixedAssetsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

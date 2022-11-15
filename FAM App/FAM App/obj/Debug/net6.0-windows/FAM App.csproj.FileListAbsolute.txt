@@ -27,8 +27,8 @@ C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\AddFixedAssetsPage.g.cs
-C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\ShowFixedAssetsPage.g.cs
-C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\AddFixedAssetsPage.baml
-C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\ShowFixedAssetsPage.baml
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\FAM App.csproj.CopyComplete
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\AddFixedAssetsPage.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\ShowFixedAssetsPage.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\AddFixedAssetsPage.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\ShowFixedAssetsPage.baml
