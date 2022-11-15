@@ -16,6 +16,9 @@
     <Compile Update="MainMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\AddProducts.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\ShowFixedAssetsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,6 +31,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainMenu.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\AddProducts.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\ShowFixedAssetsPage.xaml">
