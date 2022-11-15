@@ -18,6 +18,11 @@ namespace FAM_App
             return cmd;
         }
 
+        public void AddFixedAssetsToBase()
+        {
+            //SqlCommand cmd = DataBaseConnection();
+        }
+
         public DataTable DataBaseShowFixedAssets(DataTable dataTable)
         {
             SqlCommand cmd = DataBaseConnection();
@@ -47,5 +52,21 @@ namespace FAM_App
             return dataTable;
         }
 
+        public void AddSupplierToBase()
+        {
+            //SqlCommand cmd = DataBaseConnection();
+        }
+
+        public DataTable DataBaseShowSuppliers(DataTable dataTable)
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = "SELECT * FROM Dostawcy;";
+            cmd.CommandText = data;
+
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dataTable = new DataTable("emp");
+            sda.Fill(dataTable);
+            return dataTable;
+        }
     }
 }

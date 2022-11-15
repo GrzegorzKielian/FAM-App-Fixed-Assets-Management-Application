@@ -32,9 +32,13 @@
                     <MenuItem Header="Przegladaj produkty" Click="ShowProducts_Click"/>
                     <MenuItem Header="Dodaj produkt" Click="AddProduct_Click"/>
                 </MenuItem>
+                <MenuItem Header="Dostawcy">
+                    <MenuItem Header="Przegladaj dostawców" Click="ShowSupplier_Click"/>
+                    <MenuItem Header="Dodaj dostawce" Click="AddSupplier_Click"/>
+                </MenuItem>
                 <MenuItem Header="Raport" >
-                    <MenuItem Header="Zestawienie" Click="FixedAssetsGroupList_Click"/>
-                    <MenuItem Header="Karta srodka" Click="MenuItem_Click"/>
+                    <MenuItem Header="Zestawienie" Click="FixedAssetsStatement_Click"/>
+                    <MenuItem Header="Karta srodka" Click="FixedAssetsCard_Click"/>
                 </MenuItem>
             </Menu>
         </DockPanel>

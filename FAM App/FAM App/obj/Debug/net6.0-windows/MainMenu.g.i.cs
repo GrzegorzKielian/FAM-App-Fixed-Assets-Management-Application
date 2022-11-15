@@ -122,7 +122,7 @@ namespace FAM_App {
             case 5:
             
             #line 35 "..\..\..\MainMenu.xaml"
-            ((System.Windows.Controls.MenuItem)(target)).Click += new System.Windows.RoutedEventHandler(this.FixedAssetsGroupList_Click);
+            ((System.Windows.Controls.MenuItem)(target)).Click += new System.Windows.RoutedEventHandler(this.FixedAssetsStatement_Click);
             
             #line default
             #line hidden

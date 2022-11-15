@@ -52,14 +52,23 @@ namespace FAM_App
             MainFrame.Content = new ShowProductsPage();
         }
 
-        private void FixedAssetsGroupList_Click(object sender, RoutedEventArgs e)
+        private void FixedAssetsStatement_Click(object sender, RoutedEventArgs e)
         {
 
         }
-        private void ChosenFixedAssetsCard_Click(object sender, RoutedEventArgs e)
+        private void FixedAssetsCard_Click(object sender, RoutedEventArgs e)
         {
 
         }
+        private void ShowSupplier_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void AddSupplier_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void LogOut_MouseEnter(object sender, RoutedEventArgs e)
         {
             LogOut.BorderThickness = new Thickness(1);
