@@ -30,7 +30,7 @@ namespace FAM_App
         {
             DataBase dataBase = new DataBase();
             DataTable FixedAssets = new DataTable("emp");
-            FixedAssets = dataBase.DataBaseSelect(FixedAssets);
+            FixedAssets = dataBase.DataBaseShowFixedAssets(FixedAssets);
             datagrid1.ItemsSource = FixedAssets.DefaultView;
         }
     }

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\App.xaml
-4-822676577
+5511470012
 
-71011598219
+8916307159
 195494334426
-LoginWindow.xaml;MainMenu.xaml;Pages\AddFixedAssetsPage.xaml;Pages\ShowFixedAssetsPage.xaml;
+LoginWindow.xaml;MainMenu.xaml;Pages\AddFixedAssetsPage.xaml;Pages\AddProductsPage.xaml;Pages\ShowFixedAssetsPage.xaml;
 
 False
 

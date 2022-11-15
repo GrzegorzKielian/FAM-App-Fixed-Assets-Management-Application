@@ -1,0 +1,90 @@
+﻿<Page x:Class="FAM_App.Pages.AddProductsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FAM_App.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="1034" d:DesignWidth="1920"
+      Title="AddProductsPage">
+
+    <Page.Resources>
+        <Style x:Key="darkTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="#dddddd"/>
+        </Style>
+        <Style x:Key="darkLabel" TargetType="Label">
+            <Setter Property="Foreground" Value="#dddddd"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border x:Name="BorderPanel" BorderBrush="WhiteSmoke" BorderThickness="1"  
+                Background="#152238" 
+                Grid.Column="0" Grid.Row="1"/>
+
+        <StackPanel Grid.Row="1" Margin="0,20">
+
+        </StackPanel>
+
+        <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Nazwa:" Grid.Row="0"  FontFamily="Tahoma" Margin="20,0,0,0" 
+                       VerticalAlignment="Center" FontSize="15" 
+                       Style="{StaticResource darkLabel}"/>
+                <TextBox x:Name="NameTextBox" Grid.Row="0" Height="25" Width="310" 
+                         Margin="80,0,0,0" HorizontalAlignment="Left" 
+                         VerticalAlignment="Center" VerticalContentAlignment="Center" 
+                         Style="{StaticResource darkTextBox }"/>
+
+                <Label Content="Marka:" Grid.Row="1" FontFamily="Tahoma" Margin="20,0,0,0"
+                       VerticalAlignment="Center" FontSize="15" 
+                       Style="{StaticResource darkLabel}"/>
+                <TextBox x:Name="BrandTextBox" Grid.Row="1" Height="25" Width="310" 
+                         Margin="80,0,0,0" HorizontalAlignment="Left" 
+                         VerticalAlignment="Center" VerticalContentAlignment="Center"
+                         Style="{StaticResource darkTextBox }"/>
+
+                <Label Content="Model:" Grid.Row="2" FontFamily="Tahoma" Margin="20,0,0,0"
+                       VerticalAlignment="Center" FontSize="15" 
+                       Style="{StaticResource darkLabel}"/>
+                <TextBox x:Name="ModelTextBox" Grid.Row="2" Height="25" Width="310" 
+                         Margin="80,0,0,0" HorizontalAlignment="Left" 
+                         VerticalAlignment="Center" VerticalContentAlignment="Center"
+                         Style="{StaticResource darkTextBox }"/>
+
+                <Label Content="Rok Produkcji:" Grid.Row="3" FontFamily="Tahoma" 
+                       Margin="20,0,0,0" VerticalAlignment="Center" FontSize="15"
+                       Style="{StaticResource darkLabel}"/>
+                <TextBox x:Name="YearTextBox" Grid.Row="3" Height="25" Width="310" 
+                         Margin="130,0,0,0" HorizontalAlignment="Left" 
+                         VerticalAlignment="Center" VerticalContentAlignment="Center"
+                         Style="{StaticResource darkTextBox }"/>
+
+                <Label Content="Opis:" Grid.Row="4" FontFamily="Tahoma" Margin="20,0,0,0" 
+                       VerticalAlignment="Center" FontSize="15" Style="{StaticResource darkLabel}"/>
+                <TextBox x:Name="DescriptionTextBox" Grid.Row="4" Height="75" Width="620" 
+                         Margin="80,0,0,0" HorizontalAlignment="Left" 
+                         VerticalAlignment="Center" VerticalContentAlignment="Center" 
+                         MaxLength="300" TextWrapping="Wrap" Style="{StaticResource darkTextBox }"/>
+
+                <Button x:Name="AddProduct" Content="Dodaj produkt" Grid.Row="5" 
+                        Height="30" Width="150" Margin="0,0,50,0" FontFamily="Tahoma" 
+                        FontSize="15" HorizontalAlignment="Right" Click="AddProduct_Click"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

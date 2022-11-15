@@ -24,11 +24,14 @@
         <DockPanel Grid.Row="0" Grid.ColumnSpan="2">
             <Menu DockPanel.Dock="Top" Background="#dddddd" Foreground="#152238" FontSize="15" FontFamily="Tahoma" >
                 <MenuItem Header="Przegladaj srodki trwale" Click="ShowFixedAssets_Click" Height="30" />
-                <MenuItem Header="Dodaj nowe srodki trwale" Click="AddFixedAssets_Click">
-                    <MenuItem Header="Srodek trwaly"/>
+                <MenuItem Header="Dodaj nowe srodki trwale">
+                    <MenuItem Header="Srodek trwaly" Click="AddFixedAssets_Click"/>
                     <MenuItem Header="Pozostale srodki trwale"/>
                 </MenuItem>
-                <MenuItem Header="Dodaj produkt" Click="AddProduct_Click"/>
+                <MenuItem Header="Produkty">
+                    <MenuItem Header="Przegladaj produkty"/>
+                    <MenuItem Header="Dodaj produkt" Click="AddProduct_Click"/>
+                </MenuItem>
                 <MenuItem Header="Raport" Click="Report_Click">
                     <MenuItem Header="Zestawienie"/>
                     <MenuItem Header="Karta srodka"/>

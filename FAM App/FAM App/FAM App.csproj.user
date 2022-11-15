@@ -16,7 +16,7 @@
     <Compile Update="MainMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\AddProducts.xaml.cs">
+    <Compile Update="Pages\AddProductsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\ShowFixedAssetsPage.xaml.cs">
@@ -33,7 +33,7 @@
     <Page Update="MainMenu.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\AddProducts.xaml">
+    <Page Update="Pages\AddProductsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\ShowFixedAssetsPage.xaml">

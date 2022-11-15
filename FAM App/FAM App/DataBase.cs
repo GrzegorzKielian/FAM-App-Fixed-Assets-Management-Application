@@ -18,16 +18,21 @@ namespace FAM_App
             return cmd;
         }
 
-        public DataTable DataBaseSelect(DataTable dataTable)
+        public DataTable DataBaseShowFixedAssets(DataTable dataTable)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT * FROM information_schema.tables;";
+            String data = "SELECT * FROM Srodki_Trwale;";
             cmd.CommandText = data;
 
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dataTable = new DataTable("emp");
             sda.Fill(dataTable);
             return dataTable;
+        }
+
+        public void AddProductToBase(String Name, String Brand, String Model, String Descritpion, String Year)
+        {
+            //SqlCommand cmd = DataBaseConnection();
         }
 
     }

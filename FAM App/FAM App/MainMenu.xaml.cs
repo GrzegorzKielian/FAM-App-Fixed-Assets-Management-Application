@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FAM_App.Pages;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace FAM_App
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Content = new AddProductsPage();
         }
 
         private void Report_Click(object sender, RoutedEventArgs e)
