@@ -45,5 +45,9 @@ namespace FAM_App.Pages
                 MessageBox.Show(ex.ToString());
             }
         }
+        private void openFile_Click(object sender, RoutedEventArgs e)
+        {
+            //System.Diagnostics.Process.Start(appPath);
+        }
     }
 }

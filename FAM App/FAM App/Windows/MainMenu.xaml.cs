@@ -44,7 +44,7 @@ namespace FAM_App
         }
         private void AddOtherFixedAssets_Click(object sender, RoutedEventArgs e)
         {
-            
+            MainFrame.Content = new AddOtherFixedAssetsPage();
         }
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)

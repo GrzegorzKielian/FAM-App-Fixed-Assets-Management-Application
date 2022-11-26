@@ -211,9 +211,9 @@
                     </Grid>
                 </Border>
 
-                <Button x:Name="AddFixedAssetsButton" Content="Dodaj srodek trwaly" Grid.Row="6" Grid.Column="3"
+                <Button x:Name="AddOtherFixedAssetsButton" Content="Dodaj srodek trwaly" Grid.Row="6" Grid.Column="3"
                         Height="30" Width="150" Margin="0,0,50,0" FontFamily="Tahoma" 
-                        FontSize="15" HorizontalAlignment="Right" Click="AddFixedAsset_Click" />
+                        FontSize="15" HorizontalAlignment="Right" Click="AddOtherFixedAsset_Click" />
 
             </Grid>
         </Border>
