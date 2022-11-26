@@ -34,5 +34,50 @@ namespace FAM_App.Pages
             Suppliers = dataBase.DataBaseShowSuppliers(Suppliers);
             SuppliersDataGrid.ItemsSource = Suppliers.DefaultView;
         }
+
+        private void ByName_Checked(object sender, RoutedEventArgs e)
+        {
+            ByName_TxtBox.IsEnabled = true;
+        }
+
+        private void ByCity_Checked(object sender, RoutedEventArgs e)
+        {
+            ByCity_TxtBox.IsEnabled = true;
+        }
+
+        private void ByPostCode_Checked(object sender, RoutedEventArgs e)
+        {
+            ByPostCode_TxtBox.IsEnabled = true;
+        }
+
+        private void ByStreet_Checked(object sender, RoutedEventArgs e)
+        {
+            ByStreet_TxtBox.IsEnabled = true;
+        }
+
+
+        private void ByName_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ByName_TxtBox.IsEnabled = false;
+        }
+
+        private void ByCity_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ByCity_TxtBox.IsEnabled = false;
+        }
+
+        private void ByPostCode_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ByPostCode_TxtBox.IsEnabled = false;
+        }
+
+        private void ByStreet_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ByStreet_TxtBox.IsEnabled = false;
+        }
+        private void Search_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

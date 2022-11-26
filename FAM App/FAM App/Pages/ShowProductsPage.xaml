@@ -12,21 +12,55 @@
         <Style x:Key="dark" TargetType="DataGrid">
             <Setter Property="Background" Value="#152238"/>
         </Style>
+        <Style x:Key="darkTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="#dddddd"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+            <Setter Property="IsEnabled" Value="False"/>
+        </Style>
+        <Style x:Key="darkCheckbox" TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#dddddd"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="0.1*"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border x:Name="BorderPanel" BorderBrush="WhiteSmoke" BorderThickness="1"  
-                Background="#152238" 
+                Background="#152238"
                 Grid.Column="0" Grid.Row="1"/>
 
-        <StackPanel Grid.Row="1" Margin="0,20">
+        <StackPanel Grid.Row="1" Margin="0,50">
+            <CheckBox x:Name="ByName" Style="{StaticResource darkCheckbox}" Unchecked="ByName_Unchecked" Checked="ByName_Checked">
+                <TextBlock Text="Wyszukaj po nazwie" TextWrapping="Wrap"/>
+            </CheckBox>
+            <TextBox x:Name="ByName_TxtBox" Style="{StaticResource darkTextBox }"/>
 
+            <CheckBox x:Name="ByBrand" Style="{StaticResource darkCheckbox}" Unchecked="ByBrand_Unchecked" Checked="ByBrand_Checked">
+                <TextBlock Text="Wyszukaj po marce" TextWrapping="Wrap"/>
+            </CheckBox>
+            <TextBox x:Name="ByBrand_TxtBox" Style="{StaticResource darkTextBox}"/>
+
+            <CheckBox x:Name="ByModel" Style="{StaticResource darkCheckbox}" Unchecked="ByModel_Unchecked" Checked="ByModel_Checked">
+                <TextBlock Text="Wyszukaj po modelu" TextWrapping="Wrap"/>
+            </CheckBox>
+            <TextBox x:Name="ByModel_TxtBox" Style="{StaticResource darkTextBox}"/>
+
+            <CheckBox x:Name="ByYear" Style="{StaticResource darkCheckbox}" Unchecked="ByYear_Unchecked" Checked="ByYear_Checked">
+                <TextBlock Text="Wyszukaj po roku produkcji" TextWrapping="Wrap"/>
+            </CheckBox>
+            <TextBox x:Name="ByYear_TxtBox" Style="{StaticResource darkTextBox}"/>
+
+            <Button x:Name="Search_Button" Content="Wyszukaj" Height="25" FontSize="15" FontFamily="Tahoma" Click="Search_Button_Click"/>
         </StackPanel>
 
         <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
