@@ -9,14 +9,65 @@
       Title="AddFixedAssetsPage">
 
     <Page.Resources>
-        <Style x:Key="dark" TargetType="DataGrid">
-            <Setter Property="Background" Value="#152238"/>
+        <Style x:Key="darkTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="#dddddd"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Grid.Column" Value="3"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="310"/>
+            <Setter Property="Height" Value="25"/>
         </Style>
+        <Style x:Key="darkLabelEnter" TargetType="Label">
+            <Setter Property="Foreground" Value="#dddddd"/>
+            <Setter Property="Grid.Column" Value="2"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style x:Key="darkLabelSelect" TargetType="Label">
+            <Setter Property="Foreground" Value="#dddddd"/>
+            <Setter Property="Grid.Column" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style x:Key="darkCombobox" TargetType="ComboBox">
+            <Setter Property="Foreground" Value="#dddddd"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="25"/>
+        </Style>
+        <Style x:Key="darkDatePicker" TargetType="DatePicker">
+            <Setter Property="Background" Value="#dddddd"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Grid.Column" Value="3"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="310"/>
+            <Setter Property="Height" Value="25"/>
+        </Style>
+        <Style x:Key="darkTextBlock" TargetType="TextBlock">
+            <Setter Property="Background" Value="#dddddd"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="620"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
-            <ColumnDefinition />
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -30,7 +81,159 @@
         </StackPanel>
 
         <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border x:Name="FixedAssets_Data" Grid.Row="0" Grid.ColumnSpan="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Data wprowadzenia środka:" Grid.Column="0" Style="{StaticResource darkLabelEnter}"/>
+                        <TextBox x:Name="Current_Date" Grid.Column="1" Style="{StaticResource darkTextBox}" Width="200" IsEnabled="False"/>
+                        <Label Content="Kod środka:" Grid.Column="2" Style="{StaticResource darkLabelEnter}"/>
+                        <TextBox x:Name="FixedAsset_Code" Grid.Column="3" Style="{StaticResource darkTextBox}" Width="200" IsEnabled="False"/>
+                    </Grid>
+                </Border>
 
+                <Border x:Name="FixedAssets_Classification" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,40,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.4*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Grupa:" Grid.Column="0" Style="{StaticResource darkLabelSelect}"/>
+                        <ComboBox Name="Group" Grid.Column="1" Style="{StaticResource darkCombobox}">
+                        </ComboBox>
+
+                        <Label Content="Podgrupa:" Grid.Column="2" Style="{StaticResource darkLabelSelect}"/>
+                        <ComboBox Name="Subgroup" Grid.Column="3" Style="{StaticResource darkCombobox}">
+                        </ComboBox>
+
+                        <Label Content="Rodzaj:" Grid.Column="4" Style="{StaticResource darkLabelSelect}"/>
+                        <ComboBox Name="Type" Grid.Column="5" Style="{StaticResource darkCombobox}">
+                        </ComboBox>
+                    </Grid>
+                </Border>
+                <Label Content="Produkt:" Grid.Row="2" Style="{StaticResource darkLabelSelect}"/>
+                <ComboBox Name="Product" Grid.Row="2" Style="{StaticResource darkCombobox}">
+                    <ComboBoxItem Name="Name1">Name1</ComboBoxItem>
+                    <ComboBoxItem Name="Name2">Name2</ComboBoxItem>
+                    <ComboBoxItem Name="Name3">Name3</ComboBoxItem>
+                </ComboBox>
+
+                <Label Content="Dostawca:" Grid.Row="3" Style="{StaticResource darkLabelSelect}"/>
+                <ComboBox Name="Supplier" Grid.Row="3" Style="{StaticResource darkCombobox}">
+                </ComboBox>
+                
+                <Label Content="Stan/Status:" Grid.Row="4" Style="{StaticResource darkLabelSelect}"/>
+                <ComboBox Name="Status" Grid.Row="4" Style="{StaticResource darkCombobox}">
+                </ComboBox>
+
+                <Border x:Name="Depreciation" Grid.Row="5" Grid.ColumnSpan="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Stawka amortyzacji:" Grid.Row="0" Style="{StaticResource darkLabelSelect}"/>
+                        <TextBox x:Name="Depreciation_rate" Grid.Row="0" Style="{StaticResource darkTextBox}" MaxLength="2"/>
+                        
+                        <Label Content="Sposób amortyzacji:" Grid.Row="1" Style="{StaticResource darkLabelSelect}"/>
+                        <TextBox x:Name="Depreciation_method" Grid.Row="1" Style="{StaticResource darkTextBox}" IsEnabled="False"/>
+                    </Grid>
+                </Border>
+
+
+                <Label Content="Data nabycia:" Grid.Row="1" Style="{StaticResource darkLabelEnter}"/>
+                <DatePicker Name="Date_of_aquisition" Grid.Row="1" Style="{StaticResource darkDatePicker}" />
+
+                <Label Content="Wartość początkowa brutto:" Grid.Row="2" Style="{StaticResource darkLabelEnter}" />
+                <Border x:Name="Gross_orig_val" Grid.Row="2" Grid.Column="3" Margin="0,0,300,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.73*"/>
+                            <ColumnDefinition Width="0.08*"/>
+                            <ColumnDefinition Width="0.12*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="Gross_orig_val1_TxtBox" Grid.Column="0" 
+                         Style="{StaticResource darkTextBox}" MaxLength="18"/>
+                        <Label Content="," Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource darkLabelEnter}"/>
+                        <TextBox x:Name="Gross_orig_val2_TxtBox" Grid.Column="2"  
+                         Style="{StaticResource darkTextBox}" Width="50" MaxLength="2"/>
+                    </Grid>
+                </Border>
+
+                <Label Content="Wartość początkowa netto:" Grid.Row="3" Style="{StaticResource darkLabelEnter}" />
+                <Border x:Name="Net_orig_val1" Grid.Row="3" Grid.Column="3" Margin="0,0,300,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.73*"/>
+                            <ColumnDefinition Width="0.08*"/>
+                            <ColumnDefinition Width="0.12*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="Net_orig_val1_TxtBox" Grid.Column="0" 
+                         Style="{StaticResource darkTextBox}" MaxLength="18"/>
+                        <Label Content="," Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource darkLabelEnter}"/>
+                        <TextBox x:Name="Net_orig_val2_TxtBox" Grid.Column="2"  
+                         Style="{StaticResource darkTextBox}" Width="50" MaxLength="2"/>
+                    </Grid>
+                </Border>
+
+                <Label Content="Opis:" Grid.Row="4" Style="{StaticResource darkLabelEnter}" />
+                <TextBox x:Name="Description_TxtBox" Grid.Row="4" Height="75" Width="620"
+                         TextWrapping="Wrap" MaxLength="300"
+                         Style="{StaticResource darkTextBox}"/>
+
+                <Border x:Name="Invoice" Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Faktura:" Grid.Row="0" Style="{StaticResource darkLabelSelect}"/>
+                        <TextBlock Grid.Column="1" Style="{StaticResource darkTextBlock}" >
+                            <Hyperlink Click="openFile_Click">Wybierz plik</Hyperlink>
+                        </TextBlock>
+
+                        <Label Content="Gwarancja:" Grid.Row="1" Style="{StaticResource darkLabelSelect}"/>
+                        <TextBox x:Name="Guarantee" Grid.Row="1" Style="{StaticResource darkTextBox}"/>
+                    </Grid>
+                </Border>
+
+                <Button x:Name="AddFixedAssetsButton" Content="Dodaj srodek trwaly" Grid.Row="6" Grid.Column="3"
+                        Height="30" Width="150" Margin="0,0,50,0" FontFamily="Tahoma" 
+                        FontSize="15" HorizontalAlignment="Right" Click="AddFixedAsset_Click" />
+
+            </Grid>
         </Border>
     </Grid>
 </Page>

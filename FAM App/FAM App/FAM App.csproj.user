@@ -10,6 +10,9 @@
     <Compile Update="Pages\AddFixedAssetsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\AddOtherFixedAssetsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\AddSupplierPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -34,6 +37,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\AddFixedAssetsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\AddOtherFixedAssetsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\AddSupplierPage.xaml">

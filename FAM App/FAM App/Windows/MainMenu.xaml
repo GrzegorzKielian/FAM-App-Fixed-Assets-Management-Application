@@ -26,7 +26,7 @@
                 <MenuItem Header="Przegladaj srodki trwale" Click="ShowFixedAssets_Click" Height="30" />
                 <MenuItem Header="Dodaj nowe srodki trwale">
                     <MenuItem Header="Srodek trwaly" Click="AddFixedAssets_Click"/>
-                    <MenuItem Header="Pozostale srodki trwale"/>
+                    <MenuItem Header="Pozostale srodki trwale" Click="AddOtherFixedAssets_Click"/>
                 </MenuItem>
                 <MenuItem Header="Produkty">
                     <MenuItem Header="Przegladaj produkty" Click="ShowProducts_Click"/>

@@ -20,9 +20,37 @@ namespace FAM_App
     /// </summary>
     public partial class AddFixedAssetsPage : Page
     {
+
         public AddFixedAssetsPage()
         {
             InitializeComponent();
+            SetFixedAssetData();
+        }
+        private void SetFixedAssetData()
+        {
+            Current_Date.Text = DateTime.Now.ToString("dd.MM.yyyy");
+            FixedAsset_Code.Text = "0";
+            Depreciation_method.Text = "Amortyzacja liniowa";
+        }
+
+        private void AddFixedAsset_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("Czy na pewno chcesz dodać nowy środek trwały do bazy danych?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void openFile_Click(object sender, RoutedEventArgs e)
+        {
+            //System.Diagnostics.Process.Start(appPath);
         }
     }
 }

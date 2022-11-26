@@ -26,7 +26,7 @@ namespace FAM_App
         public DataTable DataBaseShowFixedAssets(DataTable dataTable)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT * FROM Srodki_Trwale;";
+            String data = "SELECT * FROM Srodek_Trwaly;";
             cmd.CommandText = data;
 
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
@@ -43,7 +43,7 @@ namespace FAM_App
         public DataTable DataBaseShowProducts(DataTable dataTable)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT * FROM Produkty;";
+            String data = "SELECT * FROM Produkt;";
             cmd.CommandText = data;
 
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
