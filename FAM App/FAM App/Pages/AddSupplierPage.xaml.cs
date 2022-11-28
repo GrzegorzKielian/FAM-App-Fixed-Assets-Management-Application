@@ -31,10 +31,10 @@ namespace FAM_App.Pages
             {
                 if (MessageBox.Show("Czy na pewno chcesz dodać nowego dostawce do bazy danych?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    string Name = NameTextBox.Text;
-                    string City = CityTextBox.Text;
-                    string PostCode = PostCodeTextBox.Text;
-                    string Street = StreetTextBox.Text;
+                    string Name = Name_TextBox.Text;
+                    string City = City_TextBox.Text;
+                    string PostCode = PostCode_TextBox.Text;
+                    string Street = Street_TextBox.Text;
 
                     DataBase dataBase = new DataBase();
                     dataBase.AddSupplierToBase(Name, City, PostCode, Street);

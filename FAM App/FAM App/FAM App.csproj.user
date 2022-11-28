@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Pages\AddEmployeePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\AddFixedAssetsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -14,6 +17,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\AddSupplierPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\FixedAssetCardPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\ShowSupplierPage.xaml.cs">
@@ -36,6 +42,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Pages\AddEmployeePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Pages\AddFixedAssetsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -43,6 +52,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\AddSupplierPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\FixedAssetCardPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\ShowSupplierPage.xaml">

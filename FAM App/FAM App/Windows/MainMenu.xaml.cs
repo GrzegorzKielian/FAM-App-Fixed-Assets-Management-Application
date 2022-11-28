@@ -24,6 +24,12 @@ namespace FAM_App
         public MainMenu()
         {
             InitializeComponent();
+            IsAdmin();
+        }
+
+        private void IsAdmin()
+        {
+            AddEmployee.Visibility = Visibility.Visible;
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
@@ -60,9 +66,9 @@ namespace FAM_App
         {
 
         }
-        private void FixedAssetsCard_Click(object sender, RoutedEventArgs e)
+        private void FixedAssetCard_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Content = new FixedAssetCardPage();
         }
         private void ShowSupplier_Click(object sender, RoutedEventArgs e)
         {
@@ -71,6 +77,10 @@ namespace FAM_App
         private void AddSupplier_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new AddSupplierPage();
+        }
+        private void AddEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new AddEmployeePage();
         }
 
         private void LogOut_MouseEnter(object sender, RoutedEventArgs e)
@@ -82,7 +92,6 @@ namespace FAM_App
         {
             LogOut.BorderThickness = new Thickness(0);
         }
-
 
     }
 }

@@ -34,16 +34,33 @@ namespace FAM_App
         {
             try
             {
+                string login = LoginTxtBox.Text;
+                string passwd = PasswdTxtBox.ToString();
 
-                MainMenu mainMenu = new MainMenu();
-                mainMenu.Show();
-                this.Close();
+                DataBase dataBase = new DataBase();
+
+                if(dataBase.Login(login))
+                {
+                    MainMenu mainMenu = new MainMenu();
+                    mainMenu.Show();
+                    this.Close();
+                }
+                else
+                {
+                    LoginTxtBox.BorderBrush = Brushes.Red;
+                }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("db error");
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void LoginTxtBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            LoginTxtBox.BorderBrush = new SolidColorBrush(Color.FromArgb(0xFF, 221, 221, 221));
         }
     }
 }

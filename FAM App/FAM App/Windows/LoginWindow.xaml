@@ -53,7 +53,8 @@
                 <TextBox x:Name="LoginTxtBox" Grid.Row="2" Grid.Column="2" 
                          Grid.ColumnSpan="4" Margin="0,0,0,40" 
                          VerticalContentAlignment="Center" 
-                         HorizontalContentAlignment="Center" Style="{StaticResource darkTextBox}"/>
+                         HorizontalContentAlignment="Center" Style="{StaticResource darkTextBox}"
+                         MaxLength="50" MouseEnter="LoginTxtBox_MouseEnter"/>
 
                 <Label Content="Haslo:" Grid.Row="3" Grid.Column="2" 
                        Grid.ColumnSpan="2" Style="{StaticResource darkLabel}"/>
@@ -61,7 +62,8 @@
                              Grid.Column="2" Grid.ColumnSpan="4" 
                              Margin="0,0,0,40" FontSize="20" 
                              HorizontalContentAlignment="Center" 
-                             VerticalContentAlignment="Center" Background="#dddddd"/>
+                             VerticalContentAlignment="Center" Background="#dddddd"
+                             MaxLength="64"/>
 
                 <Button x:Name="ClearButton" Content="Wyczysc pola" 
                         Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="4" 

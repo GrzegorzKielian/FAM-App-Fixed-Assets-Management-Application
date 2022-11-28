@@ -38,8 +38,9 @@
                 </MenuItem>
                 <MenuItem Header="Raport" >
                     <MenuItem Header="Zestawienie" Click="FixedAssetsStatement_Click"/>
-                    <MenuItem Header="Karta srodka" Click="FixedAssetsCard_Click"/>
+                    <MenuItem Header="Karta srodka" Click="FixedAssetCard_Click"/>
                 </MenuItem>
+                <MenuItem x:Name="AddEmployee" Header="Dodaj pracownika" Click="AddEmployee_Click" Visibility="Hidden"/>
             </Menu>
         </DockPanel>
 

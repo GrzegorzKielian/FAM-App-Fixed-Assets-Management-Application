@@ -57,25 +57,25 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Nazwa:" Grid.Row="0" Style="{StaticResource darkLabel}"/>
-                <TextBox x:Name="NameTextBox" Grid.Row="0" Height="25" Width="310"   
+                <TextBox x:Name="Name_TextBox" Grid.Row="0" Height="25" Width="310"   
                          Style="{StaticResource darkTextBox }"/>
 
                 <Label Content="Miejscowosc:" Grid.Row="1" 
                        Style="{StaticResource darkLabel}"/>
-                <TextBox x:Name="CityTextBox" Grid.Row="1" Height="25" Width="310" 
+                <TextBox x:Name="City_TextBox" Grid.Row="1" Height="25" Width="310" 
                          Style="{StaticResource darkTextBox }"/>
 
                 <Label Content="Kod Pocztowy:" Grid.Row="2" Style="{StaticResource darkLabel}"/>
-                <TextBox x:Name="PostCodeTextBox" Grid.Row="2" Height="25" Width="310" 
+                <TextBox x:Name="PostCode_TextBox" Grid.Row="2" Height="25" Width="310" 
                          Style="{StaticResource darkTextBox }"/>
 
                 <Label Content="Ulica:" Grid.Row="3" 
                        Style="{StaticResource darkLabel}"/>
-                <TextBox x:Name="StreetTextBox" Grid.Row="3" Height="25" Width="310" 
+                <TextBox x:Name="Street_TextBox" Grid.Row="3" Height="25" Width="310" 
                          Style="{StaticResource darkTextBox }"/>
 
 
-                <Button x:Name="AddSupplierButton" Content="Dodaj dostawce" Grid.Row="5" Grid.Column="1"
+                <Button x:Name="AddSupplier_Button" Content="Dodaj dostawce" Grid.Row="5" Grid.Column="1"
                         Height="30" Width="150" Margin="0,0,50,0" FontFamily="Tahoma" 
                         FontSize="15" HorizontalAlignment="Right" Click="AddSupplier_Click"/>
             </Grid>

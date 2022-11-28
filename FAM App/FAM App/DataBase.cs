@@ -18,6 +18,18 @@ namespace FAM_App
             return cmd;
         }
 
+        public bool Login(string login)
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = "SELECT Login FROM Pracownik WHERE Login='"+login+"';";
+            cmd.CommandText = data;
+            if(cmd != null)
+            {
+                return true;
+            }
+            else { return false; }
+        }
+
         public void AddFixedAssetsToBase()
         {
             //SqlCommand cmd = DataBaseConnection();

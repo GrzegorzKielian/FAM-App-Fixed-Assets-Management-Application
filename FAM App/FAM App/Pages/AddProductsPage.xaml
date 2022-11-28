@@ -57,29 +57,29 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Nazwa:" Grid.Row="0" Style="{StaticResource darkLabel}"/>
-                <TextBox x:Name="NameTextBox" Grid.Row="0" Height="25" Width="310"   
+                <TextBox x:Name="Name_TextBox" Grid.Row="0" Height="25" Width="310"   
                          Style="{StaticResource darkTextBox }"/>
 
                 <Label Content="Marka:" Grid.Row="1" 
                        Style="{StaticResource darkLabel}"/>
-                <TextBox x:Name="BrandTextBox" Grid.Row="1" Height="25" Width="310" 
+                <TextBox x:Name="Brand_TextBox" Grid.Row="1" Height="25" Width="310" 
                          Style="{StaticResource darkTextBox }"/>
 
                 <Label Content="Model:" Grid.Row="2" Style="{StaticResource darkLabel}"/>
-                <TextBox x:Name="ModelTextBox" Grid.Row="2" Height="25" Width="310" 
+                <TextBox x:Name="Model_TextBox" Grid.Row="2" Height="25" Width="310" 
                          Style="{StaticResource darkTextBox }"/>
 
                 <Label Content="Rok Produkcji:" Grid.Row="3" 
                        Style="{StaticResource darkLabel}"/>
-                <TextBox x:Name="YearTextBox" Grid.Row="3" Height="25" Width="310" 
+                <TextBox x:Name="Year_TextBox" Grid.Row="3" Height="25" Width="310" 
                          Style="{StaticResource darkTextBox }"/>
 
                 <Label Content="Opis:" Grid.Row="4" Style="{StaticResource darkLabel}"/>
-                <TextBox x:Name="DescriptionTextBox" Grid.Row="4" Height="75" Width="620"   
+                <TextBox x:Name="Description_TextBox" Grid.Row="4" Height="75" Width="620"   
                          MaxLength="300" TextWrapping="Wrap" 
                          Style="{StaticResource darkTextBox }"/>
 
-                <Button x:Name="AddProductButton" Content="Dodaj produkt" Grid.Row="5" Grid.Column="1"
+                <Button x:Name="AddProduct_Button" Content="Dodaj produkt" Grid.Row="5" Grid.Column="1"
                         Height="30" Width="150" Margin="0,0,50,0" FontFamily="Tahoma" 
                         FontSize="15" HorizontalAlignment="Right" Click="AddProduct_Click"/>
             </Grid>

@@ -31,11 +31,11 @@ namespace FAM_App.Pages
             {
                 if (MessageBox.Show("Czy na pewno chcesz dodać nowy produkt do bazy danych?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    string Name = NameTextBox.Text;
-                    string Brand = BrandTextBox.Text;
-                    string Model = ModelTextBox.Text;
-                    string Description = DescriptionTextBox.Text;
-                    string Year = YearTextBox.Text;
+                    string Name = Name_TextBox.Text;
+                    string Brand = Brand_TextBox.Text;
+                    string Model = Model_TextBox.Text;
+                    string Description = Description_TextBox.Text;
+                    string Year = Year_TextBox.Text;
 
                     DataBase dataBase = new DataBase();
                     dataBase.AddProductToBase(Name, Brand, Model, Description, Year);
