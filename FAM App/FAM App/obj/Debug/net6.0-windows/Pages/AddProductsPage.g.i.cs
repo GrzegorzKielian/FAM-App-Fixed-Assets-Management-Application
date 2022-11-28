@@ -117,7 +117,7 @@ namespace FAM_App.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/FAM App;V1.0.0.0;component/pages/addproductspage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/FAM App;component/pages/addproductspage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Pages\AddProductsPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

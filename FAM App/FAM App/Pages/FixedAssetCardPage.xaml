@@ -16,7 +16,6 @@
             <Setter Property="Background" Value="#dddddd"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0,0,0,20"/>
-            <Setter Property="IsEnabled" Value="False"/>
         </Style>
         <Style x:Key="darkLabel" TargetType="Label">
             <Setter Property="Foreground" Value="#dddddd"/>

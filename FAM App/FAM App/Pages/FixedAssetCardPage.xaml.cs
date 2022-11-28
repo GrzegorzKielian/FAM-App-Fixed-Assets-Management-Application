@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,12 @@ namespace FAM_App.Pages
 
         private void ShowHistory_Button_Click(object sender, RoutedEventArgs e)
         {
+            string inventoryNumber = InventoryNumber_TxtBox.Text;
             DataBase dataBase = new DataBase();
+            DataTable history = new DataTable("emp");
+            history = dataBase.DataBaseFixedAssetHistory(history,inventoryNumber);
+            HistoryDataGrid.ItemsSource = history.DefaultView;
+
         }
     }
 }

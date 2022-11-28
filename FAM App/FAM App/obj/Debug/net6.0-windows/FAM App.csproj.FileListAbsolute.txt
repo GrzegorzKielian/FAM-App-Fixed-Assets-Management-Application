@@ -44,3 +44,5 @@ C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\AddOtherFixedAssetsPage.baml
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\AddEmployeePage.g.cs
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\AddEmployeePage.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\FixedAssetCardPage.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\FixedAssetCardPage.baml
