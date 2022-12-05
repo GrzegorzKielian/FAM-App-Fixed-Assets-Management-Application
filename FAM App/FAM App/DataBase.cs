@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls.Primitives;
 
 namespace FAM_App
@@ -14,7 +15,7 @@ namespace FAM_App
     {
         private SqlCommand DataBaseConnection()
         {
-            SqlConnection sqlConnection = new SqlConnection(@"Server=(local);Database=Inzynierka;Trusted_Connection=Yes;"); //DESKTOP-JLN71CE
+            SqlConnection sqlConnection = new SqlConnection(@"Server=(local);Database=FAMDataBase;Trusted_Connection=Yes;"); //DESKTOP-JLN71CE
             sqlConnection.Open();
             SqlCommand cmd = sqlConnection.CreateCommand();
             return cmd;
@@ -56,9 +57,20 @@ namespace FAM_App
             return dataTable;
         }
 
-        public void AddProductToBase(String Name, String Brand, String Model, String Descritpion, String Year)
+        public bool AddProductToBase(String Name, String Brand, String Model, String Descritpion, String Year)
         {
-            //SqlCommand cmd = DataBaseConnection();
+            SqlCommand cmd = DataBaseConnection();
+            String dataSelect = "SELECT MAX(ID_Produktu) FROM dbo.Produkt;";
+            cmd.CommandText = dataSelect;
+            int ID = (int)cmd.ExecuteScalar();
+            ID++;
+            String dataInsert = "INSERT INTO dbo.Produkt (ID_Produktu, Nazwa, Marka, Model, Opis, Rok_Produkcji)  VALUES ( "+ID+",'"+Name+"', '"+Brand+"', '"+Model+"', '"+Descritpion+"', '"+Year+"');";
+            cmd.CommandText = dataInsert;
+            int result = cmd.ExecuteNonQuery();
+
+            // Check Error
+            if (result < 0) { return false; }
+            else { return true; };
         }
 
         public DataTable DataBaseShowProducts(DataTable dataTable)

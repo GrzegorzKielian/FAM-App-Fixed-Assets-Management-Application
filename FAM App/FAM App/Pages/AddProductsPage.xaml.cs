@@ -38,13 +38,28 @@ namespace FAM_App.Pages
                     string Year = Year_TextBox.Text;
 
                     DataBase dataBase = new DataBase();
-                    dataBase.AddProductToBase(Name, Brand, Model, Description, Year);
+                    bool check = dataBase.AddProductToBase(Name, Brand, Model, Description, Year);
+                    if (check)
+                    {
+                        MessageBox.Show("Dodano do bazy:\n" + Name_TextBox.Text+"\n" + Brand_TextBox.Text + "\n" + Model_TextBox.Text + "\n" + Year_TextBox.Text + "\n" + Description_TextBox.Text + "\n");
+                        ClearTextBoxes();
+                    }
+                    else { MessageBox.Show("Error inserting data into Database!"); }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void ClearTextBoxes()
+        {
+            Name_TextBox.Clear();
+            Brand_TextBox.Clear();
+            Model_TextBox.Clear();
+            Description_TextBox.Clear();
+            Year_TextBox.Clear();
         }
     }
 }
