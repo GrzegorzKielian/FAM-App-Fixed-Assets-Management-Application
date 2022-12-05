@@ -33,17 +33,32 @@ namespace FAM_App.Pages
                 {
                     string Name = Name_TextBox.Text;
                     string City = City_TextBox.Text;
-                    string PostCode = PostCode_TextBox.Text;
+                    string PostCode = PostCode_TextBox1.Text +"-"+ PostCode_TextBox2.Text;
                     string Street = Street_TextBox.Text;
 
                     DataBase dataBase = new DataBase();
-                    dataBase.AddSupplierToBase(Name, City, PostCode, Street);
+                    bool check = dataBase.AddSupplierToBase(Name, City, PostCode, Street);
+                    if (check)
+                    {
+                        MessageBox.Show("Dodano do bazy:\n" + Name + "\n" + City + "\n" + PostCode + "\n" + Street);
+                        ClearTextBoxes();
+                    }
+                    else { MessageBox.Show("Błąd przy wstawianiu danych do bazy!"); }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void ClearTextBoxes()
+        {
+            Name_TextBox.Clear();
+            City_TextBox.Clear();
+            PostCode_TextBox1.Clear();
+            PostCode_TextBox2.Clear();
+            Street_TextBox.Clear();
         }
     }
 }

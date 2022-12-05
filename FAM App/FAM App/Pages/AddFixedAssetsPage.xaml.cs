@@ -28,7 +28,7 @@ namespace FAM_App
         }
         private void SetFixedAssetData()
         {
-            Current_Date.Text = DateTime.Now.ToString("dd.MM.yyyy");
+            Current_Date.Text = DateTime.Now.ToString("yyyy.MM.dd");
             FixedAsset_Code.Text = "0";
             Depreciation_method.Text = "Amortyzacja liniowa";
         }
@@ -52,5 +52,6 @@ namespace FAM_App
         {
             //System.Diagnostics.Process.Start(appPath);
         }
+
     }
 }

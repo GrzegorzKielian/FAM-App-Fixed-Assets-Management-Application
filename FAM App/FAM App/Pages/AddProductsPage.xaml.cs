@@ -44,7 +44,7 @@ namespace FAM_App.Pages
                         MessageBox.Show("Dodano do bazy:\n" + Name_TextBox.Text+"\n" + Brand_TextBox.Text + "\n" + Model_TextBox.Text + "\n" + Year_TextBox.Text + "\n" + Description_TextBox.Text + "\n");
                         ClearTextBoxes();
                     }
-                    else { MessageBox.Show("Error inserting data into Database!"); }
+                    else { MessageBox.Show("Błąd przy wstawianiu danych do bazy!"); }
                 }
             }
             catch (Exception ex)

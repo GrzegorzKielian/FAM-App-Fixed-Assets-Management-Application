@@ -123,7 +123,8 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Grupa:" Grid.Column="0" Style="{StaticResource darkLabelSelect}"/>
-                        <ComboBox Name="Group" Grid.Column="1" Style="{StaticResource darkCombobox}">
+                        <ComboBox Name="Group" Grid.Column="1" Style="{StaticResource darkCombobox}"
+>
                         </ComboBox>
 
                         <Label Content="Podgrupa:" Grid.Column="2" Style="{StaticResource darkLabelSelect}"/>

@@ -33,7 +33,13 @@ namespace FAM_App.Pages
             DataTable history = new DataTable("emp");
             history = dataBase.DataBaseFixedAssetHistory(history,inventoryNumber);
             HistoryDataGrid.ItemsSource = history.DefaultView;
+            ClearTextBoxes();
 
+        }
+
+        private void ClearTextBoxes()
+        {
+            InventoryNumber_TxtBox.Clear();
         }
     }
 }

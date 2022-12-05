@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography.Pkcs;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -34,6 +35,11 @@ namespace FAM_App
         }
 
         public void AddFixedAssetsToBase()
+        {
+            //SqlCommand cmd = DataBaseConnection();
+        }
+
+        public void AddOtherFixedAssetsToBase()
         {
             //SqlCommand cmd = DataBaseConnection();
         }
@@ -76,7 +82,7 @@ namespace FAM_App
         public DataTable DataBaseShowProducts(DataTable dataTable)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT * FROM Produkt;";
+            String data = "SELECT ID_Produktu, Nazwa, Marka, Model, Opis, Rok_Produkcji FROM dbo.Produkt;";
             cmd.CommandText = data;
 
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
@@ -85,15 +91,26 @@ namespace FAM_App
             return dataTable;
         }
 
-        public void AddSupplierToBase(String Name, String City, String PostCode, String Street)
+        public bool AddSupplierToBase(String Name, String City, String PostCode, String Street)
         {
-            //SqlCommand cmd = DataBaseConnection();
+            SqlCommand cmd = DataBaseConnection();
+            String dataSelect = "SELECT MAX(ID_Dostawcy) FROM dbo.Dostawca;";
+            cmd.CommandText = dataSelect;
+            int ID = (int)cmd.ExecuteScalar();
+            ID++;
+            String dataInsert = "INSERT INTO dbo.Dostawca (ID_Dostawcy, Nazwa, Miejscowosc, Kod_Pocztowy, Ulica)  VALUES ( " + ID + ",'" + Name + "', '" + City + "', '" + PostCode + "', '" + Street + "');";
+            cmd.CommandText = dataInsert;
+            int result = cmd.ExecuteNonQuery();
+
+            // Check Error
+            if (result < 0) { return false; }
+            else { return true; };
         }
 
         public DataTable DataBaseShowSuppliers(DataTable dataTable)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT * FROM Dostawca;";
+            String data = "SELECT ID_Dostawcy, Nazwa, Miejscowosc, Kod_Pocztowy, Ulica FROM dbo.Dostawca;";
             cmd.CommandText = data;
 
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
@@ -116,6 +133,42 @@ namespace FAM_App
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dataTable = new DataTable("emp");
             sda.Fill(dataTable);
+            return dataTable;
+        }
+
+        public DataTable DataBaseShowGroup(DataTable dataTable)
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = "SELECT ID_Grupy, CONCAT(Symbol,' - ',Nazwa) AS 'Grupa' FROM dbo.Grupa;";
+            cmd.CommandText = data;
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dataTable = new DataTable("emp");
+            sda.Fill(dataTable);
+            cmd.Dispose();
+            return dataTable;
+        }
+
+        public DataTable DataBaseShowSubgroup(DataTable dataTable, int groupID)
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = "SELECT ID_Podgrupy, CONCAT(Symbol,' - ',Nazwa) AS 'Podgrupa' FROM dbo.Podgrupa WHERE id_grupy=" + groupID + ";";
+            cmd.CommandText = data;
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dataTable = new DataTable("emp");
+            sda.Fill(dataTable);
+            cmd.Dispose();
+            return dataTable;
+        }
+
+        public DataTable DataBaseShowType(DataTable dataTable, int subgroupID)
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = "SELECT ID_Rodzaju, CONCAT(Symbol,' - ',Nazwa) AS 'Rodzaj' FROM dbo.Rodzaj WHERE id_podgrupy=" + subgroupID + ";";
+            cmd.CommandText = data;
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dataTable = new DataTable("emp");
+            sda.Fill(dataTable);
+            cmd.Dispose();
             return dataTable;
         }
     }
