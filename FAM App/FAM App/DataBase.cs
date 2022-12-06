@@ -171,5 +171,17 @@ namespace FAM_App
             cmd.Dispose();
             return dataTable;
         }
+
+        public DataTable ShowEmployee(DataTable dataTable)
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = "SELECT ID_Pracownika, Imie, Nazwisko, Pesel, Telefon, Email, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Admin, Ewidencja, Login, Haslo, Sol_Hasla FROM dbo.Pracownik";
+            cmd.CommandText = data;
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dataTable = new DataTable("emp");
+            sda.Fill(dataTable);
+            cmd.Dispose();
+            return dataTable;
+        }
     }
 }

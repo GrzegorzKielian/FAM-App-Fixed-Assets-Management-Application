@@ -40,7 +40,10 @@
                     <MenuItem Header="Zestawienie" Click="FixedAssetsStatement_Click"/>
                     <MenuItem Header="Karta srodka" Click="FixedAssetCard_Click"/>
                 </MenuItem>
-                <MenuItem x:Name="AddEmployee" Header="Dodaj pracownika" Click="AddEmployee_Click" Visibility="Hidden"/>
+                <MenuItem Header="Pracownicy">
+                    <MenuItem  x:Name="ShowEmployee" Header="Przeglądaj pracowników" Click="ShowEmployee_Click"/>
+                    <MenuItem  x:Name="AddEmployee" Header="Dodaj pracownika" Click="AddEmployee_Click" />
+                </MenuItem>
             </Menu>
         </DockPanel>
 

@@ -78,6 +78,10 @@ namespace FAM_App
         {
             MainFrame.Content = new AddSupplierPage();
         }
+        private void ShowEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new ShowEmployeePage();
+        }
         private void AddEmployee_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new AddEmployeePage();
@@ -92,6 +96,7 @@ namespace FAM_App
         {
             LogOut.BorderThickness = new Thickness(0);
         }
+
 
     }
 }
