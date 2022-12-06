@@ -35,7 +35,6 @@
             <Setter Property="FontSize" Value="15"/>
         </Style>
         <Style x:Key="darkCombobox" TargetType="ComboBox">
-            <Setter Property="Foreground" Value="#dddddd"/>
             <Setter Property="Grid.Column" Value="1"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -124,31 +123,56 @@
                         </Grid.ColumnDefinitions>
                         <Label Content="Grupa:" Grid.Column="0" Style="{StaticResource darkLabelSelect}"/>
                         <ComboBox Name="Group" Grid.Column="1" Style="{StaticResource darkCombobox}"
->
+                                    Loaded="Group_Loaded"
+                                  SelectionChanged="Group_SelectionChanged">
                         </ComboBox>
 
                         <Label Content="Podgrupa:" Grid.Column="2" Style="{StaticResource darkLabelSelect}"/>
-                        <ComboBox Name="Subgroup" Grid.Column="3" Style="{StaticResource darkCombobox}">
+                        <ComboBox Name="Subgroup" Grid.Column="3" Style="{StaticResource darkCombobox}"
+                                  SelectionChanged="Subgroup_SelectionChanged"
+                                  IsEnabled="False">
                         </ComboBox>
 
                         <Label Content="Rodzaj:" Grid.Column="4" Style="{StaticResource darkLabelSelect}"/>
-                        <ComboBox Name="Type" Grid.Column="5" Style="{StaticResource darkCombobox}">
+                        <ComboBox Name="Type" Grid.Column="5" Style="{StaticResource darkCombobox}"
+                                  SelectionChanged="Type_SelectionChanged"
+                                  IsEnabled="False">
                         </ComboBox>
                     </Grid>
                 </Border>
                 <Label Content="Produkt:" Grid.Row="2" Style="{StaticResource darkLabelSelect}"/>
-                <ComboBox Name="Product" Grid.Row="2" Style="{StaticResource darkCombobox}">
-                    <ComboBoxItem Name="Name1">Name1</ComboBoxItem>
-                    <ComboBoxItem Name="Name2">Name2</ComboBoxItem>
-                    <ComboBoxItem Name="Name3">Name3</ComboBoxItem>
+                <ComboBox Name="Product" Grid.Row="2" Style="{StaticResource darkCombobox}"
+                          Loaded="Product_Loaded">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Run Text="{Binding Nazwa}"/>
+                                <Run Text="{Binding Marka}"/>
+                                <Run Text="{Binding Model}"/>
+                                <Run Text="{Binding Rok_Produkcji}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
 
                 <Label Content="Dostawca:" Grid.Row="3" Style="{StaticResource darkLabelSelect}"/>
-                <ComboBox Name="Supplier" Grid.Row="3" Style="{StaticResource darkCombobox}">
+                <ComboBox Name="Supplier" Grid.Row="3" Style="{StaticResource darkCombobox}"
+                          Loaded="Supplier_Loaded">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Run Text="{Binding Nazwa}"/>
+                                <Run Text="{Binding Miejscowosc}"/>
+                                <Run Text="{Binding Kod_Pocztowy}"/>
+                                <Run Text="{Binding Ulica}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
                 
                 <Label Content="Stan/Status:" Grid.Row="4" Style="{StaticResource darkLabelSelect}"/>
                 <ComboBox Name="Status" Grid.Row="4" Style="{StaticResource darkCombobox}">
+                    <ComboBoxItem>Zlikwidowany</ComboBoxItem>
                 </ComboBox>
 
                 <Border x:Name="Depreciation" Grid.Row="5" Grid.ColumnSpan="2">

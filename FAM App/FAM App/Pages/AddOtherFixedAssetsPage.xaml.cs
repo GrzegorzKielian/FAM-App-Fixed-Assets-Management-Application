@@ -26,6 +26,7 @@ namespace FAM_App.Pages
         private int groupID;
         private int subgroupID;
         private int typeID;
+
         public AddOtherFixedAssetsPage()
         {
             InitializeComponent();
