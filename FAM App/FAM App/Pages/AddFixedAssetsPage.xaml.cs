@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -44,7 +47,27 @@ namespace FAM_App
             {
                 if (MessageBox.Show("Czy na pewno chcesz dodać nowy środek trwały do bazy danych?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    
+                    SqlDateTime introduction_date = Convert.ToDateTime(Current_Date.Text);
+                    string fixedAsset_Code = FixedAsset_Code.Text;
+                    int supplier = (int)Supplier.SelectedValue;
+                    int product = (int)Product.SelectedValue;
+                    string status = Status.Text;
+                    int depreciation = Convert.ToInt32(Depreciation_rate.Text);
+                    SqlDateTime date_of_aquisition = Convert.ToDateTime(Date_of_aquisition.Text);
+                    decimal gros_orig_value = TwoStringToDecimal(Gross_orig_val1_TxtBox.Text, Gross_orig_val2_TxtBox.Text);
+                    decimal net_orig_value = TwoStringToDecimal(Net_orig_val1_TxtBox.Text, Net_orig_val2_TxtBox.Text);
+                    string descritpion = Description_TxtBox.Text;
+                    string invoice = Invoice.Text;
+                    int guarantee = Convert.ToInt32(Guarantee.Text);
+
+                    DataBase dataBase = new DataBase();
+                    bool check = dataBase.AddFixedAssetsToBase(introduction_date, fixedAsset_Code, typeID, supplier, product, status, depreciation, date_of_aquisition, gros_orig_value, net_orig_value, descritpion, invoice, guarantee);
+                    if (check)
+                    {
+                        MessageBox.Show("Dodano do bazy:\n" + introduction_date + "\n" + fixedAsset_Code + "\n" + typeID + "\n" + supplier + "\n" + product + "\n" + status + "\n" + depreciation + "\n" + date_of_aquisition + "\n" + gros_orig_value + "\n" + net_orig_value + "\n" + descritpion + "\n" + invoice + "\n" + guarantee + "\n");
+                        ClearTextBoxes();
+                    }
+                    else { MessageBox.Show("Błąd przy wstawianiu danych do bazy!"); }
                 }
             }
             catch (Exception ex)
@@ -53,9 +76,37 @@ namespace FAM_App
             }
         }
 
-        private void openFile_Click(object sender, RoutedEventArgs e)
+        private void AddInvoiveBox_Click(object sender, RoutedEventArgs e)
         {
-            //System.Diagnostics.Process.Start(appPath);
+            OpenFile();
+            if (Invoice.Text != String.Empty)
+            {
+                ClearInvoiveBox.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void ClearInvoiveBox_Click(object sender, RoutedEventArgs e)
+        {
+            Invoice.Inlines.Clear();
+            ClearInvoiveBox.Visibility = Visibility.Hidden;
+        }
+
+        private void OpenFile()
+        {
+            try
+            {
+                OpenFileDialog choofdlog = new OpenFileDialog();
+                choofdlog.Filter = "All Files (*.*)|*.*";
+                choofdlog.FilterIndex = 1;
+                choofdlog.Multiselect = true;
+
+                if (choofdlog.ShowDialog() == true)
+                {
+                    string sFileName = choofdlog.FileName;
+                    Invoice.Text = sFileName;
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
 
         private void UpdateItems(int number)
@@ -145,5 +196,38 @@ namespace FAM_App
         {
             UpdateItems(5);
         }
+
+        private decimal TwoStringToDecimal(string natural_number, string fraction)
+        {
+            decimal dec;
+            decimal one = Convert.ToDecimal(natural_number);
+            decimal two = Convert.ToDecimal(fraction);
+            decimal twodec = two/100;
+            dec = one+twodec;
+            return dec;
+        }
+
+        private void ClearTextBoxes()
+        {
+            Current_Date.Text = DateTime.Now.ToString("yyyy.MM.dd");
+            FixedAsset_Code.Text = "0";
+            Depreciation_method.Text = "Amortyzacja liniowa";
+            UpdateItems(1);
+            UpdateItems(2);
+            UpdateItems(3);
+            UpdateItems(4);
+            UpdateItems(5);
+            Status.Items.Clear();
+            Depreciation_rate.Clear();
+            Date_of_aquisition.Text = String.Empty;
+            Gross_orig_val1_TxtBox.Clear();
+            Gross_orig_val2_TxtBox.Clear();
+            Net_orig_val1_TxtBox.Clear();
+            Net_orig_val2_TxtBox.Clear();
+            Description_TxtBox.Clear();
+            Invoice.Inlines.Clear();
+            Guarantee.Clear();
+        }
+
     }
 }

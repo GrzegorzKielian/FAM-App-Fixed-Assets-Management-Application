@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Security.Cryptography.Pkcs;
 using System.Text;
@@ -34,14 +35,40 @@ namespace FAM_App
             else { return false; }
         }
 
-        public void AddFixedAssetsToBase()
+        public bool AddFixedAssetsToBase(SqlDateTime introduction_date, string fixedAsset_Code, int TypeID, int supplier, int product, string status, int depreciation, SqlDateTime date_of_aquisition, decimal gros_orig_value, decimal net_orig_value, string descritpion, string invoice, int guarantee)
         {
-            //SqlCommand cmd = DataBaseConnection();
+            SqlCommand cmd = DataBaseConnection();
+            String dataSelect = "SELECT MAX(ID_Srodka) FROM dbo.Srodek_Trwaly;";
+            cmd.CommandText = dataSelect;
+
+            //int ID = (int)cmd.ExecuteScalar();
+
+
+            //String data = "";
+            //cmd.CommandText = data;
+            //int result = cmd.ExecuteNonQuery();
+
+            //// Check Error
+            //if (result < 0) { return false; }
+            //else { return true; };
+            return true;
         }
 
-        public void AddOtherFixedAssetsToBase()
+        public bool AddOtherFixedAssetsToBase(SqlDateTime introduction_date, string fixedAsset_Code, int TypeID, int supplier, int product, string status, SqlDateTime date_of_aquisition, decimal gros_orig_value, decimal net_orig_value, string descritpion, string invoice, int guarantee)
         {
-            //SqlCommand cmd = DataBaseConnection();
+            SqlCommand cmd = DataBaseConnection();
+            String dataSelect = "SELECT MAX(ID_Srodka) FROM dbo.Srodek_Trwaly;";
+            cmd.CommandText = dataSelect;
+            //int ID = (int)cmd.ExecuteScalar();
+
+            //String data = "";
+            //cmd.CommandText = data;
+            //int result = cmd.ExecuteNonQuery();
+
+            //// Check Error
+            //if (result < 0) { return false; }
+            //else { return true; };
+            return true;
         }
 
         public DataTable DataBaseShowFixedAssets(DataTable dataTable)
@@ -70,6 +97,7 @@ namespace FAM_App
             cmd.CommandText = dataSelect;
             int ID = (int)cmd.ExecuteScalar();
             ID++;
+
             String dataInsert = "INSERT INTO dbo.Produkt (ID_Produktu, Nazwa, Marka, Model, Opis, Rok_Produkcji)  VALUES ( "+ID+",'"+Name+"', '"+Brand+"', '"+Model+"', '"+Descritpion+"', '"+Year+"');";
             cmd.CommandText = dataInsert;
             int result = cmd.ExecuteNonQuery();
@@ -98,6 +126,7 @@ namespace FAM_App
             cmd.CommandText = dataSelect;
             int ID = (int)cmd.ExecuteScalar();
             ID++;
+
             String dataInsert = "INSERT INTO dbo.Dostawca (ID_Dostawcy, Nazwa, Miejscowosc, Kod_Pocztowy, Ulica)  VALUES ( " + ID + ",'" + Name + "', '" + City + "', '" + PostCode + "', '" + Street + "');";
             cmd.CommandText = dataInsert;
             int result = cmd.ExecuteNonQuery();

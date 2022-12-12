@@ -234,23 +234,36 @@
                          TextWrapping="Wrap" MaxLength="300"
                          Style="{StaticResource darkTextBox}"/>
 
-                <Border x:Name="Invoice" Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="2">
+                <Border x:Name="InvoiceBorder" Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="2">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.3*"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.19*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Label Content="Faktura:" Grid.Row="0" Style="{StaticResource darkLabelSelect}"/>
-                        <TextBlock Grid.Column="1" Style="{StaticResource darkTextBlock}" >
-                            <Hyperlink Click="openFile_Click">Wybierz plik</Hyperlink>
+                        <TextBlock x:Name="Invoice" Grid.Column="1" Style="{StaticResource darkTextBlock}" >
                         </TextBlock>
+                        <Border x:Name="InvoiceBorderButton" Grid.Column="3">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Button x:Name="AddInvoiveBox" Content="+" Grid.Column="0" Height="20" Width="20" FontWeight="Bold" FontSize="11" Click="AddInvoiveBox_Click"/>
+                                <Button x:Name="ClearInvoiveBox" Content="X" Grid.Column="1" Height="20" Width="20" FontSize="14"  Visibility="Hidden" FontFamily="Tahoma" FontWeight="Bold" Click="ClearInvoiveBox_Click" />
+                            </Grid>
+                        </Border>
 
-                        <Label Content="Gwarancja:" Grid.Row="1" Style="{StaticResource darkLabelSelect}"/>
-                        <TextBox x:Name="Guarantee" Grid.Row="1" Style="{StaticResource darkTextBox}"/>
+                        <Label Content="Gwarancja:" Grid.Row="1"  Style="{StaticResource darkLabelSelect}"/>
+                        <TextBox x:Name="Guarantee" Grid.Row="1" Grid.Column="1" Style="{StaticResource darkTextBox}"/>
                     </Grid>
                 </Border>
 
