@@ -1,0 +1,116 @@
+﻿<Page x:Class="FAM_App.Pages.AddAdressesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FAM_App.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="1034" d:DesignWidth="1920"
+      Title="AddAdressesPage">
+
+    <Page.Resources>
+        <Style x:Key="darkTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="#dddddd"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+
+        </Style>
+        <Style x:Key="darkLabel" TargetType="Label">
+            <Setter Property="Foreground" Value="#dddddd"/>
+            <Setter Property="Grid.Column" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border x:Name="BorderPanel" BorderBrush="WhiteSmoke" BorderThickness="1"  
+                Background="#152238" 
+                Grid.Column="0" Grid.Row="1"/>
+
+        <StackPanel Grid.Row="1" Margin="0,20">
+
+        </StackPanel>
+
+        <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Miejscowosc:" Grid.Row="0" Style="{StaticResource darkLabel}"/>
+                <TextBox x:Name="City_TextBox" Grid.Row="0" Height="25" Width="310" 
+                         MaxLength="50" Style="{StaticResource darkTextBox }"/>
+
+                <Label Content="Kod pocztowy:" Grid.Row="1" 
+                       Style="{StaticResource darkLabel}"/>
+                <Border x:Name="PostCodeAdress" Grid.Row="1" Grid.Column="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="PostCode_TextBox1" Grid.Column="0" Height="25" Width="55" 
+                            Style="{StaticResource darkTextBox }" MaxLength="2"/>
+                        <Label Content="-" Grid.Column="1"  Style="{StaticResource darkLabel}" HorizontalAlignment="Center" FontSize="30"/>
+                        <TextBox x:Name="PostCode_TextBox2" Grid.Column="2" Height="25" Width="80" 
+                            Style="{StaticResource darkTextBox }" MaxLength="3"/>
+                    </Grid>
+                </Border>
+
+                <Label Content="Ulica:" Grid.Row="2" Style="{StaticResource darkLabel}"/>
+                <TextBox x:Name="Street_TextBox" Grid.Row="2" Height="25" Width="310" 
+                         MaxLength="50" Style="{StaticResource darkTextBox }"/>
+
+                <Label Content="Number budynku:" Grid.Row="3" 
+                       Style="{StaticResource darkLabel}"/>
+                <TextBox x:Name="BuildingNumber_TextBox" Grid.Row="3" Height="25" Width="50" 
+                         Style="{StaticResource darkTextBox }"/>
+
+                <Label Content="Numer lokalu:" Grid.Row="4" Style="{StaticResource darkLabel}"/>
+                <TextBox x:Name="ApartmentNumber_TextBox" Grid.Row="4" Height="25" Width="50"    
+                         MaxLength="4" Style="{StaticResource darkTextBox }"/>
+
+                <Label Content="Numer pomnieszczenia:" Grid.Row="5" Style="{StaticResource darkLabel}"/>
+                <TextBox x:Name="RoomNumber_TextBox" Grid.Row="5" Height="25" Width="50"    
+                         MaxLength="4" Style="{StaticResource darkTextBox }"/>
+                
+                <Label Content="Nazwa:" Grid.Row="6" Style="{StaticResource darkLabel}"/>
+                <TextBox x:Name="Name_TextBox" Grid.Row="6" Height="25" Width="310"   
+                         MaxLength="50" Style="{StaticResource darkTextBox }"/>
+
+                <Label Content="Dodatkowe dane:" Grid.Row="7" Style="{StaticResource darkLabel}"/>
+                <TextBox x:Name="AdditionalInformation_TextBox" Grid.Row="7" Height="75" Width="620"   
+                         MaxLength="300" TextWrapping="Wrap" 
+                         Style="{StaticResource darkTextBox }"/>
+
+                <Button x:Name="AddAdress_Button" Content="Dodaj adres" Grid.Row="8" Grid.Column="1"
+                        Height="30" Width="150" Margin="0,0,50,0" FontFamily="Tahoma" 
+                        FontSize="15" HorizontalAlignment="Right" Click="AddAdress_Button_Click"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

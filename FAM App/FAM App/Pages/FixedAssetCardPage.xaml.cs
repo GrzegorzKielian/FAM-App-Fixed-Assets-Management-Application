@@ -31,7 +31,7 @@ namespace FAM_App.Pages
             string inventoryNumber = InventoryNumber_TxtBox.Text;
             DataBase dataBase = new DataBase();
             DataTable history = new DataTable("emp");
-            history = dataBase.DataBaseFixedAssetHistory(history,inventoryNumber);
+            history = dataBase.DataBaseShowFixedAssetHistory(history,inventoryNumber);
             HistoryDataGrid.ItemsSource = history.DefaultView;
             ClearTextBoxes();
 

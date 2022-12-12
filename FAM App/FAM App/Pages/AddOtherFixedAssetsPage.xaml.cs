@@ -183,7 +183,7 @@ namespace FAM_App.Pages
 
         private void Type_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(Type.SelectedValue!= null) { typeID= (int)Type.SelectedValue;}
+            if(Type.SelectedValue!= null) { typeID = (int)Type.SelectedValue;}
         }
 
         private void Product_Loaded(object sender, RoutedEventArgs e)

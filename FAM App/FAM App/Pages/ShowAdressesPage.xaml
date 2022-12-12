@@ -1,0 +1,51 @@
+﻿<Page x:Class="FAM_App.Pages.ShowAdressesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FAM_App.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="1034" d:DesignWidth="1920"
+      Title="ShowAdressesPage">
+
+    <Page.Resources>
+        <Style x:Key="dark" TargetType="DataGrid">
+            <Setter Property="Background" Value="#152238"/>
+        </Style>
+        <Style x:Key="darkTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="#dddddd"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+            <Setter Property="IsEnabled" Value="False"/>
+        </Style>
+        <Style x:Key="darkCheckbox" TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#dddddd"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border x:Name="BorderPanel" BorderBrush="WhiteSmoke" BorderThickness="1"  
+                Background="#152238"
+                Grid.Column="0" Grid.Row="1"/>
+
+        <StackPanel Grid.Row="1" Margin="0,50">
+
+        </StackPanel>
+
+        <Border x:Name="BorderPage" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+            <DataGrid x:Name="AdressesDataGrid" Style="{StaticResource dark}" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+
+        </Border>
+    </Grid>
+</Page>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.Pkcs;
 using System.Text;
@@ -10,14 +11,16 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Xml.Linq;
 
 namespace FAM_App
 {
     internal class DataBase
     {
+        SqlConnection sqlConnection;
         private SqlCommand DataBaseConnection()
         {
-            SqlConnection sqlConnection = new SqlConnection(@"Server=(local);Database=FAMDataBase;Trusted_Connection=Yes;"); //DESKTOP-JLN71CE
+            sqlConnection = new SqlConnection(@"Server=(local);Database=FAMDataBase;Trusted_Connection=Yes;"); //DESKTOP-JLN71CE
             sqlConnection.Open();
             SqlCommand cmd = sqlConnection.CreateCommand();
             return cmd;
@@ -35,31 +38,50 @@ namespace FAM_App
             else { return false; }
         }
 
-        public bool AddFixedAssetsToBase(SqlDateTime introduction_date, string fixedAsset_Code, int TypeID, int supplier, int product, string status, int depreciation, SqlDateTime date_of_aquisition, decimal gros_orig_value, decimal net_orig_value, string descritpion, string invoice, int guarantee)
+        public bool AddFixedAssetsToBase(SqlDateTime introduction_date, string fixedAsset_Code, int supplier, int product, string status, int depreciation, SqlDateTime date_of_aquisition, decimal gros_orig_value, decimal net_orig_value, string descritpion, string invoice, int guarantee, int GroupID, int SubgroupID, int TypeID)
         {
+            int ID;
             SqlCommand cmd = DataBaseConnection();
             String dataSelect = "SELECT MAX(ID_Srodka) FROM dbo.Srodek_Trwaly;";
             cmd.CommandText = dataSelect;
+            var result = cmd.ExecuteScalar(); 
+            if (result == DBNull.Value)
+            { ID = 1; }
+            else
+            {
+                ID = (int)cmd.ExecuteScalar();
+                ID++;
+            }
+            string inventoryNumber = CreateAnInventoryNumber(GroupID, SubgroupID, TypeID, ID);
 
-            //int ID = (int)cmd.ExecuteScalar();
+            String data = "INSERT INTO dbo.Srodek_Trwaly (ID_Srodka, Kod_Srodka, Nr_Inwentarzowy, Stan_Status, id_nr_klasyfikacyjny, id_produktu, Opis, Data_Nabycia, Data_Likwidacji, Data_Wprowadzenia, Wartosc_Poczatkowa_Netto, Wartosc_Poczatkowa_Brutto, id_dostawcy, Faktura, Gwarancja, Stawka_Amortyzacji) " +
+                "VALUES (" + ID + ",'" + fixedAsset_Code + "', '"+ inventoryNumber + "','"+status+"', " + TypeID + ", " + product + ", '" + descritpion + "', '" + date_of_aquisition + "', '', '" + introduction_date + "', " + net_orig_value + ", " + gros_orig_value + ", " + supplier + ", '" + invoice + "', " + guarantee + ", " + depreciation + ");";
+            cmd.CommandText = data;
+            int result2 = cmd.ExecuteNonQuery();
 
 
-            //String data = "";
-            //cmd.CommandText = data;
-            //int result = cmd.ExecuteNonQuery();
+            sqlConnection.Close();
 
-            //// Check Error
-            //if (result < 0) { return false; }
-            //else { return true; };
-            return true;
+            // Check Error
+            if (result2 < 0) { return false;  }
+            else { return true; };
         }
 
         public bool AddOtherFixedAssetsToBase(SqlDateTime introduction_date, string fixedAsset_Code, int TypeID, int supplier, int product, string status, SqlDateTime date_of_aquisition, decimal gros_orig_value, decimal net_orig_value, string descritpion, string invoice, int guarantee)
         {
+            int ID;
             SqlCommand cmd = DataBaseConnection();
             String dataSelect = "SELECT MAX(ID_Srodka) FROM dbo.Srodek_Trwaly;";
             cmd.CommandText = dataSelect;
-            //int ID = (int)cmd.ExecuteScalar();
+            var result = cmd.ExecuteScalar();
+            if (result == DBNull.Value)
+            { ID = 1; }
+            else
+            {
+                ID = (int)cmd.ExecuteScalar();
+                ID++;
+            }
+            sqlConnection.Close();
 
             //String data = "";
             //cmd.CommandText = data;
@@ -87,23 +109,31 @@ namespace FAM_App
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dataTable = new DataTable("emp");
             sda.Fill(dataTable);
+            sqlConnection.Close();
             return dataTable;
         }
 
         public bool AddProductToBase(String Name, String Brand, String Model, String Descritpion, String Year)
         {
+            int ID;
             SqlCommand cmd = DataBaseConnection();
             String dataSelect = "SELECT MAX(ID_Produktu) FROM dbo.Produkt;";
             cmd.CommandText = dataSelect;
-            int ID = (int)cmd.ExecuteScalar();
-            ID++;
+            var result = cmd.ExecuteScalar();
+            if (result == DBNull.Value)
+            { ID = 1; }
+            else
+            {
+                ID = (int)cmd.ExecuteScalar();
+                ID++;
+            }
 
             String dataInsert = "INSERT INTO dbo.Produkt (ID_Produktu, Nazwa, Marka, Model, Opis, Rok_Produkcji)  VALUES ( "+ID+",'"+Name+"', '"+Brand+"', '"+Model+"', '"+Descritpion+"', '"+Year+"');";
             cmd.CommandText = dataInsert;
-            int result = cmd.ExecuteNonQuery();
-
+            int result2 = cmd.ExecuteNonQuery();
+            sqlConnection.Close();
             // Check Error
-            if (result < 0) { return false; }
+            if (result2 < 0) { return false; }
             else { return true; };
         }
 
@@ -116,23 +146,31 @@ namespace FAM_App
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dataTable = new DataTable("emp");
             sda.Fill(dataTable);
+            sqlConnection.Close();
             return dataTable;
         }
 
         public bool AddSupplierToBase(String Name, String City, String PostCode, String Street)
         {
+            int ID;
             SqlCommand cmd = DataBaseConnection();
             String dataSelect = "SELECT MAX(ID_Dostawcy) FROM dbo.Dostawca;";
             cmd.CommandText = dataSelect;
-            int ID = (int)cmd.ExecuteScalar();
-            ID++;
+            var result = cmd.ExecuteScalar();
+            if (result == DBNull.Value)
+            { ID = 1; }
+            else
+            {
+                ID = (int)cmd.ExecuteScalar();
+                ID++;
+            }
 
             String dataInsert = "INSERT INTO dbo.Dostawca (ID_Dostawcy, Nazwa, Miejscowosc, Kod_Pocztowy, Ulica)  VALUES ( " + ID + ",'" + Name + "', '" + City + "', '" + PostCode + "', '" + Street + "');";
             cmd.CommandText = dataInsert;
-            int result = cmd.ExecuteNonQuery();
-
+            int result2 = cmd.ExecuteNonQuery();
+            sqlConnection.Close();
             // Check Error
-            if (result < 0) { return false; }
+            if (result2 < 0) { return false; }
             else { return true; };
         }
 
@@ -145,10 +183,11 @@ namespace FAM_App
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dataTable = new DataTable("emp");
             sda.Fill(dataTable);
+            sqlConnection.Close();
             return dataTable;
         }
 
-        public DataTable DataBaseFixedAssetHistory(DataTable dataTable, string inventoryNumber)
+        public DataTable DataBaseShowFixedAssetHistory(DataTable dataTable, string inventoryNumber)
         {
             SqlCommand cmd = DataBaseConnection();
             String data = "SELECT dbo.Historia_Srodka.ID_Historii AS Lp, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Stan_Status, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Historia_Srodka.Data, CONCAT(dbo.Adres.Miejscowosc, dbo.Adres.Kod_Pocztowy, dbo.Adres.Ulica, dbo.Adres.Nr_Budynku, dbo.Adres.Nr_Lokalu, dbo.Adres.Nr_Pomieszczenia) AS Adres, dbo.Historia_Srodka.id_uzytkownika AS 'Dokonal zmiany', dbo.Historia_Srodka.id_wprowadzajacego AS Wprowadzil, dbo.Historia_Srodka.Uwagi " +
@@ -162,6 +201,7 @@ namespace FAM_App
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dataTable = new DataTable("emp");
             sda.Fill(dataTable);
+            sqlConnection.Close();
             return dataTable;
         }
 
@@ -174,6 +214,7 @@ namespace FAM_App
             dataTable = new DataTable("emp");
             sda.Fill(dataTable);
             cmd.Dispose();
+            sqlConnection.Close();
             return dataTable;
         }
 
@@ -186,6 +227,7 @@ namespace FAM_App
             dataTable = new DataTable("emp");
             sda.Fill(dataTable);
             cmd.Dispose();
+            sqlConnection.Close();
             return dataTable;
         }
 
@@ -198,6 +240,7 @@ namespace FAM_App
             dataTable = new DataTable("emp");
             sda.Fill(dataTable);
             cmd.Dispose();
+            sqlConnection.Close();
             return dataTable;
         }
 
@@ -210,6 +253,76 @@ namespace FAM_App
             dataTable = new DataTable("emp");
             sda.Fill(dataTable);
             cmd.Dispose();
+            sqlConnection.Close();
+            return dataTable;
+        }
+
+        private string CreateAnInventoryNumber(int GroupID, int SubgroupID, int TypeID, int ID)
+        {
+            string inventoryNumber;
+            string groupID = GroupID.ToString();
+            string subgroupID = SubgroupID.ToString();
+            string typeID = TypeID.ToString();
+            string iD = ID.ToString();
+            inventoryNumber = groupID+subgroupID+typeID+iD;
+            return inventoryNumber;
+        }
+
+        private void AddToHistoryAsset(SqlDateTime introduction_date, int userID, int adressID, int fixedAssetID, int introducerID, string comments)
+        {
+            int ID;
+            SqlCommand cmd = DataBaseConnection();
+            String dataSelect = "SELECT MAX(ID_Historii) FROM dbo.Historia_Srodka;";
+            cmd.CommandText = dataSelect;
+            var result = cmd.ExecuteScalar();
+            if (result == DBNull.Value)
+            { ID = 1; }
+            else
+            {
+                ID = (int)cmd.ExecuteScalar();
+                ID++;
+            }
+
+            String dataInsert = "INSERT INTO dbo.Historia_Srodka (ID_Historii, Data, id_uzytkownika, id_adresu, id_srodka, id_wprowadzajacego, Uwagi)  VALUES ( " + ID + ",'" + introduction_date + "', " + userID + ", " + adressID + ", " + fixedAssetID + "," + introducerID + ",'" + comments + "');";
+            cmd.CommandText = dataInsert;
+            sqlConnection.Close();
+
+        }
+
+        public bool AddAdressToBase(string City, string PostCode, string Street, string BuildingNumber, string ApartmentNumber, string RoomNumber, string Name, string AdditionalInformation)
+        {
+            int ID;
+            SqlCommand cmd = DataBaseConnection();
+            String dataSelect = "SELECT MAX(ID_Adresu) FROM dbo.Adres;";
+            cmd.CommandText = dataSelect;
+            var result = cmd.ExecuteScalar();
+            if (result == DBNull.Value)
+            { ID = 1; }
+            else
+            {
+                ID = (int)cmd.ExecuteScalar();
+                ID++;
+            }
+
+            String dataInsert = "INSERT INTO dbo.Adres (ID_Adresu, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Nr_Pomieszczenia, Dodatkowe_Dane, Nazwa)  VALUES ( " + ID + ",'" + City + "', '" + PostCode + "', '" + Street + "', '" + BuildingNumber + "', '" + ApartmentNumber + "', '" + RoomNumber + "', '" + AdditionalInformation + "', '" + Name + "');";
+            cmd.CommandText = dataInsert;
+            int result2 = cmd.ExecuteNonQuery();
+            sqlConnection.Close();
+            // Check Error
+            if (result2 < 0) { return false; }
+            else { return true; };
+        }
+
+        public DataTable DataBaseShowAdresses(DataTable dataTable)
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = "SELECT ID_Adresu, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Nr_Pomieszczenia, Dodatkowe_Dane, Nazwa FROM dbo.Adres;";
+            cmd.CommandText = data;
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dataTable = new DataTable("emp");
+            sda.Fill(dataTable);
+            cmd.Dispose();
+            sqlConnection.Close();
             return dataTable;
         }
     }

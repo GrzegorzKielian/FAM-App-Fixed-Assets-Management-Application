@@ -61,7 +61,7 @@ namespace FAM_App
                     int guarantee = Convert.ToInt32(Guarantee.Text);
 
                     DataBase dataBase = new DataBase();
-                    bool check = dataBase.AddFixedAssetsToBase(introduction_date, fixedAsset_Code, typeID, supplier, product, status, depreciation, date_of_aquisition, gros_orig_value, net_orig_value, descritpion, invoice, guarantee);
+                    bool check = dataBase.AddFixedAssetsToBase(introduction_date, fixedAsset_Code, supplier, product, status, depreciation, date_of_aquisition, gros_orig_value, net_orig_value, descritpion, invoice, guarantee, groupID, subgroupID, typeID);
                     if (check)
                     {
                         MessageBox.Show("Dodano do bazy:\n" + introduction_date + "\n" + fixedAsset_Code + "\n" + typeID + "\n" + supplier + "\n" + product + "\n" + status + "\n" + depreciation + "\n" + date_of_aquisition + "\n" + gros_orig_value + "\n" + net_orig_value + "\n" + descritpion + "\n" + invoice + "\n" + guarantee + "\n");
@@ -228,6 +228,7 @@ namespace FAM_App
             Invoice.Inlines.Clear();
             Guarantee.Clear();
         }
+
 
     }
 }
