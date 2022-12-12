@@ -58,21 +58,25 @@ namespace FAM_App.Pages
         private void ByName_Unchecked(object sender, RoutedEventArgs e)
         {
             ByName_TxtBox.IsEnabled = false;
+            ByName_TxtBox.Clear();
         }
 
         private void ByBrand_Unchecked(object sender, RoutedEventArgs e)
         {
             ByBrand_TxtBox.IsEnabled = false;
+            ByBrand_TxtBox.Clear();
         }
 
         private void ByModel_Unchecked(object sender, RoutedEventArgs e)
         {
             ByModel_TxtBox.IsEnabled = false;
+            ByModel_TxtBox.Clear();
         }
 
         private void ByYear_Unchecked(object sender, RoutedEventArgs e)
         {
             ByYear_TxtBox.IsEnabled = false;
+            ByYear_TxtBox.Clear();
         }
 
         private void Search_Button_Click(object sender, RoutedEventArgs e)

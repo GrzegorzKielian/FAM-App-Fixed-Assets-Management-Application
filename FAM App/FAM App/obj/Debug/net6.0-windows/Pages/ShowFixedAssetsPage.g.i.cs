@@ -77,7 +77,7 @@ namespace FAM_App {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/FAM App;component/pages/showfixedassetspage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/FAM App;V1.0.0.0;component/pages/showfixedassetspage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Pages\ShowFixedAssetsPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

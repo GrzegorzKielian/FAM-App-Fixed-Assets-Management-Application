@@ -59,21 +59,25 @@ namespace FAM_App.Pages
         private void ByName_Unchecked(object sender, RoutedEventArgs e)
         {
             ByName_TxtBox.IsEnabled = false;
+            ByName_TxtBox.Clear();
         }
 
         private void ByCity_Unchecked(object sender, RoutedEventArgs e)
         {
             ByCity_TxtBox.IsEnabled = false;
+            ByCity_TxtBox.Clear();
         }
 
         private void ByPostCode_Unchecked(object sender, RoutedEventArgs e)
         {
             ByPostCode_TxtBox.IsEnabled = false;
+            ByPostCode_TxtBox.Clear();
         }
 
         private void ByStreet_Unchecked(object sender, RoutedEventArgs e)
         {
             ByStreet_TxtBox.IsEnabled = false;
+            ByStreet_TxtBox.Clear();
         }
         private void Search_Button_Click(object sender, RoutedEventArgs e)
         {

@@ -40,6 +40,30 @@
                 Grid.Column="0" Grid.Row="1"/>
 
         <StackPanel Grid.Row="1" Margin="0,50">
+            <CheckBox x:Name="ByName" Style="{StaticResource darkCheckbox}" Checked="ByName_Checked" Unchecked="ByName_Unchecked" >
+                <TextBlock Text="Wyszukaj po imieniu" TextWrapping="Wrap"/>
+            </CheckBox>
+            <TextBox x:Name="ByName_TxtBox" Style="{StaticResource darkTextBox }"/>
+
+            <CheckBox x:Name="BySurname" Style="{StaticResource darkCheckbox}" Checked="BySurname_Checked" Unchecked="BySurname_Unchecked">
+                <TextBlock Text="Wyszukaj po nazwisku" TextWrapping="Wrap"/>
+            </CheckBox>
+            <TextBox x:Name="BySurname_TxtBox" Style="{StaticResource darkTextBox }"/>
+
+            <CheckBox x:Name="ByEmail" Style="{StaticResource darkCheckbox}" Checked="ByEmail_Checked" Unchecked="ByEmail_Unchecked" >
+                <TextBlock Text="Wyszukaj po nazwie email" TextWrapping="Wrap"/>
+            </CheckBox>
+            <TextBox x:Name="ByEmail_TxtBox" Style="{StaticResource darkTextBox }"/>
+
+            <CheckBox x:Name="ByCity" Style="{StaticResource darkCheckbox}" Checked="ByCity_Checked" Unchecked="ByCity_Unchecked" >
+                <TextBlock Text="Wyszukaj po miejscu zamieszkania" TextWrapping="Wrap"/>
+            </CheckBox>
+            <TextBox x:Name="ByCity_TxtBox" Style="{StaticResource darkTextBox }"/>
+
+            <CheckBox x:Name="ByStreet" Style="{StaticResource darkCheckbox}" Checked="ByStreet_Checked" Unchecked="ByStreet_Unchecked" >
+                <TextBlock Text="Wyszukaj po nazwie ulicy" TextWrapping="Wrap"/>
+            </CheckBox>
+            <TextBox x:Name="ByStreet_TxtBox" Style="{StaticResource darkTextBox }"/>
 
             <Button x:Name="Search_Button" Content="Wyszukaj" Height="25" FontSize="15" FontFamily="Tahoma"/>
         </StackPanel>
