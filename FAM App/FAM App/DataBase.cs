@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
 using System.Windows.Markup;
 using System.Xml.Linq;
 
@@ -18,6 +19,9 @@ namespace FAM_App
 {
     internal class DataBase
     {
+        private int ID_EmployeeINFO;
+        public int ID_EmployeeGetSet { get { return this.ID_EmployeeINFO; } set { this.ID_EmployeeINFO = value; } }
+
         SqlConnection sqlConnection;
         private SqlCommand DataBaseConnection()
         {
@@ -30,13 +34,35 @@ namespace FAM_App
         public bool Login(string login)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT Login FROM Pracownik WHERE Login='"+login+"';";
+            String data = "SELECT CASE WHEN EXISTS (SELECT ID_Pracownika FROM dbo.Pracownik WHERE Login='" + login+ "') THEN CAST(1 AS INT) ELSE CAST(0 AS INT) END;";
             cmd.CommandText = data;
-            if(cmd != null)
+            int result = (int)cmd.ExecuteScalar();
+            if(result == 1)
             {
+                sqlConnection.Close();
                 return true;
             }
             else { return false; }
+        }
+
+        public string[] GetPasswordData(string login, string[] strings)
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = "SELECT ID_Pracownika, Haslo, Sol_Hasla FROM Pracownik WHERE Login='" + login + "';";
+            cmd.CommandText = data;
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.HasRows)
+            {
+                if (dr.Read())
+                {
+                    strings[0] = dr["ID_Pracownika"].ToString();
+                    strings[1] = dr["Haslo"].ToString();
+                    strings[2] = dr["Sol_Hasla"].ToString();
+                }
+            }
+            else { MessageBox.Show("Brak danych"); }
+
+            return strings;
         }
 
         public bool AddFixedAssetsToBase(SqlDateTime introduction_date, string fixedAsset_Code, int supplier, int product, int adress, string status, int depreciation, SqlDateTime date_of_aquisition, decimal gros_orig_value, decimal net_orig_value, string descritpion, string invoice, int guarantee, int GroupID, int SubgroupID, int TypeID)
@@ -59,7 +85,7 @@ namespace FAM_App
                 "VALUES (" + ID + ",'" + fixedAsset_Code + "', '"+ inventoryNumber + "','"+status+"', " + TypeID + ", " + product + ", '" + descritpion + "', '" + date_of_aquisition + "', '', '" + introduction_date + "', " + net_orig_value + ", " + gros_orig_value + ", " + supplier + ", '" + invoice + "', " + guarantee + ", " + depreciation + ");";
             cmd.CommandText = data;
             int result2 = cmd.ExecuteNonQuery();
-            //AddToHistoryAsset(introduction_date, ,adress, ID, ,"Dodanie środka trwałego do bazy danych");
+            AddToHistoryAsset(introduction_date, 0, adress, ID, ID_EmployeeINFO, "Dodanie środka trwałego do bazy danych");
             sqlConnection.Close();
 
             // Check Error
@@ -246,6 +272,7 @@ namespace FAM_App
             sqlConnection.Close();
             return dataTable;
         }
+
         public bool AddEmployeeToBase(string name, string surname, string pesel, string phone, string email, string city, string postCode, string street, string buildingNumber, string apartmentNumber, SqlBoolean admin, SqlBoolean employee, string newLogin, string newPassword, string salt)
         {
             int ID;
@@ -262,7 +289,7 @@ namespace FAM_App
             }
 
             String data = "INSERT INTO dbo.Pracownik (ID_Pracownika, Imie, Nazwisko, Pesel, Telefon, Email, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Admin, Ewidencja, Login, Haslo, Sol_Hasla) " +
-                "VALUES (" + ID + ", '" + name + "', '" + surname + "', '" + pesel + "', '" + phone + "', '" + email + "', '" + city + "', '" + postCode + "', '" + street + "', '" + buildingNumber + "', '" + apartmentNumber + "', " + admin + ", " + employee + ", '" + newLogin + "', '"+ newPassword +"', '"+ salt +"');";
+                "VALUES (" + ID + ", '" + name + "', '" + surname + "', '" + pesel + "', '" + phone + "', '" + email + "', '" + city + "', '" + postCode + "', '" + street + "', '" + buildingNumber + "', '" + apartmentNumber + "', '" + admin + "', '" + employee + "', '" + newLogin + "', '"+ newPassword +"', '"+ salt +"');";
             cmd.CommandText = data;
             int result2 = cmd.ExecuteNonQuery();
 
@@ -311,9 +338,17 @@ namespace FAM_App
                 ID = (int)cmd.ExecuteScalar();
                 ID++;
             }
+            if(userID == 0) 
+            {
+                String dataInsert1 = "INSERT INTO dbo.Historia_Srodka (ID_Historii, Data, id_uzytkownika, id_adresu, id_srodka, id_wprowadzajacego, Uwagi)  VALUES ( " + ID + ",'" + introduction_date + "', , " + adressID + ", " + fixedAssetID + "," + introducerID + ",'" + comments + "');";
+                cmd.CommandText = dataInsert1;
+            }
+            else
+            {
+                String dataInsert2 = "INSERT INTO dbo.Historia_Srodka (ID_Historii, Data, id_uzytkownika, id_adresu, id_srodka, id_wprowadzajacego, Uwagi)  VALUES ( " + ID + ",'" + introduction_date + "', " + userID + ", " + adressID + ", " + fixedAssetID + "," + introducerID + ",'" + comments + "');";
+                cmd.CommandText = dataInsert2;
+            }
 
-            String dataInsert = "INSERT INTO dbo.Historia_Srodka (ID_Historii, Data, id_uzytkownika, id_adresu, id_srodka, id_wprowadzajacego, Uwagi)  VALUES ( " + ID + ",'" + introduction_date + "', " + userID + ", " + adressID + ", " + fixedAssetID + "," + introducerID + ",'" + comments + "');";
-            cmd.CommandText = dataInsert;
             sqlConnection.Close();
 
         }
@@ -353,6 +388,27 @@ namespace FAM_App
             cmd.Dispose();
             sqlConnection.Close();
             return dataTable;
+        }
+
+        public bool IsAdmin()
+        {
+            SqlBoolean isAdmin=false;
+            SqlCommand cmd = DataBaseConnection();
+            String data = "SELECT Admin FROM dbo.Pracownik WHERE ID_Pracownika=" + ID_EmployeeINFO + ";";
+            cmd.CommandText = data;
+            SqlDataReader dr = cmd.ExecuteReader();
+            MessageBox.Show(ID_EmployeeINFO.ToString());
+            if (dr.HasRows)
+            {
+                if (dr.Read())
+                {
+                    isAdmin = (SqlBoolean)dr["Admin"];
+                }
+            }
+            else { MessageBox.Show("Brak danych"); }
+
+            if (isAdmin) { return true; }
+            else { return false; }
         }
     }
 }

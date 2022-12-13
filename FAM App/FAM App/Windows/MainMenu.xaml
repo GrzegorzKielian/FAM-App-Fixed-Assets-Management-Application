@@ -44,7 +44,7 @@
                     <MenuItem Header="Zestawienie" Click="FixedAssetsStatement_Click"/>
                     <MenuItem Header="Karta srodka" Click="FixedAssetCard_Click"/>
                 </MenuItem>
-                <MenuItem Header="Pracownicy">
+                <MenuItem Header="Pracownicy" Visibility="Hidden">
                     <MenuItem  x:Name="ShowEmployee" Header="Przeglądaj pracowników" Click="ShowEmployee_Click"/>
                     <MenuItem  x:Name="AddEmployee" Header="Dodaj pracownika" Click="AddEmployee_Click" />
                 </MenuItem>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,15 +36,24 @@ namespace FAM_App
             try
             {
                 string login = LoginTxtBox.Text;
-                string passwd = PasswdTxtBox.ToString();
+                string passwd = PasswdTxtBox.Password.ToString();
 
                 DataBase dataBase = new DataBase();
 
-                if(dataBase.Login(login))
+                if (dataBase.Login(login))
                 {
-                    MainMenu mainMenu = new MainMenu();
-                    mainMenu.Show();
-                    this.Close();
+                    bool checkpassword = Checkpassword(login, passwd);
+                    if (checkpassword)
+                    {
+                        MainMenu mainMenu = new MainMenu();
+                        mainMenu.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        PasswdTxtBox.BorderBrush = Brushes.Red;
+                    }
+
                 }
                 else
                 {
@@ -62,5 +72,38 @@ namespace FAM_App
         {
             LoginTxtBox.BorderBrush = new SolidColorBrush(Color.FromArgb(0xFF, 221, 221, 221));
         }
+
+        private void PasswdTxtBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            PasswdTxtBox.BorderBrush = new SolidColorBrush(Color.FromArgb(0xFF, 221, 221, 221));
+        }
+
+        private bool Checkpassword(string login, string passwd)
+        {
+            DataBase dataBase = new DataBase();
+            string[] strings = new string[3];
+            strings = dataBase.GetPasswordData(login, strings);
+            string hashPasswdFromDataBase = strings[1];
+            string saltFromDataBase = strings[2];
+
+            byte[] salt = Convert.FromBase64String(saltFromDataBase);
+            byte[] hashPasswd = MakeHash(passwd, salt);
+            string hashPasswdString = Convert.ToBase64String(hashPasswd);
+            MessageBox.Show(strings[0]);
+            string idEmployee = strings[0];
+            if(hashPasswdFromDataBase == hashPasswdString)
+            {
+                dataBase.ID_EmployeeGetSet = Convert.ToInt32(idEmployee);
+                return true;
+            }
+            else { return false; }
+
+
+        }
+        private byte[] MakeHash(string password, byte[] salt)
+        {
+            using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, 100)) return deriveBytes.GetBytes(100);
+        }
+
     }
 }

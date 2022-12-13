@@ -29,7 +29,15 @@ namespace FAM_App
 
         private void IsAdmin()
         {
-            AddEmployee.Visibility = Visibility.Visible;
+            DataBase dataBase = new DataBase();
+            if(dataBase.IsAdmin())
+            {
+                AddEmployee.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AddEmployee.Visibility = Visibility.Hidden;
+            }
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
