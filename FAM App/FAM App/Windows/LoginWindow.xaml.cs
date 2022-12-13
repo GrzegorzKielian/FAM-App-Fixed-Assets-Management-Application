@@ -89,11 +89,11 @@ namespace FAM_App
             byte[] salt = Convert.FromBase64String(saltFromDataBase);
             byte[] hashPasswd = MakeHash(passwd, salt);
             string hashPasswdString = Convert.ToBase64String(hashPasswd);
-            MessageBox.Show(strings[0]);
             string idEmployee = strings[0];
+
             if(hashPasswdFromDataBase == hashPasswdString)
             {
-                dataBase.ID_EmployeeGetSet = Convert.ToInt32(idEmployee);
+                EmployeeINFO.ID_EmployeeINFO = Convert.ToInt32(idEmployee);
                 return true;
             }
             else { return false; }

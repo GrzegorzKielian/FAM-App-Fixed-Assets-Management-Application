@@ -17,10 +17,8 @@ using System.Xml.Linq;
 
 namespace FAM_App
 {
-    internal class DataBase
+    internal class DataBase : EmployeeINFO
     {
-        private int ID_EmployeeINFO;
-        public int ID_EmployeeGetSet { get { return this.ID_EmployeeINFO; } set { this.ID_EmployeeINFO = value; } }
 
         SqlConnection sqlConnection;
         private SqlCommand DataBaseConnection()
@@ -392,17 +390,16 @@ namespace FAM_App
 
         public bool IsAdmin()
         {
-            SqlBoolean isAdmin=false;
+            bool isAdmin=false;
             SqlCommand cmd = DataBaseConnection();
             String data = "SELECT Admin FROM dbo.Pracownik WHERE ID_Pracownika=" + ID_EmployeeINFO + ";";
             cmd.CommandText = data;
             SqlDataReader dr = cmd.ExecuteReader();
-            MessageBox.Show(ID_EmployeeINFO.ToString());
             if (dr.HasRows)
             {
                 if (dr.Read())
                 {
-                    isAdmin = (SqlBoolean)dr["Admin"];
+                    isAdmin = (bool)dr["Admin"];
                 }
             }
             else { MessageBox.Show("Brak danych"); }

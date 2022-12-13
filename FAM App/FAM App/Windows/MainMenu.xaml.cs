@@ -30,13 +30,14 @@ namespace FAM_App
         private void IsAdmin()
         {
             DataBase dataBase = new DataBase();
+
             if(dataBase.IsAdmin())
             {
-                AddEmployee.Visibility = Visibility.Visible;
+                Employee.Visibility = Visibility.Visible;
             }
             else
             {
-                AddEmployee.Visibility = Visibility.Hidden;
+                Employee.Visibility = Visibility.Hidden;
             }
         }
 
