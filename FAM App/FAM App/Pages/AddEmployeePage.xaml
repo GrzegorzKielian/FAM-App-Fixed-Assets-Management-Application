@@ -135,18 +135,18 @@
                         </Grid.ColumnDefinitions>
                         <Label Content="Numer budynku:" Style="{StaticResource darkLabel}"/>
                         <TextBox x:Name="BuildingNumber_TextBox" Height="25" Width="50" 
-                         Style="{StaticResource darkTextBox }" MaxLength="5"/>
+                         Style="{StaticResource darkTextBox }" MaxLength="4"/>
 
                         <Label Content="Numer lokalu:" Grid.Column="2" Style="{StaticResource darkLabel}"/>
                         <TextBox x:Name="ApartmentNumber_TextBox" Grid.Column="3" Height="25" Width="50" 
-                         Style="{StaticResource darkTextBox }" MaxLength="5"/>
+                         Style="{StaticResource darkTextBox }" MaxLength="4"/>
                     </Grid>
                 </Border>
 
                 
                 <Label Content="Email:" Grid.Row="1" Style="{StaticResource darkLabelLogin}"/>
                 <TextBox x:Name="Email_TextBox" Grid.Row="1" Height="25" Width="310" 
-                         Style="{StaticResource darkTextBoxLogin }"/>
+                         MaxLength="50" Style="{StaticResource darkTextBoxLogin }"/>
                 
                 <Label Content="Login:" Grid.Row="2" Style="{StaticResource darkLabelLogin}"/>
                 <TextBox x:Name="NewLogin_TextBox" Grid.Row="2" Height="25" Width="310" 
@@ -154,7 +154,7 @@
 
                 <Label Content="Hasło:" Grid.Row="3" Style="{StaticResource darkLabelLogin}"/>
                 <TextBox x:Name="NewPasswd_TextBox" Grid.Row="3" Height="25" Width="310" 
-                         Style="{StaticResource darkTextBoxLogin}"/>
+                         MaxLength="100" Style="{StaticResource darkTextBoxLogin}"/>
                 <Border x:Name="BorderCheck"  Grid.Column="3" Grid.Row="4" >
                     <Grid>
                         <Grid.ColumnDefinitions>

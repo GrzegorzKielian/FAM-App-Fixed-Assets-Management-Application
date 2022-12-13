@@ -36,6 +36,10 @@
                     <MenuItem Header="Przegladaj dostawców" Click="ShowSupplier_Click"/>
                     <MenuItem Header="Dodaj dostawce" Click="AddSupplier_Click"/>
                 </MenuItem>
+                <MenuItem Header="Adresy">
+                    <MenuItem  x:Name="ShowAdress" Header="Przeglądaj adresy" Click="ShowAdresses_Click" />
+                    <MenuItem  x:Name="AddAdress" Header="Dodaj adres" Click="AddAdress_Click" />
+                </MenuItem>
                 <MenuItem Header="Raport" >
                     <MenuItem Header="Zestawienie" Click="FixedAssetsStatement_Click"/>
                     <MenuItem Header="Karta srodka" Click="FixedAssetCard_Click"/>

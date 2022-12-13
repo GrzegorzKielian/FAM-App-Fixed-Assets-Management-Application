@@ -140,24 +140,49 @@
                         </ComboBox>
                     </Grid>
                 </Border>
-                <Label Content="Produkt:" Grid.Row="2" Style="{StaticResource darkLabelSelect}"/>
-                <ComboBox Name="Product" Grid.Row="2" Style="{StaticResource darkCombobox}"
+                <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Produkt:" Grid.Row="2" Style="{StaticResource darkLabelSelect}"/>
+                        <ComboBox Name="Product" Grid.Row="2" Style="{StaticResource darkCombobox}"
                           Loaded="Product_Loaded">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
                                 <Run Text="{Binding Nazwa}"/>
                                 <Run Text="{Binding Marka}"/>
                                 <Run Text="{Binding Model}"/>
                                 <Run Text="{Binding Rok_Produkcji}"/>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
 
-                <Label Content="Dostawca:" Grid.Row="3" Style="{StaticResource darkLabelSelect}"/>
-                <ComboBox Name="Supplier" Grid.Row="3" Style="{StaticResource darkCombobox}"
+                        <Label Content="Dostawca:" Grid.Column="2" Style="{StaticResource darkLabelSelect}"/>
+                        <ComboBox Name="Supplier" Grid.Column="3" Style="{StaticResource darkCombobox}"
                           Loaded="Supplier_Loaded">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                <Run Text="{Binding Nazwa}"/>
+                                <Run Text="{Binding Miejscowosc}"/>
+                                <Run Text="{Binding Kod_Pocztowy}"/>
+                                <Run Text="{Binding Ulica}"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+                </Border>
+                
+                <Label Content="Adres:" Grid.Row="3" Style="{StaticResource darkLabelSelect}"/>
+                <ComboBox Name="Adress" Grid.Row="3" Style="{StaticResource darkCombobox}" 
+                          Loaded="Adress_Loaded">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock>
@@ -165,6 +190,9 @@
                                 <Run Text="{Binding Miejscowosc}"/>
                                 <Run Text="{Binding Kod_Pocztowy}"/>
                                 <Run Text="{Binding Ulica}"/>
+                                <Run Text="{Binding Nr_Budynku}"/>
+                                <Run Text="{Binding Nr_Lokalu}"/>
+                                <Run Text="{Binding Nr_Pomieszczenia}"/>
                             </TextBlock>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
@@ -173,6 +201,7 @@
                 <Label Content="Stan/Status:" Grid.Row="4" Style="{StaticResource darkLabelSelect}"/>
                 <ComboBox Name="Status" Grid.Row="4" Style="{StaticResource darkCombobox}">
                     <ComboBoxItem>Zlikwidowany</ComboBoxItem>
+                    <ComboBoxItem>W użyciu</ComboBoxItem>
                 </ComboBox>
 
                 <Border x:Name="Depreciation" Grid.Row="5" Grid.ColumnSpan="2">
@@ -239,7 +268,8 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.3*"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="0.19*"/>
+                            <ColumnDefinition Width="0.15*"/>
+                            <ColumnDefinition Width="0.1*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -248,7 +278,7 @@
                         <Label Content="Faktura:" Grid.Row="0" Style="{StaticResource darkLabelSelect}"/>
                         <TextBlock x:Name="Invoice" Grid.Column="1" Style="{StaticResource darkTextBlock}" >
                         </TextBlock>
-                        <Border x:Name="InvoiceBorderButton" Grid.Column="3">
+                        <Border x:Name="InvoiceBorderButton" Grid.Column="2">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>

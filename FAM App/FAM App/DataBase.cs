@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Windows.Markup;
 using System.Xml.Linq;
 
 namespace FAM_App
@@ -38,7 +39,7 @@ namespace FAM_App
             else { return false; }
         }
 
-        public bool AddFixedAssetsToBase(SqlDateTime introduction_date, string fixedAsset_Code, int supplier, int product, string status, int depreciation, SqlDateTime date_of_aquisition, decimal gros_orig_value, decimal net_orig_value, string descritpion, string invoice, int guarantee, int GroupID, int SubgroupID, int TypeID)
+        public bool AddFixedAssetsToBase(SqlDateTime introduction_date, string fixedAsset_Code, int supplier, int product, int adress, string status, int depreciation, SqlDateTime date_of_aquisition, decimal gros_orig_value, decimal net_orig_value, string descritpion, string invoice, int guarantee, int GroupID, int SubgroupID, int TypeID)
         {
             int ID;
             SqlCommand cmd = DataBaseConnection();
@@ -58,8 +59,7 @@ namespace FAM_App
                 "VALUES (" + ID + ",'" + fixedAsset_Code + "', '"+ inventoryNumber + "','"+status+"', " + TypeID + ", " + product + ", '" + descritpion + "', '" + date_of_aquisition + "', '', '" + introduction_date + "', " + net_orig_value + ", " + gros_orig_value + ", " + supplier + ", '" + invoice + "', " + guarantee + ", " + depreciation + ");";
             cmd.CommandText = data;
             int result2 = cmd.ExecuteNonQuery();
-
-
+            //AddToHistoryAsset(introduction_date, ,adress, ID, ,"Dodanie środka trwałego do bazy danych");
             sqlConnection.Close();
 
             // Check Error
@@ -67,7 +67,7 @@ namespace FAM_App
             else { return true; };
         }
 
-        public bool AddOtherFixedAssetsToBase(SqlDateTime introduction_date, string fixedAsset_Code, int TypeID, int supplier, int product, string status, SqlDateTime date_of_aquisition, decimal gros_orig_value, decimal net_orig_value, string descritpion, string invoice, int guarantee)
+        public bool AddOtherFixedAssetsToBase(SqlDateTime introduction_date, string fixedAsset_Code, int supplier, int product, int adress, string status, SqlDateTime date_of_aquisition, decimal gros_orig_value, decimal net_orig_value, string descritpion, string invoice, int guarantee, int GroupID, int SubgroupID, int TypeID)
         {
             int ID;
             SqlCommand cmd = DataBaseConnection();
@@ -81,16 +81,19 @@ namespace FAM_App
                 ID = (int)cmd.ExecuteScalar();
                 ID++;
             }
+            string inventoryNumber = CreateAnInventoryNumber(GroupID, SubgroupID, TypeID, ID);
+
+
+            String data = "INSERT INTO dbo.Srodek_Trwaly (ID_Srodka, Kod_Srodka, Nr_Inwentarzowy, Stan_Status, id_nr_klasyfikacyjny, id_produktu, Opis, Data_Nabycia, Data_Likwidacji, Data_Wprowadzenia, Wartosc_Poczatkowa_Netto, Wartosc_Poczatkowa_Brutto, id_dostawcy, Faktura, Gwarancja, Stawka_Amortyzacji) " +
+                "VALUES (" + ID + ",'" + fixedAsset_Code + "', '" + inventoryNumber + "','" + status + "', " + TypeID + ", " + product + ", '" + descritpion + "', '" + date_of_aquisition + "', '', '" + introduction_date + "', " + net_orig_value + ", " + gros_orig_value + ", " + supplier + ", '" + invoice + "', " + guarantee + ", '');";
+            cmd.CommandText = data;
+            int result2 = cmd.ExecuteNonQuery();
+
             sqlConnection.Close();
 
-            //String data = "";
-            //cmd.CommandText = data;
-            //int result = cmd.ExecuteNonQuery();
-
-            //// Check Error
-            //if (result < 0) { return false; }
-            //else { return true; };
-            return true;
+            // Check Error
+            if (result2 < 0) { return false; }
+            else { return true; };
         }
 
         public DataTable DataBaseShowFixedAssets(DataTable dataTable)
@@ -242,6 +245,32 @@ namespace FAM_App
             cmd.Dispose();
             sqlConnection.Close();
             return dataTable;
+        }
+        public bool AddEmployeeToBase(string name, string surname, string pesel, string phone, string email, string city, string postCode, string street, string buildingNumber, string apartmentNumber, SqlBoolean admin, SqlBoolean employee, string newLogin, string newPassword, string salt)
+        {
+            int ID;
+            SqlCommand cmd = DataBaseConnection();
+            String dataSelect = "SELECT MAX(ID_Pracownika) FROM dbo.Pracownik;";
+            cmd.CommandText = dataSelect;
+            var result = cmd.ExecuteScalar();
+            if (result == DBNull.Value)
+            { ID = 1; }
+            else
+            {
+                ID = (int)cmd.ExecuteScalar();
+                ID++;
+            }
+
+            String data = "INSERT INTO dbo.Pracownik (ID_Pracownika, Imie, Nazwisko, Pesel, Telefon, Email, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Admin, Ewidencja, Login, Haslo, Sol_Hasla) " +
+                "VALUES (" + ID + ", '" + name + "', '" + surname + "', '" + pesel + "', '" + phone + "', '" + email + "', '" + city + "', '" + postCode + "', '" + street + "', '" + buildingNumber + "', '" + apartmentNumber + "', " + admin + ", " + employee + ", '" + newLogin + "', '"+ newPassword +"', '"+ salt +"');";
+            cmd.CommandText = data;
+            int result2 = cmd.ExecuteNonQuery();
+
+            sqlConnection.Close();
+
+            // Check Error
+            if (result2 < 0) { return false; }
+            else { return true; };
         }
 
         public DataTable ShowEmployee(DataTable dataTable)

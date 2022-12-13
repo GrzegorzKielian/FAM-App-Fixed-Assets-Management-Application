@@ -51,6 +51,7 @@ namespace FAM_App
                     string fixedAsset_Code = FixedAsset_Code.Text;
                     int supplier = (int)Supplier.SelectedValue;
                     int product = (int)Product.SelectedValue;
+                    int adress = (int)Adress.SelectedValue;
                     string status = Status.Text;
                     int depreciation = Convert.ToInt32(Depreciation_rate.Text);
                     SqlDateTime date_of_aquisition = Convert.ToDateTime(Date_of_aquisition.Text);
@@ -61,10 +62,10 @@ namespace FAM_App
                     int guarantee = Convert.ToInt32(Guarantee.Text);
 
                     DataBase dataBase = new DataBase();
-                    bool check = dataBase.AddFixedAssetsToBase(introduction_date, fixedAsset_Code, supplier, product, status, depreciation, date_of_aquisition, gros_orig_value, net_orig_value, descritpion, invoice, guarantee, groupID, subgroupID, typeID);
+                    bool check = dataBase.AddFixedAssetsToBase(introduction_date, fixedAsset_Code, supplier, product, adress, status, depreciation, date_of_aquisition, gros_orig_value, net_orig_value, descritpion, invoice, guarantee, groupID, subgroupID, typeID);
                     if (check)
                     {
-                        MessageBox.Show("Dodano do bazy:\n" + introduction_date + "\n" + fixedAsset_Code + "\n" + typeID + "\n" + supplier + "\n" + product + "\n" + status + "\n" + depreciation + "\n" + date_of_aquisition + "\n" + gros_orig_value + "\n" + net_orig_value + "\n" + descritpion + "\n" + invoice + "\n" + guarantee + "\n");
+                        MessageBox.Show("Dodano do bazy:\n" + introduction_date + "\n" + fixedAsset_Code + "\n" + typeID + "\n" + Supplier.Text + "\n" + Product.Text + "\n" + Adress.Text + "\n" + status + "\n" + depreciation + "\n" + date_of_aquisition + "\n" + gros_orig_value + "\n" + net_orig_value + "\n" + descritpion + "\n" + invoice + "\n" + guarantee + "\n");
                         ClearTextBoxes();
                     }
                     else { MessageBox.Show("Błąd przy wstawianiu danych do bazy!"); }
@@ -163,6 +164,15 @@ namespace FAM_App
                     Supplier.ItemsSource = suppliers.DefaultView;
                     Supplier.SelectedValuePath = "ID_Dostawcy";
                 }
+                if(number == 6)
+                {
+                    DataBase dataBase = new DataBase();
+                    DataTable adresses = new DataTable();
+                    adresses = dataBase.DataBaseShowAdresses(adresses);
+
+                    Adress.ItemsSource = adresses.DefaultView;
+                    Adress.SelectedValuePath = "ID_Adresu";
+                }
 
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
@@ -195,6 +205,10 @@ namespace FAM_App
         private void Supplier_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateItems(5);
+        }
+        private void Adress_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateItems(6);
         }
 
         private decimal TwoStringToDecimal(string natural_number, string fraction)

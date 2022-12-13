@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Security.Cryptography;
 
 namespace FAM_App.Pages
 {
@@ -31,13 +33,68 @@ namespace FAM_App.Pages
             {
                 if (MessageBox.Show("Czy na pewno chcesz dodać nowego pracownika do bazy danych?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
+                    string name = Name_TextBox.Text;
+                    string surname = Surname_TextBox.Text;
+                    string pesel = Pesel_TextBox.Text;
+                    string phone = Phone_TextBox.Text;
+                    string city = City_TextBox.Text;
+                    string postCode = PostCode_TextBox1.Text + "-" + PostCode_TextBox2.Text;
+                    string street = Street_TextBox.Text;
+                    string buildingNumber = BuildingNumber_TextBox.Text;
+                    string apartmentNumber = ApartmentNumber_TextBox.Text;
+                    string email = Email_TextBox.Text;
+                    string login = NewLogin_TextBox.Text;
+                    SqlBoolean employee = true;
+                    SqlBoolean admin = (SqlBoolean)IsAdmin.IsChecked;
+                    byte[] salt = MakeSalt();
+                    byte[] hashPasswd = MakeHash(NewPasswd_TextBox.Text, salt);
+                    string saltString = Convert.ToBase64String(salt);
+                    string hashPasswdString = Convert.ToBase64String(hashPasswd);
 
+                    DataBase dataBase = new DataBase();
+                    bool check = dataBase.AddEmployeeToBase(name, surname, pesel, phone, email, city, postCode, street, buildingNumber, apartmentNumber, admin, employee, login, hashPasswdString, saltString);
+                    if (check)
+                    {
+                        MessageBox.Show("Dodano do bazy: \n"+name+"\n" + surname + "\n" + pesel + "\n" + phone + "\n" + email + "\n" + city + "\n" + postCode + "\n" + street + "\n" + buildingNumber + "\n" + apartmentNumber + "\n" + admin + "\n" + employee + "\n" + login + "\n Długość hasła: "+NewPasswd_TextBox.Text.Length);
+                        ClearTextBoxes();
+                    }
+                    else { MessageBox.Show("Błąd przy wstawianiu danych do bazy!"); }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private byte[] MakeSalt()
+        {
+            byte[] bytes = new byte[16];
+            using (var rng = new RNGCryptoServiceProvider()) rng.GetBytes(bytes);
+            return bytes;
+        }
+
+        private byte[] MakeHash(string password, byte[] salt)
+        {
+            using (var deriveBytes = new Rfc2898DeriveBytes(password,salt,100)) return deriveBytes.GetBytes(100) ;
+        }
+
+        private void ClearTextBoxes()
+        {
+            Name_TextBox.Clear();
+            Surname_TextBox.Clear();
+            Pesel_TextBox.Clear();
+            Phone_TextBox.Clear();
+            City_TextBox.Clear();
+            PostCode_TextBox1.Clear();
+            PostCode_TextBox2.Clear();
+            Street_TextBox.Clear();
+            BuildingNumber_TextBox.Clear();
+            ApartmentNumber_TextBox.Clear();
+            Email_TextBox.Clear();
+            NewLogin_TextBox.Clear();
+            NewPasswd_TextBox.Clear();
+            IsAdmin.IsChecked = false;
         }
     }
 }

@@ -86,6 +86,15 @@ namespace FAM_App
         {
             MainFrame.Content = new AddEmployeePage();
         }
+        private void ShowAdresses_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new ShowAdressesPage();
+        }
+
+        private void AddAdress_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new AddAdressesPage();
+        }
 
         private void LogOut_MouseEnter(object sender, RoutedEventArgs e)
         {
