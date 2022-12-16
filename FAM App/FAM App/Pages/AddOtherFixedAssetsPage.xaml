@@ -178,12 +178,20 @@
                     </Grid>
                 </Border>
 
-                <Label Content="Adres:" Grid.Row="3" Style="{StaticResource darkLabelSelect}"/>
-                <ComboBox Name="Adress" Grid.Row="3" Style="{StaticResource darkCombobox}" 
+                <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Adres:" Grid.Column="0" Style="{StaticResource darkLabelSelect}"/>
+                        <ComboBox Name="Adress" Grid.Column="1" Style="{StaticResource darkCombobox}" 
                           Loaded="Adress_Loaded">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
                                 <Run Text="{Binding Nazwa}"/>
                                 <Run Text="{Binding Miejscowosc}"/>
                                 <Run Text="{Binding Kod_Pocztowy}"/>
@@ -191,11 +199,26 @@
                                 <Run Text="{Binding Nr_Budynku}"/>
                                 <Run Text="{Binding Nr_Lokalu}"/>
                                 <Run Text="{Binding Nr_Pomieszczenia}"/>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
 
+                        <Label Content="Użytkownik" Grid.Column="2" Style="{StaticResource darkLabelSelect}"/>
+                        <ComboBox Name="User" Grid.Column="3" Style="{StaticResource darkCombobox}"
+                                  Loaded="User_Loaded">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                    <Run Text="{Binding Imie}"/>
+                                    <Run Text="{Binding Nazwisko}"/>
+                                    <Run Text="{Binding Email}"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+                </Border>
                 <Label Content="Stan/Status:" Grid.Row="4" Style="{StaticResource darkLabelSelect}"/>
                 <ComboBox Name="Status" Grid.Row="4" Style="{StaticResource darkCombobox}">
                     <ComboBoxItem>Zlikwidowany</ComboBoxItem>

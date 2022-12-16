@@ -31,7 +31,7 @@ namespace FAM_App.Pages
         {
             DataBase dataBase = new DataBase();
             DataTable Employee = new DataTable("emp");
-            Employee = dataBase.ShowEmployee(Employee);
+            Employee = dataBase.DataBaseShowEmployee(Employee);
             EmployeeDataGrid.ItemsSource = Employee.DefaultView;
         }
 

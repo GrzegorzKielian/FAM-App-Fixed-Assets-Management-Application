@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlTypes;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -36,7 +37,7 @@ namespace FAM_App
         }
         private void SetFixedAssetData()
         {
-            Current_Date.Text = DateTime.Now.ToString("yyyy.MM.dd");
+            Current_Date.Text = DateTime.Now.ToString("yyyy-MM-dd");
             FixedAsset_Code.Text = "0";
             Depreciation_method.Text = "Amortyzacja liniowa";
         }
@@ -47,34 +48,72 @@ namespace FAM_App
             {
                 if (MessageBox.Show("Czy na pewno chcesz dodać nowy środek trwały do bazy danych?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    SqlDateTime introduction_date = Convert.ToDateTime(Current_Date.Text);
+                    string introduction_date = Current_Date.Text;
                     string fixedAsset_Code = FixedAsset_Code.Text;
-                    int supplier = (int)Supplier.SelectedValue;
-                    int product = (int)Product.SelectedValue;
-                    int adress = (int)Adress.SelectedValue;
+                    int supplier = CheckSupplier();
+                    int product = CheckProduct(); 
+                    int adress = CheckAdress(); 
+                    int user = CheckIsUser();
                     string status = Status.Text;
-                    int depreciation = Convert.ToInt32(Depreciation_rate.Text);
-                    SqlDateTime date_of_aquisition = Convert.ToDateTime(Date_of_aquisition.Text);
-                    decimal gros_orig_value = TwoStringToDecimal(Gross_orig_val1_TxtBox.Text, Gross_orig_val2_TxtBox.Text);
-                    decimal net_orig_value = TwoStringToDecimal(Net_orig_val1_TxtBox.Text, Net_orig_val2_TxtBox.Text);
+                    int depreciation = Convert.ToInt32(Depreciation_rate.Text); 
+                    string date_of_aquisition = ChangeFormatDate();
+                    string gros_orig_value = TwoStringToDecimal(Gross_orig_val1_TxtBox.Text, Gross_orig_val2_TxtBox.Text);
+                    string net_orig_value = TwoStringToDecimal(Net_orig_val1_TxtBox.Text, Net_orig_val2_TxtBox.Text);
                     string descritpion = Description_TxtBox.Text;
                     string invoice = Invoice.Text;
                     int guarantee = Convert.ToInt32(Guarantee.Text);
 
-                    DataBase dataBase = new DataBase();
-                    bool check = dataBase.AddFixedAssetsToBase(introduction_date, fixedAsset_Code, supplier, product, adress, status, depreciation, date_of_aquisition, gros_orig_value, net_orig_value, descritpion, invoice, guarantee, groupID, subgroupID, typeID);
-                    if (check)
+                    if (supplier == 0 || product == 0 || adress == 0 || status == String.Empty ) {  }
+                    else
                     {
-                        MessageBox.Show("Dodano do bazy:\n" + introduction_date + "\n" + fixedAsset_Code + "\n" + typeID + "\n" + Supplier.Text + "\n" + Product.Text + "\n" + Adress.Text + "\n" + status + "\n" + depreciation + "\n" + date_of_aquisition + "\n" + gros_orig_value + "\n" + net_orig_value + "\n" + descritpion + "\n" + invoice + "\n" + guarantee + "\n");
-                        ClearTextBoxes();
+                        DataBase dataBase = new DataBase();
+                        bool check = dataBase.AddFixedAssetsToBase(introduction_date, fixedAsset_Code, supplier, product, adress, status, depreciation, date_of_aquisition, gros_orig_value, net_orig_value, descritpion, invoice, guarantee, groupID, subgroupID, typeID, user);
+                        if (check)
+                        {
+                            MessageBox.Show("Dodano do bazy:\n" + introduction_date + "\n" + fixedAsset_Code + "\n" + typeID + "\n" + Supplier.Text + "\n" + Product.Text + "\n" + Adress.Text + "\n" + status + "\n" + depreciation + "\n" + date_of_aquisition + "\n" + gros_orig_value + "\n" + net_orig_value + "\n" + descritpion + "\n" + invoice + "\n" + guarantee + "\n");
+                            ClearTextBoxes();
+                        }
+                        else { MessageBox.Show("Błąd przy wstawianiu danych do bazy!"); }
                     }
-                    else { MessageBox.Show("Błąd przy wstawianiu danych do bazy!"); }
                 }
             }
             catch (Exception ex)
             {
+                MessageBox.Show("Wymagane pola są puste!");
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private string ChangeFormatDate()
+        {
+            string changedDate = this.Date_of_aquisition.SelectedDate.Value.Date.ToString("yyyy-MM-dd");
+            return changedDate;
+
+        }
+
+        private int CheckAdress()
+        {
+            if (Adress.Text == String.Empty) { return 0; }
+            else { return (int)Adress.SelectedValue; }
+        }
+
+        private int CheckProduct()
+        {
+            if (Product.Text == String.Empty) { return 0; }
+            else { return (int)Product.SelectedValue; }
+        }
+
+        private int CheckSupplier()
+        {
+            if (Supplier.Text == String.Empty) { return Convert.ToInt32(""); }
+            else { return (int)Supplier.SelectedValue; }
+        }
+
+        private int CheckIsUser()
+        {
+            if (User.Text == String.Empty) { return 0; }
+            else { return (int)User.SelectedValue; }
+
         }
 
         private void AddInvoiveBox_Click(object sender, RoutedEventArgs e)
@@ -173,6 +212,15 @@ namespace FAM_App
                     Adress.ItemsSource = adresses.DefaultView;
                     Adress.SelectedValuePath = "ID_Adresu";
                 }
+                if(number == 7)
+                {
+                    DataBase dataBase = new DataBase();
+                    DataTable employee = new DataTable();
+                    employee = dataBase.DataBaseShowEmployee(employee);
+
+                    User.ItemsSource = employee.DefaultView;
+                    User.SelectedValuePath = "ID_Pracownika";
+                }
 
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
@@ -211,14 +259,15 @@ namespace FAM_App
             UpdateItems(6);
         }
 
-        private decimal TwoStringToDecimal(string natural_number, string fraction)
+        private void User_Loaded(object sender, RoutedEventArgs e)
         {
-            decimal dec;
-            decimal one = Convert.ToDecimal(natural_number);
-            decimal two = Convert.ToDecimal(fraction);
-            decimal twodec = two/100;
-            dec = one+twodec;
-            return dec;
+            UpdateItems(7);
+        }
+
+        private string TwoStringToDecimal(string natural_number, string fraction)
+        {
+            string one = natural_number+'.'+fraction;
+            return one;
         }
 
         private void ClearTextBoxes()
@@ -231,6 +280,8 @@ namespace FAM_App
             UpdateItems(3);
             UpdateItems(4);
             UpdateItems(5);
+            UpdateItems(6);
+            UpdateItems(7);
             Status.Items.Clear();
             Depreciation_rate.Clear();
             Date_of_aquisition.Text = String.Empty;
