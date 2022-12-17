@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="LoginWindow" Height="600" Width="500" 
         WindowStartupLocation="CenterScreen"
-        Background="#152238">
+        Background="#152238" PreviewKeyDown="Window_PreviewKeyDown">
     <Window.Resources>
         <Style x:Key="darkLabel" TargetType="Label">
             <Setter Property="Foreground" Value="#dddddd"/>

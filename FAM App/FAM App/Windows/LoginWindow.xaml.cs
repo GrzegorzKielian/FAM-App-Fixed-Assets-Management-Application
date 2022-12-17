@@ -105,5 +105,9 @@ namespace FAM_App
             using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, 100)) return deriveBytes.GetBytes(100);
         }
 
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter) { LoginButton_Click(sender, e); }
+        }
     }
 }

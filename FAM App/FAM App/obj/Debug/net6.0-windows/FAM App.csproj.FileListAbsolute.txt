@@ -52,3 +52,5 @@ C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\ShowAdressesPage.g.cs
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\AddAdressesPage.baml
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Pages\ShowAdressesPage.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Windows\EditFixedAssetWindow.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Debug\net6.0-windows\Windows\EditFixedAssetWindow.baml
