@@ -23,6 +23,7 @@ namespace FAM_App
         public LoginWindow()
         {
             InitializeComponent();
+            LoginTxtBox.Focus();
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
