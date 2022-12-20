@@ -34,6 +34,9 @@
     <Compile Update="Pages\ShowSupplierPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Windows\EditEmployeeWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\EditFixedAssetWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -79,6 +82,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\ShowSupplierPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\EditEmployeeWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\EditFixedAssetWindow.xaml">

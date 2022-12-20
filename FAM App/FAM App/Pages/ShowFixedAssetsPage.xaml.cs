@@ -39,8 +39,7 @@ namespace FAM_App
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (FixedAssetsDataGrid.SelectedItem == null)
-                return;
+            if (FixedAssetsDataGrid.SelectedItem == null) return;
             DataRowView dr = FixedAssetsDataGrid.SelectedItem as DataRowView;
             DataRow dr1 = dr.Row;
             int id_of_the_edited_asset = Convert.ToInt32(dr1.ItemArray[0]);

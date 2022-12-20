@@ -433,5 +433,20 @@ namespace FAM_App
             sqlConnection.Close();
             return dataTable;
         }
+
+        public DataTable GetEmployeeDataToEdit(DataTable dataTable, int employee_ID)
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = "SELECT Imie, Nazwisko, Pesel, Telefon, Email, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Admin, Ewidencja, Login " +
+                "FROM dbo.Pracownik " +
+                "WHERE (dbo.Pracownik.ID_Pracownika = "+employee_ID+");";
+            cmd.CommandText = data;
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dataTable = new DataTable("emp");
+            sda.Fill(dataTable);
+            cmd.Dispose();
+            sqlConnection.Close();
+            return dataTable;
+        }
     }
 }

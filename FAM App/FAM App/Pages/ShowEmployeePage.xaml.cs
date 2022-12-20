@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FAM_App.Windows;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -88,6 +89,16 @@ namespace FAM_App.Pages
         {
             ByStreet_TxtBox.IsEnabled = false;
             ByStreet_TxtBox.Clear();
+        }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if(EmployeeDataGrid.SelectedItem == null) return;
+            DataRowView dr = EmployeeDataGrid.SelectedItem as DataRowView;
+            DataRow dr1 = dr.Row;
+            int id_of_the_edited_employee = Convert.ToInt32(dr1.ItemArray[0]);
+            EditEmployeeWindow editEmployeeWindow = new EditEmployeeWindow(id_of_the_edited_employee);
+            editEmployeeWindow.Show();
         }
     }
 }
