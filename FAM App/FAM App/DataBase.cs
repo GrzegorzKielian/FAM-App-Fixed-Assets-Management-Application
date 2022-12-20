@@ -448,5 +448,23 @@ namespace FAM_App
             sqlConnection.Close();
             return dataTable;
         }
+
+        public bool UpdateEmployee(int employeeID, string name, string surname, string pesel, string phone, string email, string city, string postCode, string street, string buildingNumber, string apartmentNumber, SqlBoolean admin, SqlBoolean employee, string newLogin, string newPassword, string salt)
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = "UPDATE dbo.Pracownik " +
+                "SET dbo.Pracownik.Imie = '"+name+"', dbo.Pracownik.Nazwisko = '"+surname+"', dbo.Pracownik.Pesel = '"+pesel+"', dbo.Pracownik.Telefon = '"+phone+ "', dbo.Pracownik.Email = '"+email+"', dbo.Pracownik.Miejscowosc = '"+city+ "', dbo.Pracownik.Kod_Pocztowy = '"+postCode+"', dbo.Pracownik.Ulica = '"+street+"', dbo.Pracownik.Nr_Budynku = '"+buildingNumber+ "', dbo.Pracownik.Nr_Lokalu = '"+apartmentNumber+ "', dbo.Pracownik.Admin = "+admin+", dbo.Pracownik.Login = '"+newLogin+"', dbo.Pracownik.Haslo = '"+newPassword+ "', dbo.Pracownik.Sol_Hasla = '"+salt+"' " +
+                "WHERE (dbo.Pracownik.ID_Pracownika = "+employeeID+");";
+            cmd.CommandText = data;
+            int updateResult = cmd.ExecuteNonQuery();
+
+            sqlConnection.Close();
+
+            // Check Error
+            if (updateResult < 0) { return false; }
+            else { return true; };
+        }
+
+
     }
 }

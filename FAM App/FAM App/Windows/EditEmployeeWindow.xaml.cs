@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -21,9 +22,11 @@ namespace FAM_App.Windows
     /// </summary>
     public partial class EditEmployeeWindow : Window
     {
+        int employee_ID;
         public EditEmployeeWindow(int employee_ID)
         {
             InitializeComponent();
+            this.employee_ID = employee_ID;
             GetDataBaseData(employee_ID);
         }
 
@@ -102,7 +105,31 @@ namespace FAM_App.Windows
         {
             if (MessageBox.Show("Czy na pewno chcesz zapisać zmiany?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                MessageBox.Show("Zapisano");
+                string name = Name_TextBox.Text;
+                string surname = Surname_TextBox.Text;
+                string pesel = Pesel_TextBox.Text;
+                string phone = Phone_TextBox.Text;
+                string city = City_TextBox.Text;
+                string postCode = PostCode_TextBox1.Text + "-" + PostCode_TextBox2.Text;
+                string street = Street_TextBox.Text;
+                string buildingNumber = BuildingNumber_TextBox.Text;
+                string apartmentNumber = ApartmentNumber_TextBox.Text;
+                string email = Email_TextBox.Text;
+                string login = NewLogin_TextBox.Text;
+                SqlBoolean employee = true;
+                SqlBoolean admin = (SqlBoolean)IsAdmin.IsChecked;
+                byte[] salt = MakeSalt();
+                byte[] hashPasswd = MakeHash(NewPasswd_TextBox.Text, salt);
+                string saltString = Convert.ToBase64String(salt);
+                string hashPasswdString = Convert.ToBase64String(hashPasswd);
+
+                DataBase dataBase = new DataBase();
+                bool check = dataBase.UpdateEmployee(employee_ID, name, surname, pesel, phone, email, city, postCode, street, buildingNumber, apartmentNumber, admin, employee, login, hashPasswdString, saltString);
+                if (check)
+                {
+                    MessageBox.Show("Zapisano zmiany");
+                }
+                else { MessageBox.Show("Błąd przy wstawianiu danych do bazy!"); }
             }
         }
     }
