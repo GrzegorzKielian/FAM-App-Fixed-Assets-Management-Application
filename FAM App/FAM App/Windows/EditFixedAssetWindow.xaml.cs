@@ -25,11 +25,14 @@ namespace FAM_App.Windows
         private int groupID;
         private int subgroupID;
         private int typeID;
+        private int assetID;
+        string comments;
         DataTable FixedAsset;
 
         public EditFixedAssetWindow(int fixedAsset_ID)
         {
             InitializeComponent();
+            assetID = fixedAsset_ID;
             GetDataBaseData(fixedAsset_ID);
             
         }
@@ -238,6 +241,38 @@ namespace FAM_App.Windows
             return one;
         }
 
+        private string ChangeFormatDate()
+        {
+            string changedDate = this.Date_of_aquisition.SelectedDate.Value.Date.ToString("yyyy-MM-dd");
+            return changedDate;
+
+        }
+
+        private int CheckAdress()
+        {
+            if (Adress.Text == String.Empty) { return 0; }
+            else { return (int)Adress.SelectedValue; }
+        }
+
+        private int CheckProduct()
+        {
+            if (Product.Text == String.Empty) { return 0; }
+            else { return (int)Product.SelectedValue; }
+        }
+
+        private int CheckSupplier()
+        {
+            if (Supplier.Text == String.Empty) { return Convert.ToInt32(""); }
+            else { return (int)Supplier.SelectedValue; }
+        }
+
+        private int CheckIsUser()
+        {
+            if (User.Text == String.Empty) { return 0; }
+            else { return (int)User.SelectedValue; }
+
+        }
+
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Czy na pewno chcesz anulować?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
@@ -250,7 +285,31 @@ namespace FAM_App.Windows
         {
             if (MessageBox.Show("Czy na pewno chcesz zapisać?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                MessageBox.Show("Zapisano");
+                string revision_date = DateTime.Now.ToString("yyyy-MM-dd");
+                int supplier = CheckSupplier();
+                int product = CheckProduct();
+                int adress = CheckAdress();
+                int user = CheckIsUser();
+                string status = Status.Text;
+                int depreciation = Convert.ToInt32(Depreciation_rate.Text);
+                string date_of_aquisition = ChangeFormatDate();
+                string gros_orig_value = TwoStringToDecimal(Gross_orig_val1_TxtBox.Text, Gross_orig_val2_TxtBox.Text);
+                string net_orig_value = TwoStringToDecimal(Net_orig_val1_TxtBox.Text, Net_orig_val2_TxtBox.Text);
+                string descritpion = Description_TxtBox.Text;
+                string invoice = Invoice.Text;
+                int guarantee = Convert.ToInt32(Guarantee.Text);
+
+                if (supplier == 0 || product == 0 || adress == 0 || status == String.Empty) { }
+                else
+                {
+                    DataBase dataBase = new DataBase();
+                    bool check = dataBase.UpdateFixedAsset(assetID, revision_date, supplier, product, adress, status, depreciation, date_of_aquisition, gros_orig_value, net_orig_value, descritpion, invoice, guarantee, groupID, subgroupID, typeID, user);
+                    if (check)
+                    {
+                        MessageBox.Show("Zapisano zmiany");
+                    }
+                    else { MessageBox.Show("Błąd przy wstawianiu danych do bazy!"); }
+                }
             }
         }
 

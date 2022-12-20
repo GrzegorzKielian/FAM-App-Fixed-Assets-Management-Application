@@ -229,7 +229,7 @@ namespace FAM_App.Windows {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/FAM App;V1.0.0.0;component/windows/editemployeewindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/FAM App;component/windows/editemployeewindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Windows\EditEmployeeWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Markup;
@@ -457,7 +458,6 @@ namespace FAM_App
                 "WHERE (dbo.Pracownik.ID_Pracownika = "+employeeID+");";
             cmd.CommandText = data;
             int updateResult = cmd.ExecuteNonQuery();
-
             sqlConnection.Close();
 
             // Check Error
@@ -465,6 +465,32 @@ namespace FAM_App
             else { return true; };
         }
 
+        public bool AddToChanges()
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = "";
+            cmd.CommandText = data;
+            int result = cmd.ExecuteNonQuery();
 
+            sqlConnection.Close();
+            if (result < 0) { return false; }
+            else { return true; };
+        }
+
+        public bool UpdateFixedAsset(int asset_ID, string revision_date, int supplier, int product, int adress, string status, int depreciation, string date_of_aquisition, string gros_orig_value, string net_orig_value, string descritpion, string invoice, int guarantee, int GroupID, int SubgroupID, int TypeID, int UserID)
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = "UPDATE dbo.Srodek_Trwaly " +
+                "SET dbo.Srodek_Trwaly.Stan_Status = '"+status+"', dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = "+TypeID+", dbo.Srodek_Trwaly.id_produktu = "+product+", dbo.Srodek_Trwaly.Opis = '"+descritpion+"', dbo.Srodek_Trwaly.Data_Nabycia = '"+date_of_aquisition+"', dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto = "+gros_orig_value+", dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto = "+net_orig_value+", dbo.Srodek_Trwaly.id_dostawcy = "+supplier+", dbo.Srodek_Trwaly.Faktura = '"+invoice+"', dbo.Srodek_Trwaly.Gwarancja = "+guarantee+", dbo.Srodek_Trwaly.Stawka_Amortyzacji = "+depreciation+" " +
+                "WHERE (dbo.Srodek_Trwaly.ID_Srodka = "+asset_ID+");";
+            cmd.CommandText = data;
+            int updateResult = cmd.ExecuteNonQuery();
+            bool result = AddToHistoryAsset(revision_date, UserID, adress, asset_ID, ID_EmployeeINFO, "Zmiana danych środka trwałego");
+            sqlConnection.Close();
+
+            // Check Error
+            if (updateResult < 0 & !result) { return false; }
+            else { return true; };
+        }
     }
 }

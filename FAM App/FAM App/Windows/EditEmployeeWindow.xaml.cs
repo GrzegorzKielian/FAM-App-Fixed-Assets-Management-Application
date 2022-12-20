@@ -23,6 +23,8 @@ namespace FAM_App.Windows
     public partial class EditEmployeeWindow : Window
     {
         int employee_ID;
+        string oldValue;
+        string revision_date;
         public EditEmployeeWindow(int employee_ID)
         {
             InitializeComponent();
@@ -66,21 +68,6 @@ namespace FAM_App.Windows
             return s;
         }
 
-        private void AddEmployeeButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (MessageBox.Show("Czy na pewno chcesz zapisać zmiany?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
         private byte[] MakeSalt()
         {
             byte[] bytes = new byte[16];
@@ -122,6 +109,7 @@ namespace FAM_App.Windows
                 byte[] hashPasswd = MakeHash(NewPasswd_TextBox.Text, salt);
                 string saltString = Convert.ToBase64String(salt);
                 string hashPasswdString = Convert.ToBase64String(hashPasswd);
+                
 
                 DataBase dataBase = new DataBase();
                 bool check = dataBase.UpdateEmployee(employee_ID, name, surname, pesel, phone, email, city, postCode, street, buildingNumber, apartmentNumber, admin, employee, login, hashPasswdString, saltString);
