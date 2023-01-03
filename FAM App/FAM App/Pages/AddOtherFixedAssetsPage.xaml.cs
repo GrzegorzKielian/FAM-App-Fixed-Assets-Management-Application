@@ -61,7 +61,6 @@ namespace FAM_App.Pages
                     string descritpion = Description_TxtBox.Text;
                     string invoice = Invoice.Text;
                     int guarantee = Convert.ToInt32(Guarantee.Text);
-                    MessageBox.Show(net_orig_value.ToString());
                     if (supplier == 0 || product == 0 || adress == 0 || status == String.Empty) { }
                     else
                     {

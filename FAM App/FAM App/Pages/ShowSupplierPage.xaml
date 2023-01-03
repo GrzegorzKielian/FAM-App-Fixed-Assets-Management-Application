@@ -16,12 +16,10 @@
             <Setter Property="Background" Value="#dddddd"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0,0,0,20"/>
-            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="15"/>
         </Style>
-        <Style x:Key="darkCheckbox" TargetType="CheckBox">
-            <Setter Property="Foreground" Value="#dddddd"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
+        <Style x:Key="darkComboBox" TargetType="ComboBox">
             <Setter Property="FontFamily" Value="Tahoma"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Margin" Value="0,0,0,10"/>
@@ -40,27 +38,16 @@
                 Grid.Column="0" Grid.Row="1"/>
 
         <StackPanel Grid.Row="1" Margin="0,50">
-            <CheckBox x:Name="ByName" Style="{StaticResource darkCheckbox}" Unchecked="ByName_Unchecked" Checked="ByName_Checked">
-                <TextBlock Text="Wyszukaj po nazwie" TextWrapping="Wrap"/>
-            </CheckBox>
-            <TextBox x:Name="ByName_TxtBox" Style="{StaticResource darkTextBox}"/>
-
-            <CheckBox x:Name="ByCity" Style="{StaticResource darkCheckbox}" Unchecked="ByCity_Unchecked" Checked="ByCity_Checked">
-                <TextBlock Text="Wyszukaj po miejscowości" TextWrapping="Wrap"/>
-            </CheckBox>
-            <TextBox x:Name="ByCity_TxtBox" Style="{StaticResource darkTextBox}"/>
-
-            <CheckBox x:Name="ByPostCode" Style="{StaticResource darkCheckbox}" Unchecked="ByPostCode_Unchecked" Checked="ByPostCode_Checked">
-                <TextBlock Text="Wyszukaj po kodzie pocztowym" TextWrapping="Wrap"/>
-            </CheckBox>
-            <TextBox x:Name="ByPostCode_TxtBox" Style="{StaticResource darkTextBox}"/>
-
-            <CheckBox x:Name="ByStreet" Style="{StaticResource darkCheckbox}" Unchecked="ByStreet_Unchecked" Checked="ByStreet_Checked">
-                <TextBlock Text="Wyszukaj po nazwie ulicy" TextWrapping="Wrap"/>
-            </CheckBox>
-            <TextBox x:Name="ByStreet_TxtBox" Style="{StaticResource darkTextBox}"/>
+            <ComboBox x:Name="ChooseBox" Style="{StaticResource darkComboBox}">
+                <ComboBoxItem>Wyszykaj po nazwie</ComboBoxItem>
+                <ComboBoxItem>Wyszykaj po miejscowości</ComboBoxItem>
+                <ComboBoxItem>Wyszykaj po kodzie pocztowym</ComboBoxItem>
+                <ComboBoxItem>Wyszykaj po ulicy</ComboBoxItem>
+            </ComboBox>
+            <TextBox x:Name="Choose_TxtBox" Style="{StaticResource darkTextBox}"/>
 
             <Button x:Name="Search_Button" Content="Wyszukaj" Height="25" FontSize="15" FontFamily="Tahoma" Click="Search_Button_Click"/>
+            <Button x:Name="ShowAll_Button" Content="Pokaż wszystko" Height="25" FontSize="15" FontFamily="Tahoma" Margin="0,15,0,0" Click="ShowAll_Button_Click"/>
         </StackPanel>
 
         <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">

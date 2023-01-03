@@ -124,7 +124,7 @@ namespace FAM_App
         public DataTable DataBaseShowFixedAssets(DataTable dataTable)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT dbo.Srodek_Trwaly.ID_Srodka, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Srodek_Trwaly.Stan_Status, dbo.Grupa.Nazwa AS Grupa, dbo.Podgrupa.Nazwa AS Podgrupa, dbo.Rodzaj.Nazwa AS Rodzaj, dbo.Produkt.Nazwa AS Produkt, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Dostawca.Nazwa AS Dostawca, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja "+
+            String data = "SELECT dbo.Srodek_Trwaly.ID_Srodka, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Srodek_Trwaly.Stan_Status, dbo.Grupa.Nazwa AS Grupa, dbo.Podgrupa.Nazwa AS Podgrupa, dbo.Rodzaj.Nazwa AS Rodzaj, dbo.Produkt.Nazwa AS Produkt, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Dostawca.Nazwa AS Dostawca, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stawka_Amortyzacji " +
                           "FROM dbo.Produkt "+
                           "INNER JOIN dbo.Srodek_Trwaly "+
                           "INNER JOIN dbo.Dostawca ON dbo.Srodek_Trwaly.id_dostawcy = dbo.Dostawca.ID_Dostawcy ON dbo.Produkt.ID_Produktu = dbo.Srodek_Trwaly.id_Produktu "+
@@ -218,12 +218,13 @@ namespace FAM_App
         public DataTable DataBaseShowFixedAssetHistory(DataTable dataTable, string inventoryNumber)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT dbo.Historia_Srodka.ID_Historii AS Lp, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Stan_Status, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Historia_Srodka.Data, CONCAT(dbo.Adres.Miejscowosc, dbo.Adres.Kod_Pocztowy, dbo.Adres.Ulica, dbo.Adres.Nr_Budynku, dbo.Adres.Nr_Lokalu, dbo.Adres.Nr_Pomieszczenia) AS Adres, dbo.Historia_Srodka.id_uzytkownika AS 'Dokonal zmiany', dbo.Historia_Srodka.id_wprowadzajacego AS Wprowadzil, dbo.Historia_Srodka.Uwagi " +
+            String data = "SELECT dbo.Historia_Srodka.ID_Historii AS Lp, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Stan_Status, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Historia_Srodka.Data, CONCAT(dbo.Adres.Miejscowosc,' ', dbo.Adres.Kod_Pocztowy,' ', dbo.Adres.Ulica,' ', dbo.Adres.Nr_Budynku,' ', dbo.Adres.Nr_Lokalu,' ', dbo.Adres.Nr_Pomieszczenia) AS Adres, (SELECT TOP(1) CONCAT(uzytkownik.Imie,' ', uzytkownik.Nazwisko) FROM dbo.Pracownik WHERE uzytkownik.ID_Pracownika=dbo.Historia_Srodka.id_uzytkownika) AS Uzytkownik, (SELECT TOP(1) CONCAT(wprodzadzajacy.Imie,' ', wprodzadzajacy.Nazwisko) FROM dbo.Pracownik WHERE wprodzadzajacy.ID_Pracownika=dbo.Historia_Srodka.id_wprowadzajacego) AS 'Dokonal zmiany', dbo.Historia_Srodka.Uwagi " +
                 "FROM dbo.Historia_Srodka " +
                 "INNER JOIN dbo.Srodek_Trwaly ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka " +
                 "INNER JOIN dbo.Adres ON dbo.Historia_Srodka.id_adresu = dbo.Adres.ID_Adresu " +
-                "INNER JOIN dbo.Pracownik ON dbo.Historia_Srodka.id_uzytkownika = dbo.Pracownik.ID_Pracownika AND dbo.Historia_Srodka.id_wprowadzajacego = dbo.Pracownik.ID_Pracownika " +
-                "WHERE Nr_Inwentarzowy ='"+inventoryNumber+"';";
+                "INNER JOIN dbo.Pracownik AS wprodzadzajacy ON dbo.Historia_Srodka.id_wprowadzajacego = wprodzadzajacy.ID_Pracownika " +
+                "INNER JOIN dbo.Pracownik AS uzytkownik ON dbo.Historia_Srodka.id_uzytkownika = uzytkownik.ID_Pracownika " +
+                "WHERE Nr_Inwentarzowy = '"+inventoryNumber+"';";
             cmd.CommandText = data;
 
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
@@ -341,7 +342,7 @@ namespace FAM_App
 
             if(userID == 0) 
             {
-                String dataInsert1 = "INSERT INTO dbo.Historia_Srodka (ID_Historii, Data, id_uzytkownika, id_adresu, id_srodka, id_wprowadzajacego, Uwagi)  VALUES ( " + ID + ",'" + introduction_date + "', , " + adressID + ", " + fixedAssetID + "," + introducerID + ",'" + comments + "');";
+                String dataInsert1 = "INSERT INTO dbo.Historia_Srodka (ID_Historii, Data, id_uzytkownika, id_adresu, id_srodka, id_wprowadzajacego, Uwagi)  VALUES ( " + ID + ",'" + introduction_date + "', NULL, " + adressID + ", " + fixedAssetID + "," + introducerID + ",'" + comments + "');";
                 cmd.CommandText = dataInsert1;
                 result2 = cmd.ExecuteNonQuery();
             }
@@ -415,7 +416,41 @@ namespace FAM_App
             else { return false; }
         }
 
-        public DataTable GetAssetDataToEdit(DataTable dataTable, int assetID)
+        public bool DataBaseHaveUser(int assetID)
+        {
+            bool haveUser = false;
+            SqlCommand cmd = DataBaseConnection();
+            String data = "SELECT dbo.Historia_Srodka.id_uzytkownika " +
+                "FROM dbo.Historia_Srodka INNER JOIN dbo.Srodek_Trwaly ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka " +
+                "WHERE (dbo.Srodek_Trwaly.ID_Srodka = "+assetID+")";
+            cmd.CommandText = data;
+            var result = cmd.ExecuteScalar();
+            if (result == DBNull.Value) { haveUser = false; }
+            else { haveUser = true; }
+
+            if (haveUser) { return true; }
+            else { return false; }
+        }
+        public DataTable GetAssetDataToEditWithoutUser(DataTable dataTable, int assetID)
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = "SELECT CONCAT(dbo.Grupa.Symbol, ' - ', dbo.Grupa.Nazwa) AS GRUPA, CONCAT(dbo.Podgrupa.Symbol, ' - ', dbo.Podgrupa.Nazwa) AS PODGRUPA, CONCAT(dbo.Rodzaj.Symbol, ' - ', dbo.Rodzaj.Nazwa) AS RODZAJ, " +
+                "CONCAT(dbo.Produkt.Nazwa, ' ', dbo.Produkt.Marka, ' ', dbo.Produkt.Model, ' ', dbo.Produkt.Rok_Produkcji) AS PRODUKT, " +
+                "CONCAT(dbo.Dostawca.Nazwa, ' ', dbo.Dostawca.Miejscowosc, ' ', dbo.Dostawca.Kod_Pocztowy, ' ', dbo.Dostawca.Ulica) AS DOSTAWCA, " +
+                "CONCAT(dbo.Adres.Nazwa, ' ', dbo.Adres.Miejscowosc, ' ', dbo.Adres.Kod_Pocztowy, ' ', dbo.Adres.Ulica, ' ', dbo.Adres.Nr_Budynku, ' ', dbo.Adres.Nr_Lokalu, ' ', dbo.Adres.Nr_Pomieszczenia) AS ADRES, " +
+                "dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stan_Status, dbo.Srodek_Trwaly.Stawka_Amortyzacji, dbo.Srodek_Trwaly.Kod_Srodka " +
+                "FROM dbo.Adres INNER JOIN dbo.Historia_Srodka ON dbo.Adres.ID_Adresu = dbo.Historia_Srodka.id_adresu INNER JOIN dbo.Srodek_Trwaly ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka INNER JOIN dbo.Podgrupa INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy INNER JOIN dbo.Rodzaj ON dbo.Podgrupa.ID_Podgrupy = dbo.Rodzaj.id_podgrupy ON dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = dbo.Rodzaj.ID_Rodzaju INNER JOIN dbo.Produkt ON dbo.Srodek_Trwaly.id_produktu = dbo.Produkt.ID_Produktu INNER JOIN dbo.Dostawca ON dbo.Srodek_Trwaly.id_dostawcy = dbo.Dostawca.ID_Dostawcy " +
+                "WHERE (dbo.Srodek_Trwaly.ID_Srodka = " + assetID + ")";
+            cmd.CommandText = data;
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dataTable = new DataTable("emp");
+            sda.Fill(dataTable);
+            cmd.Dispose();
+            sqlConnection.Close();
+            return dataTable;
+        }
+
+        public DataTable GetAssetDataToEditWithUser(DataTable dataTable, int assetID)
         {
             SqlCommand cmd = DataBaseConnection();
             String data = "SELECT CONCAT(dbo.Grupa.Symbol, ' - ', dbo.Grupa.Nazwa) AS GRUPA, CONCAT(dbo.Podgrupa.Symbol, ' - ', dbo.Podgrupa.Nazwa) AS PODGRUPA, CONCAT(dbo.Rodzaj.Symbol, ' - ', dbo.Rodzaj.Nazwa) AS RODZAJ, " +
@@ -424,8 +459,8 @@ namespace FAM_App
                 "CONCAT(dbo.Adres.Nazwa, ' ', dbo.Adres.Miejscowosc, ' ', dbo.Adres.Kod_Pocztowy, ' ', dbo.Adres.Ulica, ' ', dbo.Adres.Nr_Budynku, ' ', dbo.Adres.Nr_Lokalu, ' ', dbo.Adres.Nr_Pomieszczenia) AS ADRES, " +
                 "CONCAT(dbo.Pracownik.Imie, ' ', dbo.Pracownik.Nazwisko, ' ', dbo.Pracownik.Email) AS PRACOWNIK, " +
                 "dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stan_Status, dbo.Srodek_Trwaly.Stawka_Amortyzacji, dbo.Srodek_Trwaly.Kod_Srodka " +
-                "FROM dbo.Pracownik INNER JOIN dbo.Adres INNER JOIN dbo.Historia_Srodka ON dbo.Adres.ID_Adresu = dbo.Historia_Srodka.id_adresu ON dbo.Pracownik.ID_Pracownika = dbo.Historia_Srodka.id_uzytkownika AND dbo.Pracownik.ID_Pracownika = dbo.Historia_Srodka.id_wprowadzajacego INNER JOIN dbo.Srodek_Trwaly ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka INNER JOIN dbo.Podgrupa INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy INNER JOIN dbo.Rodzaj ON dbo.Podgrupa.ID_Podgrupy = dbo.Rodzaj.id_podgrupy ON dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = dbo.Rodzaj.ID_Rodzaju INNER JOIN dbo.Produkt ON dbo.Srodek_Trwaly.id_produktu = dbo.Produkt.ID_Produktu INNER JOIN dbo.Dostawca ON dbo.Srodek_Trwaly.id_dostawcy = dbo.Dostawca.ID_Dostawcy " +
-                "WHERE (dbo.Srodek_Trwaly.ID_Srodka = "+assetID+")";
+                "FROM dbo.Pracownik INNER JOIN dbo.Adres INNER JOIN dbo.Historia_Srodka ON dbo.Adres.ID_Adresu = dbo.Historia_Srodka.id_adresu ON dbo.Pracownik.ID_Pracownika = dbo.Historia_Srodka.id_uzytkownika INNER JOIN dbo.Srodek_Trwaly ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka INNER JOIN dbo.Podgrupa INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy INNER JOIN dbo.Rodzaj ON dbo.Podgrupa.ID_Podgrupy = dbo.Rodzaj.id_podgrupy ON dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = dbo.Rodzaj.ID_Rodzaju INNER JOIN dbo.Produkt ON dbo.Srodek_Trwaly.id_produktu = dbo.Produkt.ID_Produktu INNER JOIN dbo.Dostawca ON dbo.Srodek_Trwaly.id_dostawcy = dbo.Dostawca.ID_Dostawcy " +
+                "WHERE (dbo.Srodek_Trwaly.ID_Srodka = " + assetID + ")";
             cmd.CommandText = data;
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dataTable = new DataTable("emp");
@@ -491,6 +526,19 @@ namespace FAM_App
             // Check Error
             if (updateResult < 0 & !result) { return false; }
             else { return true; };
+        }
+
+        public DataTable DataBaseShowSelectedData(DataTable dataTable, String query)
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = query;
+            cmd.CommandText = data;
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dataTable = new DataTable("emp");
+            sda.Fill(dataTable);
+            cmd.Dispose();
+            sqlConnection.Close();
+            return dataTable;
         }
     }
 }

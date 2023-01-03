@@ -21,10 +21,20 @@ namespace FAM_App.Pages
     /// </summary>
     public partial class ShowProductsPage : Page
     {
+        List<String> whichColumn = new List<String>();
         public ShowProductsPage()
         {
             InitializeComponent();
             LoadData();
+            AddColumsToList();
+        }
+
+        private void AddColumsToList()
+        {
+            whichColumn.Add("Nazwa");
+            whichColumn.Add("Marka");
+            whichColumn.Add("Model");
+            whichColumn.Add("Rok_Produkcji");
         }
 
         private void LoadData()
@@ -33,56 +43,36 @@ namespace FAM_App.Pages
             DataTable Products = new DataTable("emp");
             Products = dataBase.DataBaseShowProducts(Products);
             ProductsDataGrid.ItemsSource = Products.DefaultView;
-        }
-
-        private void ByName_Checked(object sender, RoutedEventArgs e)
-        {
-            ByName_TxtBox.IsEnabled = true;
-        }
-
-        private void ByBrand_Checked(object sender, RoutedEventArgs e)
-        {
-            ByBrand_TxtBox.IsEnabled = true;
-        }
-
-        private void ByModel_Checked(object sender, RoutedEventArgs e)
-        {
-            ByModel_TxtBox.IsEnabled = true;
-        }
-
-        private void ByYear_Checked(object sender, RoutedEventArgs e)
-        {
-            ByYear_TxtBox.IsEnabled = true;
-        }
-
-        private void ByName_Unchecked(object sender, RoutedEventArgs e)
-        {
-            ByName_TxtBox.IsEnabled = false;
-            ByName_TxtBox.Clear();
-        }
-
-        private void ByBrand_Unchecked(object sender, RoutedEventArgs e)
-        {
-            ByBrand_TxtBox.IsEnabled = false;
-            ByBrand_TxtBox.Clear();
-        }
-
-        private void ByModel_Unchecked(object sender, RoutedEventArgs e)
-        {
-            ByModel_TxtBox.IsEnabled = false;
-            ByModel_TxtBox.Clear();
-        }
-
-        private void ByYear_Unchecked(object sender, RoutedEventArgs e)
-        {
-            ByYear_TxtBox.IsEnabled = false;
-            ByYear_TxtBox.Clear();
+            ProductsDataGrid.CanUserAddRows= false;
         }
 
         private void Search_Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            try
+            {
+                int index = ChooseBox.SelectedIndex;
+                string chooseTxt = Choose_TxtBox.Text;
+                String query = "";
+                if (index == -1) { MessageBox.Show("Nie wybrano opcji wyszukiwania"); }
+                else
+                { 
+                    query = "SELECT ID_Produktu, Nazwa, Marka, Model, Opis, Rok_Produkcji FROM dbo.Produkt WHERE (" + whichColumn[index] +" LIKE '" + chooseTxt + "');";
+                    DataBase dataBase = new DataBase();
+                    DataTable Products = new DataTable("emp");
+                    Products = dataBase.DataBaseShowSelectedData(Products, query);
+                    ProductsDataGrid.ItemsSource = Products.DefaultView;
+                    ProductsDataGrid.CanUserAddRows = false;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
+        private void ShowAll_Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoadData();
+        }
     }
 }

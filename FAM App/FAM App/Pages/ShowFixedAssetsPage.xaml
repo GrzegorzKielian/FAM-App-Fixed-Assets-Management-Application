@@ -12,6 +12,25 @@
         <Style x:Key="dark" TargetType="DataGrid">
             <Setter Property="Background" Value="#152238"/>
         </Style>
+        <Style x:Key="darkLabel" TargetType="Label">
+            <Setter Property="Foreground" Value="#dddddd"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style x:Key="darkTextBlock" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#dddddd"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+        </Style>
+        <Style x:Key="darkCheckBox" TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#dddddd"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <ContextMenu x:Key="RightClickMenu">
+            <MenuItem Header="Amortyzacja"
+                      Click="MenuItem_Click"
+                      CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent}"/>
+        </ContextMenu>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -25,15 +44,39 @@
                 Background="#152238" 
                 Grid.Column="0" Grid.Row="1"/>
 
-        <StackPanel Grid.Row="1" Margin="0,20">
-
-        </StackPanel>
+        <Border Grid.Row="1" Margin="2,20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <CheckBox x:Name="Depreciation_CheckBox" Grid.Row="0" Checked="Depreciation_CheckBox_Checked" Unchecked="Depreciation_CheckBox_Unchecked" Style="{StaticResource darkCheckBox}">
+                    <TextBlock Text="Pokaż tylko środki z amortyzacją." TextWrapping="Wrap"/>
+                </CheckBox>
+                <Border Grid.Row="1" x:Name="Depreciation_Border" Visibility="Hidden">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Style="{StaticResource darkLabel}">
+                            <TextBlock Text="Aby wyliczyć amortyzację kliknij prawym przyciskiem myszy na środek trwały." TextWrapping="Wrap" FontSize="12"/>
+                        </Label>
+                        <Label Grid.Row="1" Content="Amortyzacja:" Style="{StaticResource darkLabel}" VerticalAlignment="Bottom"/>
+                        <TextBlock Grid.Row="2" Text="" x:Name="Depreciation_Box" Style="{StaticResource darkTextBlock}"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
 
         <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
             <DataGrid x:Name="FixedAssetsDataGrid" Style="{StaticResource dark}" d:ItemsSource="{d:SampleData ItemCount=5}">
                 <DataGrid.Resources>
                     <Style TargetType="DataGridRow">
                         <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                        <EventSetter Event="MouseRightButtonDown" Handler="DataGridRow_MouseRightButtonDown"/>
                     </Style>
                 </DataGrid.Resources>
             </DataGrid>

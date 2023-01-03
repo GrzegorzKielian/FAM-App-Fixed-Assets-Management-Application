@@ -31,7 +31,7 @@ namespace FAM_App
         {
             DataBase dataBase = new DataBase();
 
-            if(dataBase.IsAdmin())
+            if (dataBase.IsAdmin())
             {
                 Employee.Visibility = Visibility.Visible;
             }

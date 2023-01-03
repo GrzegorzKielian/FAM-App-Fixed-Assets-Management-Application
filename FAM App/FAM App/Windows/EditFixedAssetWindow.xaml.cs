@@ -41,44 +41,95 @@ namespace FAM_App.Windows
         {
             DataBase dataBase = new DataBase();
             FixedAsset = new DataTable("emp");
-            FixedAsset = dataBase.GetAssetDataToEdit(FixedAsset, fixedAsset_ID);
-            LoadDataToBoxes(FixedAsset);
+            if (dataBase.DataBaseHaveUser(fixedAsset_ID))
+            {
+                FixedAsset = dataBase.GetAssetDataToEditWithUser(FixedAsset, fixedAsset_ID);
+                LoadDataToBoxes_WithUser(FixedAsset);
+            }
+            else
+            {
+                FixedAsset = dataBase.GetAssetDataToEditWithoutUser(FixedAsset, fixedAsset_ID);
+                LoadDataToBoxes_WithoutUser(FixedAsset);
+            }       
         }
 
-        private void LoadDataToBoxes(DataTable fixedAsset)
+        private void LoadDataToBoxes_WithUser(DataTable fixedAsset)
         {
-            bool dep=true;
-            int iF = Convert.ToInt32(fixedAsset.Rows[0][15]);
-            if (iF != 0)
+            try
             {
-                dep = false;
-                Depreciation.Visibility = Visibility.Hidden;
+                bool dep = true;
+                int iF = Convert.ToInt32(fixedAsset.Rows[0][15]);
+                if (iF != 0)
+                {
+                    dep = false;
+                    Depreciation.Visibility = Visibility.Hidden;
+                }
+                Group.Text = fixedAsset.Rows[0][0].ToString();
+                Subgroup.Text = fixedAsset.Rows[0][1].ToString();
+                Type.Text = fixedAsset.Rows[0][2].ToString();
+
+                Product.Text = fixedAsset.Rows[0][3].ToString();
+                Supplier.Text = fixedAsset.Rows[0][4].ToString();
+                Adress.Text = fixedAsset.Rows[0][5].ToString();
+                User.Text = fixedAsset.Rows[0][6].ToString();
+
+                if (dep)
+                {
+                    Depreciation_rate.Text = fixedAsset.Rows[0][14].ToString();
+                    Depreciation_method.Text = "Amortyzacja liniowa";
+                }
+                Date_of_aquisition.Text = fixedAsset.Rows[0][7].ToString();
+                string[] grossVal = SplitValue(fixedAsset.Rows[0][8].ToString());
+                string[] netVal = SplitValue(fixedAsset.Rows[0][9].ToString());
+                Gross_orig_val1_TxtBox.Text = grossVal[0];
+                Gross_orig_val2_TxtBox.Text = grossVal[1];
+                Net_orig_val1_TxtBox.Text = netVal[0];
+                Net_orig_val2_TxtBox.Text = netVal[1];
+                Description_TxtBox.Text = fixedAsset.Rows[0][10].ToString();
+                Status.Text = fixedAsset.Rows[0][13].ToString();
+                Invoice.Text = fixedAsset.Rows[0][11].ToString();
+                Guarantee.Text = fixedAsset.Rows[0][12].ToString();
             }
-            Group.Text = fixedAsset.Rows[0][0].ToString();
-            Subgroup.Text = fixedAsset.Rows[0][1].ToString();
-            Type.Text = fixedAsset.Rows[0][2].ToString();
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
+        }
 
-            Product.Text = fixedAsset.Rows[0][3].ToString();
-            Supplier.Text = fixedAsset.Rows[0][4].ToString();
-            Adress.Text = fixedAsset.Rows[0][5].ToString();
-            User.Text = fixedAsset.Rows[0][6].ToString();
-
-            if(dep)
+        private void LoadDataToBoxes_WithoutUser(DataTable fixedAsset)
+        {
+            try
             {
-                Depreciation_rate.Text = fixedAsset.Rows[0][14].ToString();
-                Depreciation_method.Text = "Amortyzacja liniowa";
+                bool dep = true;
+                int iF = Convert.ToInt32(fixedAsset.Rows[0][14]);
+                if (iF != 0)
+                {
+                    dep = false;
+                    Depreciation.Visibility = Visibility.Hidden;
+                }
+                Group.Text = fixedAsset.Rows[0][0].ToString();
+                Subgroup.Text = fixedAsset.Rows[0][1].ToString();
+                Type.Text = fixedAsset.Rows[0][2].ToString();
+
+                Product.Text = fixedAsset.Rows[0][3].ToString();
+                Supplier.Text = fixedAsset.Rows[0][4].ToString();
+                Adress.Text = fixedAsset.Rows[0][5].ToString();
+
+                if (dep)
+                {
+                    Depreciation_rate.Text = fixedAsset.Rows[0][13].ToString();
+                    Depreciation_method.Text = "Amortyzacja liniowa";
+                }
+                Date_of_aquisition.Text = fixedAsset.Rows[0][6].ToString();
+                string[] grossVal = SplitValue(fixedAsset.Rows[0][7].ToString());
+                string[] netVal = SplitValue(fixedAsset.Rows[0][8].ToString());
+                Gross_orig_val1_TxtBox.Text = grossVal[0];
+                Gross_orig_val2_TxtBox.Text = grossVal[1];
+                Net_orig_val1_TxtBox.Text = netVal[0];
+                Net_orig_val2_TxtBox.Text = netVal[1];
+                Description_TxtBox.Text = fixedAsset.Rows[0][9].ToString();
+                Status.Text = fixedAsset.Rows[0][12].ToString();
+                Invoice.Text = fixedAsset.Rows[0][10].ToString();
+                Guarantee.Text = fixedAsset.Rows[0][11].ToString();
             }
-            Date_of_aquisition.Text = fixedAsset.Rows[0][7].ToString();
-            string[] grossVal = SplitValue(fixedAsset.Rows[0][8].ToString());
-            string[] netVal = SplitValue(fixedAsset.Rows[0][9].ToString());
-            Gross_orig_val1_TxtBox.Text = grossVal[0];
-            Gross_orig_val2_TxtBox.Text = grossVal[1];
-            Net_orig_val1_TxtBox.Text = netVal[0];
-            Net_orig_val2_TxtBox.Text = netVal[1];
-            Description_TxtBox.Text = fixedAsset.Rows[0][10].ToString();
-            Status.Text = fixedAsset.Rows[0][13].ToString();
-            Invoice.Text = fixedAsset.Rows[0][11].ToString();
-            Guarantee.Text = fixedAsset.Rows[0][12].ToString();
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private string[] SplitValue(string v)

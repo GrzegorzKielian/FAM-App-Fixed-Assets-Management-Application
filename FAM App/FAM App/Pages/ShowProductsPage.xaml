@@ -16,12 +16,10 @@
             <Setter Property="Background" Value="#dddddd"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0,0,0,20"/>
-            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="15"/>
         </Style>
-        <Style x:Key="darkCheckbox" TargetType="CheckBox">
-            <Setter Property="Foreground" Value="#dddddd"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
+        <Style x:Key="darkComboBox" TargetType="ComboBox">
             <Setter Property="FontFamily" Value="Tahoma"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Margin" Value="0,0,0,10"/>
@@ -40,27 +38,15 @@
                 Grid.Column="0" Grid.Row="1"/>
 
         <StackPanel Grid.Row="1" Margin="0,50">
-            <CheckBox x:Name="ByName" Style="{StaticResource darkCheckbox}" Unchecked="ByName_Unchecked" Checked="ByName_Checked">
-                <TextBlock Text="Wyszukaj po nazwie" TextWrapping="Wrap"/>
-            </CheckBox>
-            <TextBox x:Name="ByName_TxtBox" Style="{StaticResource darkTextBox }"/>
-
-            <CheckBox x:Name="ByBrand" Style="{StaticResource darkCheckbox}" Unchecked="ByBrand_Unchecked" Checked="ByBrand_Checked">
-                <TextBlock Text="Wyszukaj po marce" TextWrapping="Wrap"/>
-            </CheckBox>
-            <TextBox x:Name="ByBrand_TxtBox" Style="{StaticResource darkTextBox}"/>
-
-            <CheckBox x:Name="ByModel" Style="{StaticResource darkCheckbox}" Unchecked="ByModel_Unchecked" Checked="ByModel_Checked">
-                <TextBlock Text="Wyszukaj po modelu" TextWrapping="Wrap"/>
-            </CheckBox>
-            <TextBox x:Name="ByModel_TxtBox" Style="{StaticResource darkTextBox}"/>
-
-            <CheckBox x:Name="ByYear" Style="{StaticResource darkCheckbox}" Unchecked="ByYear_Unchecked" Checked="ByYear_Checked">
-                <TextBlock Text="Wyszukaj po roku produkcji" TextWrapping="Wrap"/>
-            </CheckBox>
-            <TextBox x:Name="ByYear_TxtBox" Style="{StaticResource darkTextBox}"/>
-
+            <ComboBox x:Name="ChooseBox" Style="{StaticResource darkComboBox}">
+                <ComboBoxItem>Wyszykaj po nazwie</ComboBoxItem>
+                <ComboBoxItem>Wyszykaj po marce</ComboBoxItem>
+                <ComboBoxItem>Wyszykaj po modelu</ComboBoxItem>
+                <ComboBoxItem>Wyszykaj po roku produkcji</ComboBoxItem>
+            </ComboBox>
+            <TextBox x:Name="Choose_TxtBox" Style="{StaticResource darkTextBox}"/>
             <Button x:Name="Search_Button" Content="Wyszukaj" Height="25" FontSize="15" FontFamily="Tahoma" Click="Search_Button_Click"/>
+            <Button x:Name="ShowAll_Button" Content="Pokaż wszystko" Height="25" FontSize="15" FontFamily="Tahoma" Margin="0,15,0,0" Click="ShowAll_Button_Click" />
         </StackPanel>
 
         <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">

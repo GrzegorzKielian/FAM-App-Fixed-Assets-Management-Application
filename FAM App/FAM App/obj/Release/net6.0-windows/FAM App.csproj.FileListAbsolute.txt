@@ -36,3 +36,23 @@ C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\FAM App.pdb
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\FAM App.genruntimeconfig.cache
 C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\ref\FAM App.dll
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\AddAdressesPage.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\AddEmployeePage.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\AddOtherFixedAssetsPage.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\AddSupplierPage.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\FixedAssetCardPage.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\ShowAdressesPage.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\ShowEmployeePage.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\ShowSupplierPage.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Windows\EditEmployeeWindow.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Windows\EditFixedAssetWindow.g.cs
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\AddAdressesPage.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\AddEmployeePage.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\AddOtherFixedAssetsPage.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\AddSupplierPage.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\FixedAssetCardPage.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\ShowAdressesPage.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\ShowEmployeePage.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Pages\ShowSupplierPage.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Windows\EditEmployeeWindow.baml
+C:\Users\grzeg\Documents\FAM-App-Fixed-Assets-Management-Application\FAM App\FAM App\obj\Release\net6.0-windows\Windows\EditFixedAssetWindow.baml

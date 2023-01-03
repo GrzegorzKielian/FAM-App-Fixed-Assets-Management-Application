@@ -21,10 +21,20 @@ namespace FAM_App.Pages
     /// </summary>
     public partial class ShowSupplierPage : Page
     {
+        List<String> whichColumn = new List<String>();
         public ShowSupplierPage()
         {
             InitializeComponent();
             LoadData();
+            AddColumsToList();
+        }
+
+        private void AddColumsToList()
+        {
+            whichColumn.Add("Nazwa");
+            whichColumn.Add("Miejscowosc");
+            whichColumn.Add("Kod_Pocztowy");
+            whichColumn.Add("Ulica");
         }
 
         private void LoadData()
@@ -33,55 +43,37 @@ namespace FAM_App.Pages
             DataTable Suppliers = new DataTable("emp");
             Suppliers = dataBase.DataBaseShowSuppliers(Suppliers);
             SuppliersDataGrid.ItemsSource = Suppliers.DefaultView;
+            SuppliersDataGrid.CanUserAddRows= false;
         }
 
-        private void ByName_Checked(object sender, RoutedEventArgs e)
-        {
-            ByName_TxtBox.IsEnabled = true;
-        }
-
-        private void ByCity_Checked(object sender, RoutedEventArgs e)
-        {
-            ByCity_TxtBox.IsEnabled = true;
-        }
-
-        private void ByPostCode_Checked(object sender, RoutedEventArgs e)
-        {
-            ByPostCode_TxtBox.IsEnabled = true;
-        }
-
-        private void ByStreet_Checked(object sender, RoutedEventArgs e)
-        {
-            ByStreet_TxtBox.IsEnabled = true;
-        }
-
-
-        private void ByName_Unchecked(object sender, RoutedEventArgs e)
-        {
-            ByName_TxtBox.IsEnabled = false;
-            ByName_TxtBox.Clear();
-        }
-
-        private void ByCity_Unchecked(object sender, RoutedEventArgs e)
-        {
-            ByCity_TxtBox.IsEnabled = false;
-            ByCity_TxtBox.Clear();
-        }
-
-        private void ByPostCode_Unchecked(object sender, RoutedEventArgs e)
-        {
-            ByPostCode_TxtBox.IsEnabled = false;
-            ByPostCode_TxtBox.Clear();
-        }
-
-        private void ByStreet_Unchecked(object sender, RoutedEventArgs e)
-        {
-            ByStreet_TxtBox.IsEnabled = false;
-            ByStreet_TxtBox.Clear();
-        }
+        
         private void Search_Button_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                int index = ChooseBox.SelectedIndex;
+                string chooseTxt = Choose_TxtBox.Text;
+                String query = "";
+                if (index == -1) { MessageBox.Show("Nie wybrano opcji wyszukiwania"); }
+                else
+                {
+                    query = "SELECT ID_Dostawcy, Nazwa, Miejscowosc, Kod_Pocztowy, Ulica FROM dbo.Dostawca WHERE (" + whichColumn[index] +" LIKE '" + chooseTxt + "');";
+                    DataBase dataBase = new DataBase();
+                    DataTable Suppliers = new DataTable("emp");
+                    Suppliers = dataBase.DataBaseShowSelectedData(Suppliers, query);
+                    SuppliersDataGrid.ItemsSource = Suppliers.DefaultView;
+                    SuppliersDataGrid.CanUserAddRows = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
+        private void ShowAll_Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoadData();
         }
     }
 }
