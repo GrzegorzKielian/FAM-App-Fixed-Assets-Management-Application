@@ -2,7 +2,8 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:Syncfusion="http://schemas.syncfusion.com/wpf"
       xmlns:local="clr-namespace:FAM_App.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="1034" d:DesignWidth="1920"
@@ -47,12 +48,19 @@
                 <TextBox x:Name="InventoryNumber_TxtBox" Style="{StaticResource darkTextBox }"/>
 
                 <Button x:Name="ShowHistory_Button" Content="Historia środka" Height="25" FontSize="15" FontFamily="Tahoma" Click="ShowHistory_Button_Click"/>
+                <Button x:Name="ExportToPDF_Button" Content="Zapisz do PDF" Height="25" FontSize="15" FontFamily="Tahoma" Margin="0,20,0,0" Click="ExportToPDF_Button_Click"/>
             </StackPanel>
         </Grid>
 
         <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
-            <DataGrid x:Name="HistoryDataGrid" Style="{StaticResource dark}" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.05*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <DataGrid Grid.Row="0" x:Name="FixedAssetGrid" Style="{StaticResource dark}" Margin="0,0,0,5"/>
+                <DataGrid Grid.Row="1" x:Name="HistoryDataGrid" Style="{StaticResource dark}"/>
+            </Grid>
         </Border>
     </Grid>
 </Page>

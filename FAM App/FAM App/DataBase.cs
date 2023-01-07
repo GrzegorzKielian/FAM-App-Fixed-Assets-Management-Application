@@ -24,7 +24,7 @@ namespace FAM_App
         SqlConnection sqlConnection;
         private SqlCommand DataBaseConnection()
         {
-            sqlConnection = new SqlConnection(@"Server=(local);Database=FAMDataBase;Trusted_Connection=Yes;"); //DESKTOP-JLN71CE
+            sqlConnection = new SqlConnection($"Data Source=tcp:192.168.0.3,1433; Initial Catalog=FAMDataBase; User id=FAMAppMobile; Password=123456; Connect Timeout = 10; MultipleActiveResultSets=True "); //DESKTOP-JLN71CE
             sqlConnection.Open();
             SqlCommand cmd = sqlConnection.CreateCommand();
             return cmd;
@@ -217,21 +217,23 @@ namespace FAM_App
 
         public DataTable DataBaseShowFixedAssetHistory(DataTable dataTable, string inventoryNumber)
         {
-            SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT dbo.Historia_Srodka.ID_Historii AS Lp, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Stan_Status, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Historia_Srodka.Data, CONCAT(dbo.Adres.Miejscowosc,' ', dbo.Adres.Kod_Pocztowy,' ', dbo.Adres.Ulica,' ', dbo.Adres.Nr_Budynku,' ', dbo.Adres.Nr_Lokalu,' ', dbo.Adres.Nr_Pomieszczenia) AS Adres, (SELECT TOP(1) CONCAT(uzytkownik.Imie,' ', uzytkownik.Nazwisko) FROM dbo.Pracownik WHERE uzytkownik.ID_Pracownika=dbo.Historia_Srodka.id_uzytkownika) AS Uzytkownik, (SELECT TOP(1) CONCAT(wprodzadzajacy.Imie,' ', wprodzadzajacy.Nazwisko) FROM dbo.Pracownik WHERE wprodzadzajacy.ID_Pracownika=dbo.Historia_Srodka.id_wprowadzajacego) AS 'Dokonal zmiany', dbo.Historia_Srodka.Uwagi " +
-                "FROM dbo.Historia_Srodka " +
-                "INNER JOIN dbo.Srodek_Trwaly ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka " +
-                "INNER JOIN dbo.Adres ON dbo.Historia_Srodka.id_adresu = dbo.Adres.ID_Adresu " +
-                "INNER JOIN dbo.Pracownik AS wprodzadzajacy ON dbo.Historia_Srodka.id_wprowadzajacego = wprodzadzajacy.ID_Pracownika " +
-                "INNER JOIN dbo.Pracownik AS uzytkownik ON dbo.Historia_Srodka.id_uzytkownika = uzytkownik.ID_Pracownika " +
-                "WHERE Nr_Inwentarzowy = '"+inventoryNumber+"';";
-            cmd.CommandText = data;
+                SqlCommand cmd = DataBaseConnection();
 
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            dataTable = new DataTable("emp");
-            sda.Fill(dataTable);
-            sqlConnection.Close();
-            return dataTable;
+                String data = "SELECT dbo.Historia_Srodka.ID_Historii AS Lp, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Historia_Srodka.Data, CONCAT(dbo.Adres.Miejscowosc,' ', dbo.Adres.Kod_Pocztowy,' ', dbo.Adres.Ulica,' ', dbo.Adres.Nr_Budynku,', NrLokalu: ', dbo.Adres.Nr_Lokalu,', NrPomieszczenia: ', dbo.Adres.Nr_Pomieszczenia) AS Adres, (SELECT TOP(1) CONCAT(uzytkownik.Imie,' ', uzytkownik.Nazwisko) FROM dbo.Pracownik WHERE uzytkownik.ID_Pracownika=dbo.Historia_Srodka.id_uzytkownika) AS Uzytkownik, (SELECT TOP(1) CONCAT(wprodzadzajacy.Imie,' ', wprodzadzajacy.Nazwisko) FROM dbo.Pracownik WHERE wprodzadzajacy.ID_Pracownika=dbo.Historia_Srodka.id_wprowadzajacego) AS 'Dokonal zmiany', dbo.Historia_Srodka.Uwagi " +
+                    "FROM dbo.Historia_Srodka " +
+                    "INNER JOIN dbo.Srodek_Trwaly ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka " +
+                    "INNER JOIN dbo.Adres ON dbo.Historia_Srodka.id_adresu = dbo.Adres.ID_Adresu " +
+                    "INNER JOIN dbo.Pracownik AS wprodzadzajacy ON dbo.Historia_Srodka.id_wprowadzajacego = wprodzadzajacy.ID_Pracownika " +
+                    "INNER JOIN dbo.Pracownik AS uzytkownik ON dbo.Historia_Srodka.id_uzytkownika = uzytkownik.ID_Pracownika " +
+                    "WHERE (Nr_Inwentarzowy = '" + inventoryNumber + "');";
+                cmd.CommandText = data;
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                sda.Fill(dataTable);
+                cmd.Dispose();
+
+                sqlConnection.Close();
+                return dataTable;
+
         }
 
         public DataTable DataBaseShowGroup(DataTable dataTable)
