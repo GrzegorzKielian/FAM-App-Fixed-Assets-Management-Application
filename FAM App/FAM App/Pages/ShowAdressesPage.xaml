@@ -16,12 +16,8 @@
             <Setter Property="Background" Value="#dddddd"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0,0,0,20"/>
-            <Setter Property="IsEnabled" Value="False"/>
         </Style>
-        <Style x:Key="darkCheckbox" TargetType="CheckBox">
-            <Setter Property="Foreground" Value="#dddddd"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
+        <Style x:Key="darkComboBox" TargetType="ComboBox">
             <Setter Property="FontFamily" Value="Tahoma"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Margin" Value="0,0,0,10"/>
@@ -40,7 +36,15 @@
                 Grid.Column="0" Grid.Row="1"/>
 
         <StackPanel Grid.Row="1" Margin="0,50">
-
+            <ComboBox x:Name="ChooseBox" Style="{StaticResource darkComboBox}">
+                <ComboBoxItem>Wyszykaj po nazwie</ComboBoxItem>
+                <ComboBoxItem>Wyszykaj po miejscowości</ComboBoxItem>
+                <ComboBoxItem>Wyszykaj po kodzie pocztowym</ComboBoxItem>
+                <ComboBoxItem>Wyszykaj po ulicy</ComboBoxItem>
+            </ComboBox>
+            <TextBox x:Name="Choose_TxtBox" Style="{StaticResource darkTextBox}"/>
+            <Button x:Name="Search_Button" Content="Wyszukaj" Height="25" FontSize="15" FontFamily="Tahoma" Click="Search_Button_Click"/>
+            <Button x:Name="ShowAll_Button" Content="Pokaż wszystko" Height="25" FontSize="15" FontFamily="Tahoma" Margin="0,15,0,0" Click="ShowAll_Button_Click" />
         </StackPanel>
 
         <Border x:Name="BorderPage" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">

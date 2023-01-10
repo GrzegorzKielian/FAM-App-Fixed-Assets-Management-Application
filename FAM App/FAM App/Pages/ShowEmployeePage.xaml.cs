@@ -47,6 +47,7 @@ namespace FAM_App.Pages
             Employee = dataBase.DataBaseShowEmployee(Employee);
             EmployeeDataGrid.ItemsSource = Employee.DefaultView;
             EmployeeDataGrid.CanUserAddRows= false;
+            ChooseBox.SelectedIndex = 0;
         }
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)

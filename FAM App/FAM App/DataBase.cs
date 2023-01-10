@@ -24,7 +24,7 @@ namespace FAM_App
         SqlConnection sqlConnection;
         private SqlCommand DataBaseConnection()
         {
-            sqlConnection = new SqlConnection($"Data Source=tcp:192.168.0.3,1433; Initial Catalog=FAMDataBase; User id=FAMAppMobile; Password=123456; Connect Timeout = 10; MultipleActiveResultSets=True "); //DESKTOP-JLN71CE
+            sqlConnection = new SqlConnection($"Data Source=tcp:192.168.0.2,1433; Initial Catalog=FAMDataBase; User id=FAMAppMobile; Password=123456; Connect Timeout = 10; MultipleActiveResultSets=True "); //DESKTOP-JLN71CE
             sqlConnection.Open();
             SqlCommand cmd = sqlConnection.CreateCommand();
             return cmd;

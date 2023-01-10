@@ -44,6 +44,7 @@ namespace FAM_App.Pages
             Products = dataBase.DataBaseShowProducts(Products);
             ProductsDataGrid.ItemsSource = Products.DefaultView;
             ProductsDataGrid.CanUserAddRows= false;
+            ChooseBox.SelectedIndex = 0;
         }
 
         private void Search_Button_Click(object sender, RoutedEventArgs e)

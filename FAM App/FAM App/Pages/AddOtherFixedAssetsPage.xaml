@@ -18,6 +18,14 @@
             <Setter Property="Width" Value="310"/>
             <Setter Property="Height" Value="25"/>
         </Style>
+        <Style x:Key="darkTextBoxNumber" TargetType="TextBox">
+            <Setter Property="Background" Value="#dddddd"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="25"/>
+        </Style>
         <Style x:Key="darkLabelEnter" TargetType="Label">
             <Setter Property="Foreground" Value="#dddddd"/>
             <Setter Property="Grid.Column" Value="2"/>
@@ -60,6 +68,7 @@
             <Setter Property="Height" Value="25"/>
             <Setter Property="FontFamily" Value="Tahoma"/>
             <Setter Property="FontSize" Value="15"/>
+            <Setter Property="IsEnabled" Value="False"/>
         </Style>
 
     </Page.Resources>
@@ -230,34 +239,36 @@
                 <DatePicker Name="Date_of_aquisition" Grid.Row="1" Style="{StaticResource darkDatePicker}" />
 
                 <Label Content="Wartość początkowa brutto:" Grid.Row="2" Style="{StaticResource darkLabelEnter}" />
-                <Border x:Name="Gross_orig_val" Grid.Row="2" Grid.Column="3" Margin="0,0,300,0">
+                <Border x:Name="Gross_orig_val" Grid.Row="2" Grid.Column="3" >
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.73*"/>
-                            <ColumnDefinition Width="0.08*"/>
-                            <ColumnDefinition Width="0.12*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.05*"/>
+                            <ColumnDefinition Width="0.10*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBox x:Name="Gross_orig_val1_TxtBox" Grid.Column="0" 
-                         Style="{StaticResource darkTextBox}" MaxLength="18"/>
+                         Style="{StaticResource darkTextBoxNumber}" MaxLength="18" TextAlignment="Right"/>
                         <Label Content="," Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource darkLabelEnter}"/>
                         <TextBox x:Name="Gross_orig_val2_TxtBox" Grid.Column="2"  
-                         Style="{StaticResource darkTextBox}" Width="50" MaxLength="2"/>
+                         Style="{StaticResource darkTextBoxNumber}" Width="50" MaxLength="2"/>
                     </Grid>
                 </Border>
 
                 <Label Content="Wartość początkowa netto:" Grid.Row="3" Style="{StaticResource darkLabelEnter}" />
-                <Border x:Name="Net_orig_val1" Grid.Row="3" Grid.Column="3" Margin="0,0,300,0">
+                <Border x:Name="Net_orig_val1" Grid.Row="3" Grid.Column="3">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.73*"/>
-                            <ColumnDefinition Width="0.08*"/>
-                            <ColumnDefinition Width="0.12*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.05*"/>
+                            <ColumnDefinition Width="0.10*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBox x:Name="Net_orig_val1_TxtBox" Grid.Column="0" 
-                         Style="{StaticResource darkTextBox}" MaxLength="18"/>
+                         Style="{StaticResource darkTextBoxNumber}" MaxLength="18" TextAlignment="Right"/>
                         <Label Content="," Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource darkLabelEnter}"/>
                         <TextBox x:Name="Net_orig_val2_TxtBox" Grid.Column="2"  
-                         Style="{StaticResource darkTextBox}" Width="50" MaxLength="2"/>
+                         Style="{StaticResource darkTextBoxNumber}" Width="50" MaxLength="2"/>
                     </Grid>
                 </Border>
 

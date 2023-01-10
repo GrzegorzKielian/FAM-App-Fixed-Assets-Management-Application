@@ -56,7 +56,7 @@
                          HorizontalContentAlignment="Center" Style="{StaticResource darkTextBox}"
                          MaxLength="50" MouseEnter="LoginTxtBox_MouseEnter"/>
 
-                <Label Content="Haslo:" Grid.Row="3" Grid.Column="2" 
+                <Label Content="Hasło:" Grid.Row="3" Grid.Column="2" 
                        Grid.ColumnSpan="2" Style="{StaticResource darkLabel}"/>
                 <PasswordBox x:Name="PasswdTxtBox" Grid.Row="4" 
                              Grid.Column="2" Grid.ColumnSpan="4" 
@@ -65,7 +65,7 @@
                              VerticalContentAlignment="Center" Background="#dddddd"
                              MaxLength="64" MouseEnter="PasswdTxtBox_MouseEnter"/>
 
-                <Button x:Name="ClearButton" Content="Wyczysc pola" 
+                <Button x:Name="ClearButton" Content="Wyczyść pola" 
                         Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="4" 
                         Margin="10,0,10,40" FontSize="20" Style="{StaticResource darkButton}"
                         Click="ClearButton_Click" />

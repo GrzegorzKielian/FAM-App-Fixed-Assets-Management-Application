@@ -44,6 +44,7 @@ namespace FAM_App.Pages
             Suppliers = dataBase.DataBaseShowSuppliers(Suppliers);
             SuppliersDataGrid.ItemsSource = Suppliers.DefaultView;
             SuppliersDataGrid.CanUserAddRows= false;
+            ChooseBox.SelectedIndex = 0;
         }
 
         

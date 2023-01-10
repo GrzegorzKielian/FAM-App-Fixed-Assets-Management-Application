@@ -26,6 +26,23 @@
             <Setter Property="FontFamily" Value="Tahoma"/>
             <Setter Property="FontSize" Value="12"/>
         </Style>
+        <Style x:Key="darkLabelSelect" TargetType="Label">
+            <Setter Property="Foreground" Value="#dddddd"/>
+            <Setter Property="Grid.Column" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style x:Key="darkCombobox" TargetType="ComboBox">
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="25"/>
+        </Style>
         <ContextMenu x:Key="RightClickMenu">
             <MenuItem Header="Amortyzacja"
                       Click="MenuItem_Click"
@@ -72,14 +89,62 @@
         </Border>
 
         <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
-            <DataGrid x:Name="FixedAssetsDataGrid" Style="{StaticResource dark}" d:ItemsSource="{d:SampleData ItemCount=5}">
-                <DataGrid.Resources>
-                    <Style TargetType="DataGridRow">
-                        <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
-                        <EventSetter Event="MouseRightButtonDown" Handler="DataGridRow_MouseRightButtonDown"/>
-                    </Style>
-                </DataGrid.Resources>
-            </DataGrid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="4*"/>
+                </Grid.RowDefinitions>
+                <Border x:Name="FiltrSearch" Grid.Row="0">
+                    <Border x:Name="FixedAssets_Classification" Margin="0,0,40,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Grupa:" Grid.Column="0" Style="{StaticResource darkLabelSelect}"/>
+                            <ComboBox Name="Group" Grid.Column="1" Style="{StaticResource darkCombobox}"
+                                    Loaded="Group_Loaded"
+                                      SelectionChanged="Group_SelectionChanged">
+                            </ComboBox>
+
+                            <Label Content="Podgrupa:" Grid.Column="2" Style="{StaticResource darkLabelSelect}"/>
+                            <ComboBox Name="Subgroup" Grid.Column="3" Style="{StaticResource darkCombobox}"
+                                  SelectionChanged="Subgroup_SelectionChanged"
+                                  IsEnabled="False">
+                            </ComboBox>
+
+                            <Label Content="Rodzaj:" Grid.Column="4" Style="{StaticResource darkLabelSelect}"/>
+                            <ComboBox Name="Type" Grid.Column="5" Style="{StaticResource darkCombobox}"
+                                  SelectionChanged="Type_SelectionChanged"
+                                  IsEnabled="False">
+                            </ComboBox>
+                            
+                            <Label Content="Stan/Status:" Grid.Column="6" Style="{StaticResource darkLabelSelect}"/>
+                            <ComboBox Name="Status" Grid.Column="7" Style="{StaticResource darkCombobox}">
+                                <ComboBoxItem>Zlikwidowany</ComboBoxItem>
+                                <ComboBoxItem>W użyciu</ComboBoxItem>
+                            </ComboBox>
+                            
+                            <Button x:Name="FiltrSearch_Button" Content="Filtruj" Click="FiltrSearch_Button_Click" Grid.Column="8" Height="30" Width="120" HorizontalAlignment="Left"/>
+                        </Grid>
+                    </Border>
+                </Border>
+                <DataGrid x:Name="FixedAssetsDataGrid" Grid.Row="1" Style="{StaticResource dark}" d:ItemsSource="{d:SampleData ItemCount=5}">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                            <EventSetter Event="MouseRightButtonDown" Handler="DataGridRow_MouseRightButtonDown"/>
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
+            </Grid>
 
         </Border>
     </Grid>

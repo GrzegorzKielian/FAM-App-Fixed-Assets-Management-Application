@@ -71,8 +71,8 @@ namespace FAM_App.Pages
 
                 if (history.Rows.Count > 0)
                 {
-                    Font tableHeader = FontFactory.GetFont(FontFactory.TIMES_ROMAN, 12, Font.BOLD);
-                    Font cellFont = FontFactory.GetFont(FontFactory.TIMES_ROMAN, 12, Font.NORMAL);
+                    Font tableHeader = FontFactory.GetFont(FontFactory.TIMES_ROMAN, BaseFont.CP1250, 12, Font.BOLD );
+                    Font cellFont = FontFactory.GetFont(FontFactory.TIMES_ROMAN, BaseFont.CP1250, 12, Font.NORMAL);
 
                     PdfPTable pdfPTable = new PdfPTable(fixedAsset.Columns.Count);
                     pdfPTable.DefaultCell.Padding = 2;
