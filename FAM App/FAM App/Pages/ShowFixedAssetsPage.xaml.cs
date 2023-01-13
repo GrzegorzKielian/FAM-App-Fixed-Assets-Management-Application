@@ -27,6 +27,8 @@ namespace FAM_App
     /// </summary>
     public partial class ShowFixedAssetsPage : Page
     {
+        List<String> query = new List<String>();
+
         private int groupID;
         private int subgroupID;
         private int typeID;
@@ -36,6 +38,7 @@ namespace FAM_App
         {
             InitializeComponent();
             LoadAllFixedAssets();
+            UserSearch_TxtBox.Text = String.Empty;
         }
 
         private void LoadAllFixedAssets()
@@ -223,27 +226,49 @@ namespace FAM_App
             String query;
             if (IsChecked)
             {
-                if(Status.SelectedValue != null)
+                if(UserSearch_TxtBox.Text != String.Empty)
                 {
-                    query = "SELECT dbo.Srodek_Trwaly.ID_Srodka, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Srodek_Trwaly.Stan_Status, dbo.Grupa.Nazwa AS Grupa, dbo.Podgrupa.Nazwa AS Podgrupa, dbo.Rodzaj.Nazwa AS Rodzaj, dbo.Produkt.Nazwa AS Produkt, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Dostawca.Nazwa AS Dostawca, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stawka_Amortyzacji " +
-                            "FROM dbo.Produkt " +
-                            "INNER JOIN dbo.Srodek_Trwaly " +
-                            "INNER JOIN dbo.Dostawca ON dbo.Srodek_Trwaly.id_dostawcy = dbo.Dostawca.ID_Dostawcy ON dbo.Produkt.ID_Produktu = dbo.Srodek_Trwaly.id_Produktu " +
-                            "INNER JOIN dbo.Rodzaj ON dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = dbo.Rodzaj.ID_Rodzaju " +
-                            "INNER JOIN dbo.Podgrupa " +
-                            "INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy ON dbo.Rodzaj.id_podgrupy = dbo.Podgrupa.ID_Podgrupy " +
-                            "WHERE (dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = " + typeID + " AND dbo.Srodek_Trwaly.Stan_Status = '"+Status.Text+"' AND dbo.Srodek_Trwaly.Kod_Srodka = 0);";
-                    return query;
+                    if (Type.SelectedValue != null)
+                    {
+                        query = "SELECT dbo.Srodek_Trwaly.ID_Srodka, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Srodek_Trwaly.Stan_Status, dbo.Grupa.Nazwa AS Grupa, dbo.Podgrupa.Nazwa AS Podgrupa, dbo.Rodzaj.Nazwa AS Rodzaj, dbo.Produkt.Nazwa AS Produkt, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Dostawca.Nazwa AS Dostawca, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stawka_Amortyzacji " +
+                                "FROM dbo.Dostawca " +
+                                "INNER JOIN dbo.Pracownik " +
+                                "INNER JOIN dbo.Historia_Srodka ON dbo.Pracownik.ID_Pracownika = dbo.Historia_Srodka.id_uzytkownika " +
+                                "INNER JOIN dbo.Rodzaj " +
+                                "INNER JOIN dbo.Podgrupa " +
+                                "INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy ON dbo.Rodzaj.id_podgrupy = dbo.Podgrupa.ID_Podgrupy " +
+                                "INNER JOIN dbo.Srodek_Trwaly ON dbo.Rodzaj.ID_Rodzaju = dbo.Srodek_Trwaly.id_nr_klasyfikacyjny " +
+                                "INNER JOIN dbo.Produkt ON dbo.Srodek_Trwaly.id_produktu = dbo.Produkt.ID_Produktu ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka ON dbo.Dostawca.ID_Dostawcy = dbo.Srodek_Trwaly.id_dostawcy " +
+                                "WHERE (dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = " + typeID + " AND dbo.Srodek_Trwaly.Kod_Srodka = 0 AND dbo.Pracownik.ID_Pracownika = (SELECT dbo.Pracownik.ID_Pracownika FROM dbo.Pracownik WHERE dbo.Pracownik.Nazwisko LIKE '" + UserSearch_TxtBox.Text + "'));";
+                        return query;
+                    }
+                    else
+                    {
+                        query = "SELECT dbo.Srodek_Trwaly.ID_Srodka, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Srodek_Trwaly.Stan_Status, dbo.Grupa.Nazwa AS Grupa, dbo.Podgrupa.Nazwa AS Podgrupa, dbo.Rodzaj.Nazwa AS Rodzaj, dbo.Produkt.Nazwa AS Produkt, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Dostawca.Nazwa AS Dostawca, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stawka_Amortyzacji " +
+                                "FROM dbo.Dostawca " +
+                                "INNER JOIN dbo.Pracownik " +
+                                "INNER JOIN dbo.Historia_Srodka ON dbo.Pracownik.ID_Pracownika = dbo.Historia_Srodka.id_uzytkownika " +
+                                "INNER JOIN dbo.Rodzaj " +
+                                "INNER JOIN dbo.Podgrupa " +
+                                "INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy ON dbo.Rodzaj.id_podgrupy = dbo.Podgrupa.ID_Podgrupy " +
+                                "INNER JOIN dbo.Srodek_Trwaly ON dbo.Rodzaj.ID_Rodzaju = dbo.Srodek_Trwaly.id_nr_klasyfikacyjny " +
+                                "INNER JOIN dbo.Produkt ON dbo.Srodek_Trwaly.id_produktu = dbo.Produkt.ID_Produktu ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka ON dbo.Dostawca.ID_Dostawcy = dbo.Srodek_Trwaly.id_dostawcy " +
+                                "WHERE (dbo.Srodek_Trwaly.Kod_Srodka = 0 AND dbo.Pracownik.ID_Pracownika = (SELECT dbo.Pracownik.ID_Pracownika FROM dbo.Pracownik WHERE dbo.Pracownik.Nazwisko LIKE '" + UserSearch_TxtBox.Text + "'));";
+                        return query;
+                    }
+
                 }
                 else
                 {
                     query = "SELECT dbo.Srodek_Trwaly.ID_Srodka, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Srodek_Trwaly.Stan_Status, dbo.Grupa.Nazwa AS Grupa, dbo.Podgrupa.Nazwa AS Podgrupa, dbo.Rodzaj.Nazwa AS Rodzaj, dbo.Produkt.Nazwa AS Produkt, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Dostawca.Nazwa AS Dostawca, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stawka_Amortyzacji " +
-                            "FROM dbo.Produkt " +
-                            "INNER JOIN dbo.Srodek_Trwaly " +
-                            "INNER JOIN dbo.Dostawca ON dbo.Srodek_Trwaly.id_dostawcy = dbo.Dostawca.ID_Dostawcy ON dbo.Produkt.ID_Produktu = dbo.Srodek_Trwaly.id_Produktu " +
-                            "INNER JOIN dbo.Rodzaj ON dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = dbo.Rodzaj.ID_Rodzaju " +
+                            "FROM dbo.Dostawca " +
+                            "INNER JOIN dbo.Pracownik " +
+                            "INNER JOIN dbo.Historia_Srodka ON dbo.Pracownik.ID_Pracownika = dbo.Historia_Srodka.id_uzytkownika " +
+                            "INNER JOIN dbo.Rodzaj " +
                             "INNER JOIN dbo.Podgrupa " +
                             "INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy ON dbo.Rodzaj.id_podgrupy = dbo.Podgrupa.ID_Podgrupy " +
+                            "INNER JOIN dbo.Srodek_Trwaly ON dbo.Rodzaj.ID_Rodzaju = dbo.Srodek_Trwaly.id_nr_klasyfikacyjny " +
+                            "INNER JOIN dbo.Produkt ON dbo.Srodek_Trwaly.id_produktu = dbo.Produkt.ID_Produktu ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka ON dbo.Dostawca.ID_Dostawcy = dbo.Srodek_Trwaly.id_dostawcy " +
                             "WHERE (dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = " + typeID + " AND dbo.Srodek_Trwaly.Kod_Srodka = 0);";
                     return query;
                 }
@@ -251,30 +276,66 @@ namespace FAM_App
             }
             else
             {
-                if (Status.SelectedValue != null)
+                if (UserSearch_TxtBox.Text != String.Empty)
                 {
-                    query = "SELECT dbo.Srodek_Trwaly.ID_Srodka, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Srodek_Trwaly.Stan_Status, dbo.Grupa.Nazwa AS Grupa, dbo.Podgrupa.Nazwa AS Podgrupa, dbo.Rodzaj.Nazwa AS Rodzaj, dbo.Produkt.Nazwa AS Produkt, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Dostawca.Nazwa AS Dostawca, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stawka_Amortyzacji " +
-                            "FROM dbo.Produkt " +
-                            "INNER JOIN dbo.Srodek_Trwaly " +
-                            "INNER JOIN dbo.Dostawca ON dbo.Srodek_Trwaly.id_dostawcy = dbo.Dostawca.ID_Dostawcy ON dbo.Produkt.ID_Produktu = dbo.Srodek_Trwaly.id_Produktu " +
-                            "INNER JOIN dbo.Rodzaj ON dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = dbo.Rodzaj.ID_Rodzaju " +
-                            "INNER JOIN dbo.Podgrupa " +
-                            "INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy ON dbo.Rodzaj.id_podgrupy = dbo.Podgrupa.ID_Podgrupy " +
-                            "WHERE (dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = " + typeID + " AND dbo.Srodek_Trwaly.Stan_Status = '"+Status.Text+"');";
-                    return query;
+                    if (Type.SelectedValue != null)
+                    {
+                        query = "SELECT dbo.Srodek_Trwaly.ID_Srodka, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Srodek_Trwaly.Stan_Status, dbo.Grupa.Nazwa AS Grupa, dbo.Podgrupa.Nazwa AS Podgrupa, dbo.Rodzaj.Nazwa AS Rodzaj, dbo.Produkt.Nazwa AS Produkt, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Dostawca.Nazwa AS Dostawca, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stawka_Amortyzacji " +
+                                "FROM dbo.Dostawca " +
+                                "INNER JOIN dbo.Pracownik " +
+                                "INNER JOIN dbo.Historia_Srodka ON dbo.Pracownik.ID_Pracownika = dbo.Historia_Srodka.id_uzytkownika " +
+                                "INNER JOIN dbo.Rodzaj " +
+                                "INNER JOIN dbo.Podgrupa " +
+                                "INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy ON dbo.Rodzaj.id_podgrupy = dbo.Podgrupa.ID_Podgrupy " +
+                                "INNER JOIN dbo.Srodek_Trwaly ON dbo.Rodzaj.ID_Rodzaju = dbo.Srodek_Trwaly.id_nr_klasyfikacyjny " +
+                                "INNER JOIN dbo.Produkt ON dbo.Srodek_Trwaly.id_produktu = dbo.Produkt.ID_Produktu ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka ON dbo.Dostawca.ID_Dostawcy = dbo.Srodek_Trwaly.id_dostawcy " +
+                                "WHERE (dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = " + typeID + " AND dbo.Pracownik.ID_Pracownika = (SELECT dbo.Pracownik.ID_Pracownika FROM dbo.Pracownik WHERE dbo.Pracownik.Nazwisko LIKE '" + UserSearch_TxtBox.Text + "'));";
+                        return query;
+                    }
+                    else 
+                    {
+                        query = "SELECT dbo.Srodek_Trwaly.ID_Srodka, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Srodek_Trwaly.Stan_Status, dbo.Grupa.Nazwa AS Grupa, dbo.Podgrupa.Nazwa AS Podgrupa, dbo.Rodzaj.Nazwa AS Rodzaj, dbo.Produkt.Nazwa AS Produkt, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Dostawca.Nazwa AS Dostawca, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stawka_Amortyzacji " +
+                                "FROM dbo.Dostawca " +
+                                "INNER JOIN dbo.Pracownik " +
+                                "INNER JOIN dbo.Historia_Srodka ON dbo.Pracownik.ID_Pracownika = dbo.Historia_Srodka.id_uzytkownika " +
+                                "INNER JOIN dbo.Rodzaj " +
+                                "INNER JOIN dbo.Podgrupa " +
+                                "INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy ON dbo.Rodzaj.id_podgrupy = dbo.Podgrupa.ID_Podgrupy " +
+                                "INNER JOIN dbo.Srodek_Trwaly ON dbo.Rodzaj.ID_Rodzaju = dbo.Srodek_Trwaly.id_nr_klasyfikacyjny " +
+                                "INNER JOIN dbo.Produkt ON dbo.Srodek_Trwaly.id_produktu = dbo.Produkt.ID_Produktu ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka ON dbo.Dostawca.ID_Dostawcy = dbo.Srodek_Trwaly.id_dostawcy " +
+                                "WHERE (dbo.Pracownik.ID_Pracownika = (SELECT dbo.Pracownik.ID_Pracownika FROM dbo.Pracownik WHERE dbo.Pracownik.Nazwisko LIKE '" + UserSearch_TxtBox.Text + "'));";
+                        return query;
+                    }
+
                 }
                 else
                 {
                     query = "SELECT dbo.Srodek_Trwaly.ID_Srodka, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Srodek_Trwaly.Stan_Status, dbo.Grupa.Nazwa AS Grupa, dbo.Podgrupa.Nazwa AS Podgrupa, dbo.Rodzaj.Nazwa AS Rodzaj, dbo.Produkt.Nazwa AS Produkt, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Dostawca.Nazwa AS Dostawca, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stawka_Amortyzacji " +
-                            "FROM dbo.Produkt " +
-                            "INNER JOIN dbo.Srodek_Trwaly " +
-                            "INNER JOIN dbo.Dostawca ON dbo.Srodek_Trwaly.id_dostawcy = dbo.Dostawca.ID_Dostawcy ON dbo.Produkt.ID_Produktu = dbo.Srodek_Trwaly.id_Produktu " +
-                            "INNER JOIN dbo.Rodzaj ON dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = dbo.Rodzaj.ID_Rodzaju " +
-                            "INNER JOIN dbo.Podgrupa " +
-                            "INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy ON dbo.Rodzaj.id_podgrupy = dbo.Podgrupa.ID_Podgrupy " +
-                            "WHERE (dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = " + typeID + " );";
+                        "FROM dbo.Dostawca " +
+                        "INNER JOIN dbo.Pracownik " +
+                        "INNER JOIN dbo.Historia_Srodka ON dbo.Pracownik.ID_Pracownika = dbo.Historia_Srodka.id_uzytkownika " +
+                        "INNER JOIN dbo.Rodzaj " +
+                        "INNER JOIN dbo.Podgrupa " +
+                        "INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy ON dbo.Rodzaj.id_podgrupy = dbo.Podgrupa.ID_Podgrupy " +
+                        "INNER JOIN dbo.Srodek_Trwaly ON dbo.Rodzaj.ID_Rodzaju = dbo.Srodek_Trwaly.id_nr_klasyfikacyjny " +
+                        "INNER JOIN dbo.Produkt ON dbo.Srodek_Trwaly.id_produktu = dbo.Produkt.ID_Produktu ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka ON dbo.Dostawca.ID_Dostawcy = dbo.Srodek_Trwaly.id_dostawcy " +
+                        "WHERE (dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = " + typeID + ");";
                     return query;
                 }
+            }
+        }
+
+        private void ClearUserSearch_TxtBox_Click(object sender, RoutedEventArgs e)
+        {
+            UserSearch_TxtBox.Text = String.Empty;
+            ClearUserSearch_TxtBox.Visibility = Visibility.Hidden;
+        }
+
+        private void UserSearch_TxtBox_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            if (UserSearch_TxtBox.Text != String.Empty)
+            { 
+                ClearUserSearch_TxtBox.Visibility = Visibility.Visible;
             }
         }
     }
