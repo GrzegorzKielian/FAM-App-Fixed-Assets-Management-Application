@@ -34,7 +34,17 @@ namespace FAM_App.Windows
             InitializeComponent();
             assetID = fixedAsset_ID;
             GetDataBaseData(fixedAsset_ID);
-            
+            SetProperties();
+
+
+        }
+
+        private void SetProperties()
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory.ToString();
+            Uri iconUri = new Uri(path + "../../../icon.ico", UriKind.RelativeOrAbsolute);
+
+            this.Icon = BitmapFrame.Create(iconUri);
         }
 
         private void GetDataBaseData(int fixedAsset_ID)

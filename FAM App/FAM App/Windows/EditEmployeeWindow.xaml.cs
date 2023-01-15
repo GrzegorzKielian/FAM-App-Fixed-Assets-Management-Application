@@ -30,6 +30,15 @@ namespace FAM_App.Windows
             InitializeComponent();
             this.employee_ID = employee_ID;
             GetDataBaseData(employee_ID);
+            SetProperties();
+        }
+
+        private void SetProperties()
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory.ToString();
+            Uri iconUri = new Uri(path + "../../../icon.ico", UriKind.RelativeOrAbsolute);
+
+            this.Icon = BitmapFrame.Create(iconUri);
         }
 
         private void GetDataBaseData(int employee_ID)

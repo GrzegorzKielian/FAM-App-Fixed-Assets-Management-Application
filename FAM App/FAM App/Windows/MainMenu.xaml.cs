@@ -25,6 +25,15 @@ namespace FAM_App
         {
             InitializeComponent();
             IsAdmin();
+            SetProperties();
+        }
+
+        private void SetProperties()
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory.ToString();
+            Uri iconUri = new Uri(path + "../../../icon.ico", UriKind.RelativeOrAbsolute);
+
+            this.Icon = BitmapFrame.Create(iconUri);
         }
 
         private void IsAdmin()

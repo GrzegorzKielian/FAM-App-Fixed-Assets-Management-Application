@@ -24,6 +24,15 @@ namespace FAM_App
         {
             InitializeComponent();
             LoginTxtBox.Focus();
+            SetProperties();
+        }
+
+        private void SetProperties()
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory.ToString();
+            Uri iconUri = new Uri(path+"../../../icon.ico", UriKind.RelativeOrAbsolute);
+
+            this.Icon = BitmapFrame.Create(iconUri);
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
