@@ -47,7 +47,7 @@ namespace FAM_App
         public string[] GetPasswordData(string login, string[] strings)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT ID_Pracownika, Haslo, Sol_Hasla FROM Pracownik WHERE Login='" + login + "';";
+            String data = "SELECT ID_Pracownika, Hash, Sol_Hasla FROM Pracownik WHERE Login='" + login + "';";
             cmd.CommandText = data;
             SqlDataReader dr = cmd.ExecuteReader();
             if (dr.HasRows)
@@ -55,7 +55,7 @@ namespace FAM_App
                 if (dr.Read())
                 {
                     strings[0] = dr["ID_Pracownika"].ToString();
-                    strings[1] = dr["Haslo"].ToString();
+                    strings[1] = dr["Hash"].ToString();
                     strings[2] = dr["Sol_Hasla"].ToString();
                 }
             }
@@ -290,7 +290,7 @@ namespace FAM_App
                 ID++;
             }
 
-            String data = "INSERT INTO dbo.Pracownik (ID_Pracownika, Imie, Nazwisko, Pesel, Telefon, Email, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Admin, Ewidencja, Login, Haslo, Sol_Hasla) " +
+            String data = "INSERT INTO dbo.Pracownik (ID_Pracownika, Imie, Nazwisko, Pesel, Telefon, Email, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Admin, Ewidencja, Login, Hash, Sol_Hasla) " +
                 "VALUES (" + ID + ", '" + name + "', '" + surname + "', '" + pesel + "', '" + phone + "', '" + email + "', '" + city + "', '" + postCode + "', '" + street + "', '" + buildingNumber + "', '" + apartmentNumber + "', '" + admin + "', '" + employee + "', '" + newLogin + "', '"+ newPassword +"', '"+ salt +"');";
             cmd.CommandText = data;
             int result2 = cmd.ExecuteNonQuery();
@@ -305,7 +305,7 @@ namespace FAM_App
         public DataTable DataBaseShowEmployee(DataTable dataTable)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT ID_Pracownika, Imie, Nazwisko, Pesel, Telefon, Email, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Admin, Ewidencja, Login, Haslo, Sol_Hasla FROM dbo.Pracownik";
+            String data = "SELECT ID_Pracownika, Imie, Nazwisko, Pesel, Telefon, Email, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Admin, Ewidencja, Login, Hash, Sol_Hasla FROM dbo.Pracownik";
             cmd.CommandText = data;
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dataTable = new DataTable("emp");
@@ -491,7 +491,7 @@ namespace FAM_App
         {
             SqlCommand cmd = DataBaseConnection();
             String data = "UPDATE dbo.Pracownik " +
-                "SET dbo.Pracownik.Imie = '"+name+"', dbo.Pracownik.Nazwisko = '"+surname+"', dbo.Pracownik.Pesel = '"+pesel+"', dbo.Pracownik.Telefon = '"+phone+ "', dbo.Pracownik.Email = '"+email+"', dbo.Pracownik.Miejscowosc = '"+city+ "', dbo.Pracownik.Kod_Pocztowy = '"+postCode+"', dbo.Pracownik.Ulica = '"+street+"', dbo.Pracownik.Nr_Budynku = '"+buildingNumber+ "', dbo.Pracownik.Nr_Lokalu = '"+apartmentNumber+ "', dbo.Pracownik.Admin = "+admin+", dbo.Pracownik.Login = '"+newLogin+"', dbo.Pracownik.Haslo = '"+newPassword+ "', dbo.Pracownik.Sol_Hasla = '"+salt+"' " +
+                "SET dbo.Pracownik.Imie = '"+name+"', dbo.Pracownik.Nazwisko = '"+surname+"', dbo.Pracownik.Pesel = '"+pesel+"', dbo.Pracownik.Telefon = '"+phone+ "', dbo.Pracownik.Email = '"+email+"', dbo.Pracownik.Miejscowosc = '"+city+ "', dbo.Pracownik.Kod_Pocztowy = '"+postCode+"', dbo.Pracownik.Ulica = '"+street+"', dbo.Pracownik.Nr_Budynku = '"+buildingNumber+ "', dbo.Pracownik.Nr_Lokalu = '"+apartmentNumber+ "', dbo.Pracownik.Admin = "+admin+", dbo.Pracownik.Login = '"+newLogin+"', dbo.Pracownik.Hash = '"+newPassword+ "', dbo.Pracownik.Sol_Hasla = '"+salt+"' " +
                 "WHERE (dbo.Pracownik.ID_Pracownika = "+employeeID+");";
             cmd.CommandText = data;
             int updateResult = cmd.ExecuteNonQuery();
