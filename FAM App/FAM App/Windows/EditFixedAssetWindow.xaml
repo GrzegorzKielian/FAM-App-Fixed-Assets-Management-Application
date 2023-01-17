@@ -128,34 +128,14 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Label Content="Produkt:" Grid.Row="2" Style="{StaticResource darkLabelSelect}"/>
-                            <ComboBox Name="Product" Grid.Row="2" Style="{StaticResource darkCombobox}"
+                        <ComboBox Name="Product" Grid.Row="2" Style="{StaticResource darkCombobox}"
                           Loaded="Product_Loaded" IsEditable="True">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock>
-                                <Run Text="{Binding Nazwa}"/>
-                                <Run Text="{Binding Marka}"/>
-                                <Run Text="{Binding Model}"/>
-                                <Run Text="{Binding Rok_Produkcji}"/>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
+                        </ComboBox>
 
                             <Label Content="Dostawca:" Grid.Column="2" Style="{StaticResource darkLabelSelect}"/>
-                            <ComboBox Name="Supplier" Grid.Column="3" Style="{StaticResource darkCombobox}"
+                        <ComboBox Name="Supplier" Grid.Column="3" Style="{StaticResource darkCombobox}"
                           Loaded="Supplier_Loaded" IsEditable="True">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock>
-                                <Run Text="{Binding Nazwa}"/>
-                                <Run Text="{Binding Miejscowosc}"/>
-                                <Run Text="{Binding Kod_Pocztowy}"/>
-                                <Run Text="{Binding Ulica}"/>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
+                        </ComboBox>
                         </Grid>
                     </Border>
                     <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
@@ -167,36 +147,14 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Label Content="Adres:" Grid.Column="0" Style="{StaticResource darkLabelSelect}"/>
-                            <ComboBox Name="Adress" Grid.Column="1" Style="{StaticResource darkCombobox}" 
+                        <ComboBox Name="Adress" Grid.Column="1" Style="{StaticResource darkCombobox}" 
                           Loaded="Adress_Loaded" IsEditable="True">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock>
-                                <Run Text="{Binding Nazwa}"/>
-                                <Run Text="{Binding Miejscowosc}"/>
-                                <Run Text="{Binding Kod_Pocztowy}"/>
-                                <Run Text="{Binding Ulica}"/>
-                                <Run Text="{Binding Nr_Budynku}"/>
-                                <Run Text="{Binding Nr_Lokalu}"/>
-                                <Run Text="{Binding Nr_Pomieszczenia}"/>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
+                        </ComboBox>
 
                             <Label Content="Użytkownik" Grid.Column="2" Style="{StaticResource darkLabelSelect}"/>
-                            <ComboBox Name="User" Grid.Column="3" Style="{StaticResource darkCombobox}"
+                        <ComboBox Name="User" Grid.Column="3" Style="{StaticResource darkCombobox}"
                                   Loaded="User_Loaded" IsEditable="True">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock>
-                                    <Run Text="{Binding Imie}"/>
-                                    <Run Text="{Binding Nazwisko}"/>
-                                    <Run Text="{Binding Email}"/>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
+                        </ComboBox>
                         </Grid>
                     </Border>
                     <Label Content="Stan/Status:" Grid.Row="3" Style="{StaticResource darkLabelSelect}"/>
@@ -317,9 +275,28 @@
                         FontSize="15" HorizontalAlignment="Right" Click="EditFixedAssetButton_Click" />
                     </Grid>
                 </Border>
-
-
+                <Grid Grid.ColumnSpan="4" Grid.RowSpan="6" x:Name="InputBox" Visibility="Hidden">
+                    <Grid Background="Black" Opacity="0.5"/>
+                    <Border
+                            MinWidth="300"
+                            MinHeight="90"
+                            Background="#dddddd" 
+                            BorderBrush="Black" 
+                            BorderThickness="1" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center">
+                        <StackPanel>
+                            <TextBlock Margin="5" Text="Wprowadź komentarz zmiany:" FontWeight="Bold" FontFamily="Tahoma" />
+                            <TextBox MinWidth="200" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="CommentInput_TextBox"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button x:Name="Cancel_Button" Padding="3" Margin="5,10,5,5" Content="Anuluj" Background="{x:Null}" Click="CancelComment_Button_Click" />
+                                <Button x:Name="Ok_Button" Padding="3" Margin="30,10,5,5" Content="Zatwierdź" Background="{x:Null}" Click="OkComment_Button_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
                 </Grid>
+
+            </Grid>
             </Border>
         </Grid>
 </Window>

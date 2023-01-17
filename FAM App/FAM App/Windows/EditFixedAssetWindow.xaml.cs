@@ -1,10 +1,12 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +28,8 @@ namespace FAM_App.Windows
         private int subgroupID;
         private int typeID;
         private int assetID;
-        string comments;
+        int supplier, product, adress, user, depreciation, guarantee;
+        string comments, revision_date, status, date_of_aquisition, gros_orig_value, net_orig_value, descritpion, invoice;
         DataTable FixedAsset;
 
         public EditFixedAssetWindow(int fixedAsset_ID)
@@ -221,36 +224,44 @@ namespace FAM_App.Windows
                 {
                     DataBase dataBase = new DataBase();
                     DataTable products = new DataTable();
-                    products = dataBase.DataBaseShowProducts(products);
+                    String query = "SELECT ID_Produktu, CONCAT(Nazwa, ' ', Marka, ' ', Model, ' ', Rok_Produkcji) AS Produkt FROM dbo.Produkt;";
+                    products = dataBase.DataBaseShowSelectedData(products, query);
 
                     Product.ItemsSource = products.DefaultView;
+                    Product.DisplayMemberPath = "Produkt";
                     Product.SelectedValuePath = "ID_Produktu";
                 }
                 if (number == 5)
                 {
                     DataBase dataBase = new DataBase();
                     DataTable suppliers = new DataTable();
-                    suppliers = dataBase.DataBaseShowSuppliers(suppliers);
+                    String query = "SELECT ID_Dostawcy, CONCAT(Nazwa, ' ', Miejscowosc, ' ' , Kod_Pocztowy, ' ', Ulica) AS Dostawca FROM dbo.Dostawca;";
+                    suppliers = dataBase.DataBaseShowSelectedData(suppliers, query);
 
                     Supplier.ItemsSource = suppliers.DefaultView;
+                    Supplier.DisplayMemberPath = "Dostawca";
                     Supplier.SelectedValuePath = "ID_Dostawcy";
                 }
                 if (number == 6)
                 {
                     DataBase dataBase = new DataBase();
                     DataTable adresses = new DataTable();
-                    adresses = dataBase.DataBaseShowAdresses(adresses);
+                    String query = "SELECT ID_Adresu, CONCAT(Nazwa, ' ', Miejscowosc, ' ', Kod_Pocztowy, ' ', Ulica, ' ', Nr_Budynku, ' ', Nr_Lokalu, ' ', Nr_Pomieszczenia) AS Adres FROM dbo.Adres;";
+                    adresses = dataBase.DataBaseShowSelectedData(adresses, query);
 
                     Adress.ItemsSource = adresses.DefaultView;
+                    Adress.DisplayMemberPath = "Adres";
                     Adress.SelectedValuePath = "ID_Adresu";
                 }
                 if (number == 7)
                 {
                     DataBase dataBase = new DataBase();
                     DataTable employee = new DataTable();
-                    employee = dataBase.DataBaseShowEmployee(employee);
+                    String query = "SELECT ID_Pracownika, CONCAT(Imie, ' ', Nazwisko, ' ', Email) AS Pracownik FROM dbo.Pracownik;";
+                    employee = dataBase.DataBaseShowSelectedData(employee, query);
 
                     User.ItemsSource = employee.DefaultView;
+                    User.DisplayMemberPath = "Pracownik";
                     User.SelectedValuePath = "ID_Pracownika";
                 }
 
@@ -311,25 +322,25 @@ namespace FAM_App.Windows
 
         private int CheckAdress()
         {
-            if (Adress.Text == String.Empty) { return 0; }
+            if (Adress.SelectedValue == null) { Adress.BorderBrush = Brushes.Red; return 0; }
             else { return (int)Adress.SelectedValue; }
         }
 
         private int CheckProduct()
         {
-            if (Product.Text == String.Empty) { return 0; }
+            if (Product.SelectedValue == null) { return 0; }
             else { return (int)Product.SelectedValue; }
         }
 
         private int CheckSupplier()
         {
-            if (Supplier.Text == String.Empty) { return Convert.ToInt32(""); }
+            if (Supplier.SelectedValue == null) { return 0; }
             else { return (int)Supplier.SelectedValue; }
         }
 
         private int CheckIsUser()
         {
-            if (User.Text == String.Empty) { return 0; }
+            if (User.SelectedValue == null) { return 0; }
             else { return (int)User.SelectedValue; }
 
         }
@@ -346,33 +357,63 @@ namespace FAM_App.Windows
         {
             if (MessageBox.Show("Czy na pewno chcesz zapisać?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                string revision_date = DateTime.Now.ToString("yyyy-MM-dd");
-                int supplier = CheckSupplier();
-                int product = CheckProduct();
-                int adress = CheckAdress();
-                int user = CheckIsUser();
-                string status = Status.Text;
-                int depreciation = Convert.ToInt32(Depreciation_rate.Text);
-                string date_of_aquisition = ChangeFormatDate();
-                string gros_orig_value = TwoStringToDecimal(Gross_orig_val1_TxtBox.Text, Gross_orig_val2_TxtBox.Text);
-                string net_orig_value = TwoStringToDecimal(Net_orig_val1_TxtBox.Text, Net_orig_val2_TxtBox.Text);
-                string descritpion = Description_TxtBox.Text;
-                string invoice = Invoice.Text;
-                int guarantee = Convert.ToInt32(Guarantee.Text);
+                revision_date = DateTime.Now.ToString("yyyy-MM-dd");
+                supplier = CheckSupplier();
+                product = CheckProduct();
+                adress = CheckAdress();
+                user = CheckIsUser();
+                status = Status.Text;
+                depreciation = Convert.ToInt32(Depreciation_rate.Text);
+                date_of_aquisition = ChangeFormatDate();
+                gros_orig_value = TwoStringToDecimal(Gross_orig_val1_TxtBox.Text, Gross_orig_val2_TxtBox.Text);
+                net_orig_value = TwoStringToDecimal(Net_orig_val1_TxtBox.Text, Net_orig_val2_TxtBox.Text);
+                descritpion = Description_TxtBox.Text;
+                invoice = Invoice.Text;
+                guarantee = Convert.ToInt32(Guarantee.Text);
 
-                if (supplier == 0 || product == 0 || adress == 0 || status == String.Empty) { }
+                if (supplier == 0 || product == 0 || adress == 0 || status == String.Empty || Type.SelectedValue == null) { MessageBox.Show("Należy na nowo ustalić dane w polach wyboru!"); }
                 else
                 {
-                    DataBase dataBase = new DataBase();
-                    bool check = dataBase.UpdateFixedAsset(assetID, revision_date, supplier, product, adress, status, depreciation, date_of_aquisition, gros_orig_value, net_orig_value, descritpion, invoice, guarantee, groupID, subgroupID, typeID, user);
-                    if (check)
-                    {
-                        MessageBox.Show("Zapisano zmiany");
-                    }
-                    else { MessageBox.Show("Błąd przy wstawianiu danych do bazy!"); }
+                    HaveComments();
                 }
             }
         }
 
+        private void SaveToBase(string comments)
+        {
+            try
+            {
+                DataBase dataBase = new DataBase();
+                bool check = dataBase.UpdateFixedAsset(assetID, revision_date, supplier, product, adress, status, depreciation, date_of_aquisition, gros_orig_value, net_orig_value, descritpion, invoice, guarantee, groupID, subgroupID, typeID, user, comments);
+                if (check)
+                {
+                    MessageBox.Show("Zapisano zmiany");
+                    this.Close();
+                }
+                else { MessageBox.Show("Błąd przy wstawianiu danych do bazy!"); }
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void HaveComments()
+        {
+            InputBox.Visibility= Visibility.Visible;
+        }
+
+        private void OkComment_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (CommentInput_TextBox.Text != String.Empty)
+            {
+                comments = CommentInput_TextBox.Text;
+                SaveToBase(comments);
+                InputBox.Visibility = Visibility.Hidden;
+            }
+            else { MessageBox.Show("Pole jest puste"); }
+        }
+
+        private void CancelComment_Button_Click(object sender, RoutedEventArgs e)
+        {
+            InputBox.Visibility = Visibility.Hidden;
+        }
     }
 }

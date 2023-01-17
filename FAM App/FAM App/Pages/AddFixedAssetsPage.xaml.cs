@@ -63,7 +63,7 @@ namespace FAM_App
                     string invoice = Invoice.Text;
                     int guarantee = Convert.ToInt32(Guarantee.Text);
 
-                    if (supplier == 0 || product == 0 || adress == 0 || status == String.Empty ) {  }
+                    if (supplier == 0 || product == 0 || adress == 0 || status == String.Empty ) { MessageBox.Show("Wymagane pola są puste"); }
                     else
                     {
                         DataBase dataBase = new DataBase();
@@ -105,7 +105,7 @@ namespace FAM_App
 
         private int CheckSupplier()
         {
-            if (Supplier.Text == String.Empty) { return Convert.ToInt32(""); }
+            if (Supplier.Text == String.Empty) { return 0; }
             else { return (int)Supplier.SelectedValue; }
         }
 

@@ -69,7 +69,7 @@ namespace FAM_App.Pages
             try
             {
 
-                if (history.Rows.Count > 0)
+                if (history.Rows.Count > 0 & fixedAsset.Rows.Count > 0)
                 {
                     Font tableHeader = FontFactory.GetFont(FontFactory.TIMES_ROMAN, BaseFont.CP1250, 12, Font.BOLD );
                     Font cellFont = FontFactory.GetFont(FontFactory.TIMES_ROMAN, BaseFont.CP1250, 12, Font.NORMAL);

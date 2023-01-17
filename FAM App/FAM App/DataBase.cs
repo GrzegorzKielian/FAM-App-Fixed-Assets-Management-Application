@@ -424,7 +424,8 @@ namespace FAM_App
             SqlCommand cmd = DataBaseConnection();
             String data = "SELECT dbo.Historia_Srodka.id_uzytkownika " +
                 "FROM dbo.Historia_Srodka INNER JOIN dbo.Srodek_Trwaly ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka " +
-                "WHERE (dbo.Srodek_Trwaly.ID_Srodka = "+assetID+")";
+                "WHERE (dbo.Srodek_Trwaly.ID_Srodka = "+assetID+")" +
+                "ORDER BY dbo.Historia_Srodka.Data DESC;";
             cmd.CommandText = data;
             var result = cmd.ExecuteScalar();
             if (result == DBNull.Value) { haveUser = false; }
@@ -442,7 +443,8 @@ namespace FAM_App
                 "CONCAT(dbo.Adres.Nazwa, ' ', dbo.Adres.Miejscowosc, ' ', dbo.Adres.Kod_Pocztowy, ' ', dbo.Adres.Ulica, ' ', dbo.Adres.Nr_Budynku, ' ', dbo.Adres.Nr_Lokalu, ' ', dbo.Adres.Nr_Pomieszczenia) AS ADRES, " +
                 "dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stan_Status, dbo.Srodek_Trwaly.Stawka_Amortyzacji, dbo.Srodek_Trwaly.Kod_Srodka " +
                 "FROM dbo.Adres INNER JOIN dbo.Historia_Srodka ON dbo.Adres.ID_Adresu = dbo.Historia_Srodka.id_adresu INNER JOIN dbo.Srodek_Trwaly ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka INNER JOIN dbo.Podgrupa INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy INNER JOIN dbo.Rodzaj ON dbo.Podgrupa.ID_Podgrupy = dbo.Rodzaj.id_podgrupy ON dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = dbo.Rodzaj.ID_Rodzaju INNER JOIN dbo.Produkt ON dbo.Srodek_Trwaly.id_produktu = dbo.Produkt.ID_Produktu INNER JOIN dbo.Dostawca ON dbo.Srodek_Trwaly.id_dostawcy = dbo.Dostawca.ID_Dostawcy " +
-                "WHERE (dbo.Srodek_Trwaly.ID_Srodka = " + assetID + ")";
+                "WHERE (dbo.Srodek_Trwaly.ID_Srodka = " + assetID + ")" +
+                "ORDER BY dbo.Historia_Srodka.Data DESC;";
             cmd.CommandText = data;
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dataTable = new DataTable("emp");
@@ -462,7 +464,8 @@ namespace FAM_App
                 "CONCAT(dbo.Pracownik.Imie, ' ', dbo.Pracownik.Nazwisko, ' ', dbo.Pracownik.Email) AS PRACOWNIK, " +
                 "dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stan_Status, dbo.Srodek_Trwaly.Stawka_Amortyzacji, dbo.Srodek_Trwaly.Kod_Srodka " +
                 "FROM dbo.Pracownik INNER JOIN dbo.Adres INNER JOIN dbo.Historia_Srodka ON dbo.Adres.ID_Adresu = dbo.Historia_Srodka.id_adresu ON dbo.Pracownik.ID_Pracownika = dbo.Historia_Srodka.id_uzytkownika INNER JOIN dbo.Srodek_Trwaly ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka INNER JOIN dbo.Podgrupa INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy INNER JOIN dbo.Rodzaj ON dbo.Podgrupa.ID_Podgrupy = dbo.Rodzaj.id_podgrupy ON dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = dbo.Rodzaj.ID_Rodzaju INNER JOIN dbo.Produkt ON dbo.Srodek_Trwaly.id_produktu = dbo.Produkt.ID_Produktu INNER JOIN dbo.Dostawca ON dbo.Srodek_Trwaly.id_dostawcy = dbo.Dostawca.ID_Dostawcy " +
-                "WHERE (dbo.Srodek_Trwaly.ID_Srodka = " + assetID + ")";
+                "WHERE (dbo.Srodek_Trwaly.ID_Srodka = " + assetID + ")" +
+                "ORDER BY dbo.Historia_Srodka.Data DESC;";
             cmd.CommandText = data;
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dataTable = new DataTable("emp");
@@ -514,7 +517,7 @@ namespace FAM_App
             else { return true; };
         }
 
-        public bool UpdateFixedAsset(int asset_ID, string revision_date, int supplier, int product, int adress, string status, int depreciation, string date_of_aquisition, string gros_orig_value, string net_orig_value, string descritpion, string invoice, int guarantee, int GroupID, int SubgroupID, int TypeID, int UserID)
+        public bool UpdateFixedAsset(int asset_ID, string revision_date, int supplier, int product, int adress, string status, int depreciation, string date_of_aquisition, string gros_orig_value, string net_orig_value, string descritpion, string invoice, int guarantee, int GroupID, int SubgroupID, int TypeID, int UserID, string comments)
         {
             SqlCommand cmd = DataBaseConnection();
             String data = "UPDATE dbo.Srodek_Trwaly " +
@@ -522,7 +525,7 @@ namespace FAM_App
                 "WHERE (dbo.Srodek_Trwaly.ID_Srodka = "+asset_ID+");";
             cmd.CommandText = data;
             int updateResult = cmd.ExecuteNonQuery();
-            bool result = AddToHistoryAsset(revision_date, UserID, adress, asset_ID, ID_EmployeeINFO, "Zmiana danych środka trwałego");
+            bool result = AddToHistoryAsset(revision_date, UserID, adress, asset_ID, ID_EmployeeINFO, comments);
             sqlConnection.Close();
 
             // Check Error
