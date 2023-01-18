@@ -33,7 +33,7 @@ namespace FAM_App
         public bool Login(string login)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT CASE WHEN EXISTS (SELECT ID_Pracownika FROM dbo.Pracownik WHERE Login='" + login+ "') THEN CAST(1 AS INT) ELSE CAST(0 AS INT) END;";
+            String data = "SELECT CASE WHEN EXISTS (SELECT ID_Pracownika FROM dbo.Pracownik WHERE (dbo.Pracownik.Login='" + login + "' AND dbo.Pracownik.Ewidencja = 1)) THEN CAST(1 AS INT) ELSE CAST(0 AS INT) END;";
             cmd.CommandText = data;
             int result = (int)cmd.ExecuteScalar();
             if(result == 1)

@@ -44,7 +44,7 @@ namespace FAM_App.Pages
                     string apartmentNumber = ApartmentNumber_TextBox.Text;
                     string email = Email_TextBox.Text;
                     string login = NewLogin_TextBox.Text;
-                    SqlBoolean employee = true;
+                    SqlBoolean employee = (SqlBoolean)AsEmployee.IsChecked;
                     SqlBoolean admin = (SqlBoolean)IsAdmin.IsChecked;
                     byte[] salt = MakeSalt();
                     byte[] hashPasswd = MakeHash(NewPasswd_TextBox.Text, salt);
@@ -95,6 +95,18 @@ namespace FAM_App.Pages
             NewLogin_TextBox.Clear();
             NewPasswd_TextBox.Clear();
             IsAdmin.IsChecked = false;
+        }
+
+        private void AsEmployee_Checked(object sender, RoutedEventArgs e)
+        {
+            NewLogin_TextBox.IsEnabled= true;
+            NewPasswd_TextBox.IsEnabled = true;
+        }
+
+        private void AsEmployee_Unchecked(object sender, RoutedEventArgs e)
+        {
+            NewLogin_TextBox.IsEnabled = false;
+            NewPasswd_TextBox.IsEnabled = false;
         }
     }
 }

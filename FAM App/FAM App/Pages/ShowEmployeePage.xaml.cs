@@ -70,7 +70,7 @@ namespace FAM_App.Pages
                 if (index == -1) { MessageBox.Show("Nie wybrano opcji wyszukiwania"); }
                 else
                 {
-                    query = "SELECT ID_Pracownika, Imie, Nazwisko, Pesel, Telefon, Email, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Admin, Ewidencja, Login, Haslo, Sol_Hasla FROM dbo.Pracownik WHERE (" + whichColumn[index] +" LIKE '"+chooseTxt+"');";
+                    query = "SELECT ID_Pracownika, Imie, Nazwisko, Pesel, Telefon, Email, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Admin, Ewidencja, Login, Hash, Sol_Hasla FROM dbo.Pracownik WHERE (" + whichColumn[index] +" LIKE '"+chooseTxt+"');";
                     DataBase dataBase = new DataBase();
                     DataTable Products = new DataTable("emp");
                     Products = dataBase.DataBaseShowSelectedData(Products, query);

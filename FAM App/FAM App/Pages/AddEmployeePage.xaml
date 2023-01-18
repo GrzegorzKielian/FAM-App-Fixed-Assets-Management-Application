@@ -150,11 +150,14 @@
                 
                 <Label Content="Login:" Grid.Row="2" Style="{StaticResource darkLabelLogin}"/>
                 <TextBox x:Name="NewLogin_TextBox" Grid.Row="2" Height="25" Width="310" 
-                         Style="{StaticResource darkTextBoxLogin}" MaxLength="50"/>
+                         Style="{StaticResource darkTextBoxLogin}" MaxLength="50"
+                         IsEnabled="False"/>
 
                 <Label Content="Hasło:" Grid.Row="3" Style="{StaticResource darkLabelLogin}"/>
                 <TextBox x:Name="NewPasswd_TextBox" Grid.Row="3" Height="25" Width="310" 
-                         MaxLength="100" Style="{StaticResource darkTextBoxLogin}"/>
+                         MaxLength="100" Style="{StaticResource darkTextBoxLogin}"
+                         IsEnabled="False"/>
+                
                 <Border x:Name="BorderCheck"  Grid.Column="3" Grid.Row="4" >
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -164,7 +167,7 @@
                         <CheckBox x:Name="IsAdmin" Grid.Column="0" Style="{StaticResource darkCheckBox}">
                             <TextBlock Text="Funkcja administratora" TextWrapping="Wrap"/>
                         </CheckBox>
-                        <CheckBox x:Name="AsEmployee" IsChecked="True" IsEnabled="False" Grid.Column="1" Style="{StaticResource darkCheckBox}">
+                        <CheckBox x:Name="AsEmployee" Grid.Column="1" Style="{StaticResource darkCheckBox}" Checked="AsEmployee_Checked" Unchecked="AsEmployee_Unchecked">
                             <TextBlock Text="Pracownik" TextWrapping="Wrap"/>
                         </CheckBox>
                     </Grid>
