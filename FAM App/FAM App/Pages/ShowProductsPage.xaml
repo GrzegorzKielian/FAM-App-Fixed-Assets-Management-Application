@@ -35,21 +35,22 @@
         </Grid.RowDefinitions>
         <Border x:Name="BorderPanel" BorderBrush="WhiteSmoke" BorderThickness="1"  
                 Background="#152238"
-                Grid.Column="0" Grid.Row="1"/>
+                Grid.Column="0" Grid.Row="1"
+                Margin="1" Padding="1">
 
-        <StackPanel Grid.Row="1" Margin="0,50">
-            <ComboBox x:Name="ChooseBox" Style="{StaticResource darkComboBox}">
-                <ComboBoxItem>Wyszykaj po nazwie</ComboBoxItem>
-                <ComboBoxItem>Wyszykaj po marce</ComboBoxItem>
-                <ComboBoxItem>Wyszykaj po modelu</ComboBoxItem>
-                <ComboBoxItem>Wyszykaj po roku produkcji</ComboBoxItem>
-            </ComboBox>
-            <TextBox x:Name="Choose_TxtBox" Style="{StaticResource darkTextBox}"/>
-            <Button x:Name="Search_Button" Content="Wyszukaj" Height="25" FontSize="15" FontFamily="Tahoma" Click="Search_Button_Click"/>
-            <Button x:Name="ShowAll_Button" Content="Pokaż wszystko" Height="25" FontSize="15" FontFamily="Tahoma" Margin="0,15,0,0" Click="ShowAll_Button_Click" />
-        </StackPanel>
-
-        <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+            <StackPanel Grid.Row="1" Margin="0,50">
+                <ComboBox x:Name="ChooseBox" Style="{StaticResource darkComboBox}">
+                    <ComboBoxItem>Wyszukaj po nazwie</ComboBoxItem>
+                    <ComboBoxItem>Wyszukaj po marce</ComboBoxItem>
+                    <ComboBoxItem>Wyszukaj po modelu</ComboBoxItem>
+                    <ComboBoxItem>Wyszukaj po roku produkcji</ComboBoxItem>
+                </ComboBox>
+                <TextBox x:Name="Choose_TxtBox" Style="{StaticResource darkTextBox}"/>
+                <Button x:Name="Search_Button" Content="Wyszukaj" Height="35" FontSize="15" FontFamily="Tahoma" Click="Search_Button_Click"/>
+                <Button x:Name="ShowAll_Button" Content="Pokaż wszystko" Height="25" FontSize="15" FontFamily="Tahoma" Margin="0,15,0,0" Click="ShowAll_Button_Click" />
+            </StackPanel>
+        </Border>
+        <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Padding="2">
             <DataGrid x:Name="ProductsDataGrid" Style="{StaticResource dark}" d:ItemsSource="{d:SampleData ItemCount=5}"/>
 
         </Border>

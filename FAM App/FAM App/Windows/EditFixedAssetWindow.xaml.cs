@@ -30,6 +30,7 @@ namespace FAM_App.Windows
         private int assetID;
         int supplier, product, adress, user, depreciation, guarantee;
         string comments, revision_date, status, date_of_aquisition, gros_orig_value, net_orig_value, descritpion, invoice;
+        bool haveUser;
         DataTable FixedAsset;
 
         public EditFixedAssetWindow(int fixedAsset_ID)
@@ -38,7 +39,6 @@ namespace FAM_App.Windows
             assetID = fixedAsset_ID;
             GetDataBaseData(fixedAsset_ID);
             SetProperties();
-
 
         }
 
@@ -58,11 +58,13 @@ namespace FAM_App.Windows
             {
                 FixedAsset = dataBase.GetAssetDataToEditWithUser(FixedAsset, fixedAsset_ID);
                 LoadDataToBoxes_WithUser(FixedAsset);
+                haveUser= true;
             }
             else
             {
                 FixedAsset = dataBase.GetAssetDataToEditWithoutUser(FixedAsset, fixedAsset_ID);
                 LoadDataToBoxes_WithoutUser(FixedAsset);
+                haveUser = false;
             }       
         }
 
@@ -77,13 +79,7 @@ namespace FAM_App.Windows
                     dep = false;
                     Depreciation.Visibility = Visibility.Hidden;
                 }
-                Group.Text = fixedAsset.Rows[0][0].ToString();
-                Subgroup.Text = fixedAsset.Rows[0][1].ToString();
-                Type.Text = fixedAsset.Rows[0][2].ToString();
 
-                Product.Text = fixedAsset.Rows[0][3].ToString();
-                Supplier.Text = fixedAsset.Rows[0][4].ToString();
-                Adress.Text = fixedAsset.Rows[0][5].ToString();
                 User.Text = fixedAsset.Rows[0][6].ToString();
 
                 if (dep)
@@ -117,13 +113,6 @@ namespace FAM_App.Windows
                     dep = false;
                     Depreciation.Visibility = Visibility.Hidden;
                 }
-                Group.Text = fixedAsset.Rows[0][0].ToString();
-                Subgroup.Text = fixedAsset.Rows[0][1].ToString();
-                Type.Text = fixedAsset.Rows[0][2].ToString();
-
-                Product.Text = fixedAsset.Rows[0][3].ToString();
-                Supplier.Text = fixedAsset.Rows[0][4].ToString();
-                Adress.Text = fixedAsset.Rows[0][5].ToString();
 
                 if (dep)
                 {
@@ -272,15 +261,31 @@ namespace FAM_App.Windows
         private void Group_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateItems(1);
+            Group.SelectedValue = FixedAsset.Rows[0][0];
+            Group.SelectedItem = Group.Items.GetItemAt(Group.SelectedIndex);
+        }
+
+        private void Subgroup_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateItems(2);
+            Subgroup.SelectedValue = FixedAsset.Rows[0][1];
+            Subgroup.SelectedItem = Subgroup.Items.GetItemAt(Subgroup.SelectedIndex);
+        }
+
+        private void Type_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateItems(3);
+            Type.SelectedValue = FixedAsset.Rows[0][2];
+            Type.SelectedItem = Type.Items.GetItemAt(Type.SelectedIndex);
         }
 
         private void Group_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Group.SelectedValue != null) { Subgroup.IsEnabled = true; groupID = (int)Group.SelectedValue; UpdateItems(2); }
+            if (Group.SelectedValue != null) { Subgroup.IsEnabled = true; groupID = (int)Group.SelectedValue;  }
         }
         private void Subgroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Subgroup.SelectedValue != null) { Type.IsEnabled = true; subgroupID = (int)Subgroup.SelectedValue; UpdateItems(3); }
+            if (Subgroup.SelectedValue != null) { Type.IsEnabled = true; subgroupID = (int)Subgroup.SelectedValue;  }
         }
 
         private void Type_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -291,20 +296,32 @@ namespace FAM_App.Windows
         private void Product_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateItems(4);
+            Product.SelectedValue = FixedAsset.Rows[0][3];
+            Product.SelectedItem = Product.Items.GetItemAt(Product.SelectedIndex);
+
         }
 
         private void Supplier_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateItems(5);
+            Supplier.SelectedValue = FixedAsset.Rows[0][4];
+            Supplier.SelectedItem = Product.Items.GetItemAt(Supplier.SelectedIndex);
         }
         private void Adress_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateItems(6);
+            Adress.SelectedValue = FixedAsset.Rows[0][5];
+            Adress.SelectedItem = Adress.Items.GetItemAt(Adress.SelectedIndex);
         }
 
         private void User_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateItems(7);
+            if(haveUser)
+            {
+                User.SelectedValue= FixedAsset.Rows[0][6];
+                User.SelectedItem = User.Items.GetItemAt(User.SelectedIndex);
+            }
         }
 
         private string TwoStringToDecimal(string natural_number, string fraction)
@@ -363,7 +380,14 @@ namespace FAM_App.Windows
                 adress = CheckAdress();
                 user = CheckIsUser();
                 status = Status.Text;
-                depreciation = Convert.ToInt32(Depreciation_rate.Text);
+                if (Convert.ToInt32(FixedAsset.Rows[0][14]) != 0)
+                {
+                    depreciation = 0;
+                }
+                else 
+                {
+                    depreciation = Convert.ToInt32(Depreciation_rate.Text);
+                }
                 date_of_aquisition = ChangeFormatDate();
                 gros_orig_value = TwoStringToDecimal(Gross_orig_val1_TxtBox.Text, Gross_orig_val2_TxtBox.Text);
                 net_orig_value = TwoStringToDecimal(Net_orig_val1_TxtBox.Text, Net_orig_val2_TxtBox.Text);
@@ -371,7 +395,7 @@ namespace FAM_App.Windows
                 invoice = Invoice.Text;
                 guarantee = Convert.ToInt32(Guarantee.Text);
 
-                if (supplier == 0 || product == 0 || adress == 0 || status == String.Empty || Type.SelectedValue == null) { MessageBox.Show("Należy na nowo ustalić dane w polach wyboru!"); }
+                if (supplier == 0 || product == 0 || adress == 0 || status == String.Empty || Type.SelectedValue == null) { MessageBox.Show("Należy Wprowadzić dane w polach wyboru!"); }
                 else
                 {
                     HaveComments();

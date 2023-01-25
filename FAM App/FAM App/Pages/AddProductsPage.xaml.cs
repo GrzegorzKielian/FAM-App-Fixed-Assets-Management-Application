@@ -41,7 +41,7 @@ namespace FAM_App.Pages
                     bool check = dataBase.AddProductToBase(Name, Brand, Model, Description, Year);
                     if (check)
                     {
-                        MessageBox.Show("Dodano do bazy:\n" + Name_TextBox.Text+"\n" + Brand_TextBox.Text + "\n" + Model_TextBox.Text + "\n" + Year_TextBox.Text + "\n" + Description_TextBox.Text + "\n");
+                        MessageBox.Show("Dodano do bazy"); //:\n" + Name_TextBox.Text+"\n" + Brand_TextBox.Text + "\n" + Model_TextBox.Text + "\n" + Year_TextBox.Text + "\n" + Description_TextBox.Text + "\n");
                         ClearTextBoxes();
                     }
                     else { MessageBox.Show("Błąd przy wstawianiu danych do bazy!"); }

@@ -64,10 +64,15 @@ namespace FAM_App.Windows
             BuildingNumber_TextBox.Text = employee.Rows[0][8].ToString();
             ApartmentNumber_TextBox.Text = employee.Rows[0][9].ToString();
             NewLogin_TextBox.Text = employee.Rows[0][12].ToString();
-            int iF = Convert.ToInt32(employee.Rows[0][10]);
-            if(iF == 1)
+            int ifAdmin = Convert.ToInt32(employee.Rows[0][10]);
+            if(ifAdmin == 1)
             {
                 IsAdmin.IsChecked = true;
+            }
+            int ifEmployee = Convert.ToInt32(employee.Rows[0][11]);
+            if(ifEmployee == 1)
+            {
+                AsEmployee.IsChecked = true;
             }
         }
 
@@ -112,7 +117,7 @@ namespace FAM_App.Windows
                 string apartmentNumber = ApartmentNumber_TextBox.Text;
                 string email = Email_TextBox.Text;
                 string login = NewLogin_TextBox.Text;
-                SqlBoolean employee = true;
+                SqlBoolean employee = (SqlBoolean)AsEmployee.IsChecked;
                 SqlBoolean admin = (SqlBoolean)IsAdmin.IsChecked;
                 byte[] salt = MakeSalt();
                 byte[] hashPasswd = MakeHash(NewPasswd_TextBox.Text, salt);
@@ -125,9 +130,24 @@ namespace FAM_App.Windows
                 if (check)
                 {
                     MessageBox.Show("Zapisano zmiany");
+                    this.Close();
                 }
                 else { MessageBox.Show("Błąd przy wstawianiu danych do bazy!"); }
             }
+        }
+
+        private void AsEmployee_Checked(object sender, RoutedEventArgs e)
+        {
+            NewLogin_TextBox.IsEnabled = true;
+            NewPasswd_TextBox.IsEnabled = true;
+            IsAdmin.IsEnabled = true;
+        }
+
+        private void AsEmployee_Unchecked(object sender, RoutedEventArgs e)
+        {
+            NewLogin_TextBox.IsEnabled = false;
+            NewPasswd_TextBox.IsEnabled = false;
+            IsAdmin.IsEnabled = false;
         }
     }
 }

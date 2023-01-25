@@ -24,7 +24,7 @@ namespace FAM_App
         SqlConnection sqlConnection;
         private SqlCommand DataBaseConnection()
         {
-            sqlConnection = new SqlConnection($"Data Source=tcp:192.168.0.2,1433; Initial Catalog=FAMDataBase; User id=FAMAppMobile; Password=123456; Connect Timeout = 10; MultipleActiveResultSets=True "); //DESKTOP-JLN71CE
+            sqlConnection = new SqlConnection($"Data Source=tcp:192.168.0.3,1433; Initial Catalog=FAMDataBase; User id=FAMAppMobile; Password=123456; Connect Timeout = 10; MultipleActiveResultSets=True "); //DESKTOP-JLN71CE
             sqlConnection.Open();
             SqlCommand cmd = sqlConnection.CreateCommand();
             return cmd;
@@ -124,7 +124,7 @@ namespace FAM_App
         public DataTable DataBaseShowFixedAssets(DataTable dataTable)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT dbo.Srodek_Trwaly.ID_Srodka, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Srodek_Trwaly.Stan_Status, dbo.Grupa.Nazwa AS Grupa, dbo.Podgrupa.Nazwa AS Podgrupa, dbo.Rodzaj.Nazwa AS Rodzaj, dbo.Produkt.Nazwa AS Produkt, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Dostawca.Nazwa AS Dostawca, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stawka_Amortyzacji " +
+            String data = "SELECT TOP(25) dbo.Srodek_Trwaly.ID_Srodka, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Srodek_Trwaly.Stan_Status, dbo.Grupa.Nazwa AS Grupa, dbo.Podgrupa.Nazwa AS Podgrupa, dbo.Rodzaj.Nazwa AS Rodzaj, dbo.Produkt.Nazwa AS Produkt, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Dostawca.Nazwa AS Dostawca, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stawka_Amortyzacji " +
                           "FROM dbo.Produkt "+
                           "INNER JOIN dbo.Srodek_Trwaly "+
                           "INNER JOIN dbo.Dostawca ON dbo.Srodek_Trwaly.id_dostawcy = dbo.Dostawca.ID_Dostawcy ON dbo.Produkt.ID_Produktu = dbo.Srodek_Trwaly.id_Produktu "+
@@ -168,7 +168,7 @@ namespace FAM_App
         public DataTable DataBaseShowProducts(DataTable dataTable)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT ID_Produktu, Nazwa, Marka, Model, Opis, Rok_Produkcji FROM dbo.Produkt;";
+            String data = "SELECT TOP(25) ID_Produktu, Nazwa, Marka, Model, Opis, Rok_Produkcji FROM dbo.Produkt;";
             cmd.CommandText = data;
 
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
@@ -205,7 +205,7 @@ namespace FAM_App
         public DataTable DataBaseShowSuppliers(DataTable dataTable)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT ID_Dostawcy, Nazwa, Miejscowosc, Kod_Pocztowy, Ulica FROM dbo.Dostawca;";
+            String data = "SELECT TOP(25) ID_Dostawcy, Nazwa, Miejscowosc, Kod_Pocztowy, Ulica FROM dbo.Dostawca;";
             cmd.CommandText = data;
 
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
@@ -223,8 +223,8 @@ namespace FAM_App
                     "FROM dbo.Historia_Srodka " +
                     "INNER JOIN dbo.Srodek_Trwaly ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka " +
                     "INNER JOIN dbo.Adres ON dbo.Historia_Srodka.id_adresu = dbo.Adres.ID_Adresu " +
-                    "INNER JOIN dbo.Pracownik AS wprodzadzajacy ON dbo.Historia_Srodka.id_wprowadzajacego = wprodzadzajacy.ID_Pracownika " +
-                    "INNER JOIN dbo.Pracownik AS uzytkownik ON dbo.Historia_Srodka.id_uzytkownika = uzytkownik.ID_Pracownika " +
+                    "LEFT JOIN dbo.Pracownik AS wprodzadzajacy ON dbo.Historia_Srodka.id_wprowadzajacego = wprodzadzajacy.ID_Pracownika " +
+                    "LEFT JOIN dbo.Pracownik AS uzytkownik ON dbo.Historia_Srodka.id_uzytkownika = uzytkownik.ID_Pracownika " +
                     "WHERE (Nr_Inwentarzowy = '" + inventoryNumber + "');";
                 cmd.CommandText = data;
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
@@ -289,10 +289,18 @@ namespace FAM_App
                 ID = (int)cmd.ExecuteScalar();
                 ID++;
             }
-
-            String data = "INSERT INTO dbo.Pracownik (ID_Pracownika, Imie, Nazwisko, Pesel, Telefon, Email, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Admin, Ewidencja, Login, Hash, Sol_Hasla) " +
-                "VALUES (" + ID + ", '" + name + "', '" + surname + "', '" + pesel + "', '" + phone + "', '" + email + "', '" + city + "', '" + postCode + "', '" + street + "', '" + buildingNumber + "', '" + apartmentNumber + "', '" + admin + "', '" + employee + "', '" + newLogin + "', '"+ newPassword +"', '"+ salt +"');";
-            cmd.CommandText = data;
+            String data = "";
+            if (employee)
+            {
+                data = "INSERT INTO dbo.Pracownik (ID_Pracownika, Imie, Nazwisko, Pesel, Telefon, Email, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Admin, Ewidencja, Login, Hash, Sol_Hasla) " +
+                    "VALUES (" + ID + ", '" + name + "', '" + surname + "', '" + pesel + "', '" + phone + "', '" + email + "', '" + city + "', '" + postCode + "', '" + street + "', '" + buildingNumber + "', '" + apartmentNumber + "', '" + admin + "', '" + employee + "', '" + newLogin + "', '" + newPassword + "', '" + salt + "');";
+            }
+            else 
+            {
+                data = "INSERT INTO dbo.Pracownik (ID_Pracownika, Imie, Nazwisko, Pesel, Telefon, Email, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Admin, Ewidencja, Login, Hash, Sol_Hasla) " +
+                    "VALUES (" + ID + ", '" + name + "', '" + surname + "', '" + pesel + "', '" + phone + "', '" + email + "', '" + city + "', '" + postCode + "', '" + street + "', '" + buildingNumber + "', '" + apartmentNumber + "', '" + admin + "', '" + employee + "', NULL, NULL, NULL);";
+            }
+                cmd.CommandText = data;
             int result2 = cmd.ExecuteNonQuery();
 
             sqlConnection.Close();
@@ -305,7 +313,7 @@ namespace FAM_App
         public DataTable DataBaseShowEmployee(DataTable dataTable)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT ID_Pracownika, Imie, Nazwisko, Pesel, Telefon, Email, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Admin, Ewidencja, Login, Hash, Sol_Hasla FROM dbo.Pracownik";
+            String data = "SELECT TOP(25) ID_Pracownika, Imie, Nazwisko, Pesel, Telefon, Email, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Admin, Ewidencja FROM dbo.Pracownik";
             cmd.CommandText = data;
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dataTable = new DataTable("emp");
@@ -388,7 +396,7 @@ namespace FAM_App
         public DataTable DataBaseShowAdresses(DataTable dataTable)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT ID_Adresu, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Nr_Pomieszczenia, Dodatkowe_Dane, Nazwa FROM dbo.Adres;";
+            String data = "SELECT TOP(25) ID_Adresu, Miejscowosc, Kod_Pocztowy, Ulica, Nr_Budynku, Nr_Lokalu, Nr_Pomieszczenia, Dodatkowe_Dane, Nazwa FROM dbo.Adres;";
             cmd.CommandText = data;
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dataTable = new DataTable("emp");
@@ -437,13 +445,15 @@ namespace FAM_App
         public DataTable GetAssetDataToEditWithoutUser(DataTable dataTable, int assetID)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT CONCAT(dbo.Grupa.Symbol, ' - ', dbo.Grupa.Nazwa) AS GRUPA, CONCAT(dbo.Podgrupa.Symbol, ' - ', dbo.Podgrupa.Nazwa) AS PODGRUPA, CONCAT(dbo.Rodzaj.Symbol, ' - ', dbo.Rodzaj.Nazwa) AS RODZAJ, " +
-                "CONCAT(dbo.Produkt.Nazwa, ' ', dbo.Produkt.Marka, ' ', dbo.Produkt.Model, ' ', dbo.Produkt.Rok_Produkcji) AS PRODUKT, " +
-                "CONCAT(dbo.Dostawca.Nazwa, ' ', dbo.Dostawca.Miejscowosc, ' ', dbo.Dostawca.Kod_Pocztowy, ' ', dbo.Dostawca.Ulica) AS DOSTAWCA, " +
-                "CONCAT(dbo.Adres.Nazwa, ' ', dbo.Adres.Miejscowosc, ' ', dbo.Adres.Kod_Pocztowy, ' ', dbo.Adres.Ulica, ' ', dbo.Adres.Nr_Budynku, ' ', dbo.Adres.Nr_Lokalu, ' ', dbo.Adres.Nr_Pomieszczenia) AS ADRES, " +
-                "dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stan_Status, dbo.Srodek_Trwaly.Stawka_Amortyzacji, dbo.Srodek_Trwaly.Kod_Srodka " +
-                "FROM dbo.Adres INNER JOIN dbo.Historia_Srodka ON dbo.Adres.ID_Adresu = dbo.Historia_Srodka.id_adresu INNER JOIN dbo.Srodek_Trwaly ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka INNER JOIN dbo.Podgrupa INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy INNER JOIN dbo.Rodzaj ON dbo.Podgrupa.ID_Podgrupy = dbo.Rodzaj.id_podgrupy ON dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = dbo.Rodzaj.ID_Rodzaju INNER JOIN dbo.Produkt ON dbo.Srodek_Trwaly.id_produktu = dbo.Produkt.ID_Produktu INNER JOIN dbo.Dostawca ON dbo.Srodek_Trwaly.id_dostawcy = dbo.Dostawca.ID_Dostawcy " +
-                "WHERE (dbo.Srodek_Trwaly.ID_Srodka = " + assetID + ")" +
+            String data = "SELECT dbo.Grupa.ID_Grupy, dbo.Podgrupa.ID_Podgrupy, dbo.Rodzaj.ID_Rodzaju, dbo.Produkt.ID_Produktu, dbo.Dostawca.ID_Dostawcy, dbo.Adres.ID_Adresu, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stan_Status, dbo.Srodek_Trwaly.Stawka_Amortyzacji, dbo.Srodek_Trwaly.Kod_Srodka " +
+                "FROM dbo.Adres " +
+                "INNER JOIN dbo.Historia_Srodka ON dbo.Adres.ID_Adresu = dbo.Historia_Srodka.id_adresu " +
+                "INNER JOIN dbo.Srodek_Trwaly ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka " +
+                "INNER JOIN dbo.Podgrupa " +
+                "INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy " +
+                "INNER JOIN dbo.Rodzaj ON dbo.Podgrupa.ID_Podgrupy = dbo.Rodzaj.id_podgrupy ON dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = dbo.Rodzaj.ID_Rodzaju " +
+                "INNER JOIN dbo.Produkt ON dbo.Srodek_Trwaly.id_produktu = dbo.Produkt.ID_Produktu INNER JOIN dbo.Dostawca ON dbo.Srodek_Trwaly.id_dostawcy = dbo.Dostawca.ID_Dostawcy " +
+                "WHERE (dbo.Srodek_Trwaly.ID_Srodka = "+assetID+") " +
                 "ORDER BY dbo.Historia_Srodka.Data DESC;";
             cmd.CommandText = data;
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
@@ -457,14 +467,16 @@ namespace FAM_App
         public DataTable GetAssetDataToEditWithUser(DataTable dataTable, int assetID)
         {
             SqlCommand cmd = DataBaseConnection();
-            String data = "SELECT CONCAT(dbo.Grupa.Symbol, ' - ', dbo.Grupa.Nazwa) AS GRUPA, CONCAT(dbo.Podgrupa.Symbol, ' - ', dbo.Podgrupa.Nazwa) AS PODGRUPA, CONCAT(dbo.Rodzaj.Symbol, ' - ', dbo.Rodzaj.Nazwa) AS RODZAJ, " +
-                "CONCAT(dbo.Produkt.Nazwa, ' ', dbo.Produkt.Marka, ' ', dbo.Produkt.Model, ' ', dbo.Produkt.Rok_Produkcji) AS PRODUKT, " +
-                "CONCAT(dbo.Dostawca.Nazwa, ' ', dbo.Dostawca.Miejscowosc, ' ', dbo.Dostawca.Kod_Pocztowy, ' ', dbo.Dostawca.Ulica) AS DOSTAWCA, " +
-                "CONCAT(dbo.Adres.Nazwa, ' ', dbo.Adres.Miejscowosc, ' ', dbo.Adres.Kod_Pocztowy, ' ', dbo.Adres.Ulica, ' ', dbo.Adres.Nr_Budynku, ' ', dbo.Adres.Nr_Lokalu, ' ', dbo.Adres.Nr_Pomieszczenia) AS ADRES, " +
-                "CONCAT(dbo.Pracownik.Imie, ' ', dbo.Pracownik.Nazwisko, ' ', dbo.Pracownik.Email) AS PRACOWNIK, " +
-                "dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stan_Status, dbo.Srodek_Trwaly.Stawka_Amortyzacji, dbo.Srodek_Trwaly.Kod_Srodka " +
-                "FROM dbo.Pracownik INNER JOIN dbo.Adres INNER JOIN dbo.Historia_Srodka ON dbo.Adres.ID_Adresu = dbo.Historia_Srodka.id_adresu ON dbo.Pracownik.ID_Pracownika = dbo.Historia_Srodka.id_uzytkownika INNER JOIN dbo.Srodek_Trwaly ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka INNER JOIN dbo.Podgrupa INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy INNER JOIN dbo.Rodzaj ON dbo.Podgrupa.ID_Podgrupy = dbo.Rodzaj.id_podgrupy ON dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = dbo.Rodzaj.ID_Rodzaju INNER JOIN dbo.Produkt ON dbo.Srodek_Trwaly.id_produktu = dbo.Produkt.ID_Produktu INNER JOIN dbo.Dostawca ON dbo.Srodek_Trwaly.id_dostawcy = dbo.Dostawca.ID_Dostawcy " +
-                "WHERE (dbo.Srodek_Trwaly.ID_Srodka = " + assetID + ")" +
+            String data = "SELECT dbo.Grupa.ID_Grupy, dbo.Podgrupa.ID_Podgrupy, dbo.Rodzaj.ID_Rodzaju, dbo.Produkt.ID_Produktu, dbo.Dostawca.ID_Dostawcy, dbo.Adres.ID_Adresu, dbo.Pracownik.ID_Pracownika, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stan_Status, dbo.Srodek_Trwaly.Stawka_Amortyzacji, dbo.Srodek_Trwaly.Kod_Srodka " +
+                "FROM dbo.Pracownik " +
+                "INNER JOIN dbo.Adres " +
+                "INNER JOIN dbo.Historia_Srodka ON dbo.Adres.ID_Adresu = dbo.Historia_Srodka.id_adresu ON dbo.Pracownik.ID_Pracownika = dbo.Historia_Srodka.id_uzytkownika " +
+                "INNER JOIN dbo.Srodek_Trwaly ON dbo.Historia_Srodka.id_srodka = dbo.Srodek_Trwaly.ID_Srodka " +
+                "INNER JOIN dbo.Podgrupa " +
+                "INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy " +
+                "INNER JOIN dbo.Rodzaj ON dbo.Podgrupa.ID_Podgrupy = dbo.Rodzaj.id_podgrupy ON dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = dbo.Rodzaj.ID_Rodzaju INNER JOIN dbo.Produkt ON dbo.Srodek_Trwaly.id_produktu = dbo.Produkt.ID_Produktu " +
+                "INNER JOIN dbo.Dostawca ON dbo.Srodek_Trwaly.id_dostawcy = dbo.Dostawca.ID_Dostawcy " +
+                "WHERE (dbo.Srodek_Trwaly.ID_Srodka = "+assetID+") " +
                 "ORDER BY dbo.Historia_Srodka.Data DESC;";
             cmd.CommandText = data;
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
@@ -494,7 +506,7 @@ namespace FAM_App
         {
             SqlCommand cmd = DataBaseConnection();
             String data = "UPDATE dbo.Pracownik " +
-                "SET dbo.Pracownik.Imie = '"+name+"', dbo.Pracownik.Nazwisko = '"+surname+"', dbo.Pracownik.Pesel = '"+pesel+"', dbo.Pracownik.Telefon = '"+phone+ "', dbo.Pracownik.Email = '"+email+"', dbo.Pracownik.Miejscowosc = '"+city+ "', dbo.Pracownik.Kod_Pocztowy = '"+postCode+"', dbo.Pracownik.Ulica = '"+street+"', dbo.Pracownik.Nr_Budynku = '"+buildingNumber+ "', dbo.Pracownik.Nr_Lokalu = '"+apartmentNumber+ "', dbo.Pracownik.Admin = "+admin+", dbo.Pracownik.Login = '"+newLogin+"', dbo.Pracownik.Hash = '"+newPassword+ "', dbo.Pracownik.Sol_Hasla = '"+salt+"' " +
+                "SET dbo.Pracownik.Imie = '"+name+"', dbo.Pracownik.Nazwisko = '"+surname+"', dbo.Pracownik.Pesel = '"+pesel+"', dbo.Pracownik.Telefon = '"+phone+ "', dbo.Pracownik.Email = '"+email+"', dbo.Pracownik.Miejscowosc = '"+city+ "', dbo.Pracownik.Kod_Pocztowy = '"+postCode+"', dbo.Pracownik.Ulica = '"+street+"', dbo.Pracownik.Nr_Budynku = '"+buildingNumber+ "', dbo.Pracownik.Nr_Lokalu = '"+apartmentNumber+ "', dbo.Pracownik.Admin = '"+admin+ "', dbo.Pracownik.Ewidencja = '"+employee+"', dbo.Pracownik.Login = '" + newLogin+"', dbo.Pracownik.Hash = '"+newPassword+ "', dbo.Pracownik.Sol_Hasla = '"+salt+"' " +
                 "WHERE (dbo.Pracownik.ID_Pracownika = "+employeeID+");";
             cmd.CommandText = data;
             int updateResult = cmd.ExecuteNonQuery();
@@ -539,7 +551,6 @@ namespace FAM_App
             String data = query;
             cmd.CommandText = data;
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            dataTable = new DataTable("emp");
             sda.Fill(dataTable);
             cmd.Dispose();
             sqlConnection.Close();

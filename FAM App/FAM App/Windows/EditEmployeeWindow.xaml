@@ -80,90 +80,145 @@
                     <ColumnDefinition Width="0.2*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Imię:" Grid.Row="0" Style="{StaticResource darkLabel}"/>
-                <TextBox x:Name="Name_TextBox" Grid.Row="0" Height="25" Width="310"   
-                         Style="{StaticResource darkTextBox }" MaxLength="30"/>
-
-                <Label Content="Nazwisko:" Grid.Row="1" 
-                       Style="{StaticResource darkLabel}"/>
-                <TextBox x:Name="Surname_TextBox" Grid.Row="1" Height="25" Width="310" 
-                         Style="{StaticResource darkTextBox }" MaxLength="30"/>
-
-                <Label Content="Pesel:" Grid.Row="2" Style="{StaticResource darkLabel}"/>
-                <TextBox x:Name="Pesel_TextBox" Grid.Row="2" Height="25" Width="310" 
-                         Style="{StaticResource darkTextBox }" MaxLength="11"/>
-
-                <Label Content="Telefon:" Grid.Row="3" Style="{StaticResource darkLabel}"/>
-                <TextBox x:Name="Phone_TextBox" Grid.Row="3" Height="25" Width="310" 
-                         Style="{StaticResource darkTextBox }" MaxLength="9"/>
-
-                <Label Content="Miejscowość:" Grid.Row="4" Style="{StaticResource darkLabel}"/>
-                <TextBox x:Name="City_TextBox" Grid.Row="4" Height="25" Width="310" 
-                         Style="{StaticResource darkTextBox }" MaxLength="50"/>
-
-                <Label Content="Kod pocztowy:" Grid.Row="5" Style="{StaticResource darkLabel}"/>
-                <Border x:Name="BorderPostCode"  Grid.Column="1" Grid.Row="5">
+                <Border Margin="5" BorderBrush="#dddddd" BorderThickness="1" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.2*"/>
-                            <ColumnDefinition Width="0.1*"/>
-                            <ColumnDefinition Width="0.3*"/>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="0.8*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="PostCode_TextBox1" Grid.Column="0" Height="25" Width="55" 
-                         Style="{StaticResource darkTextBox }" MaxLength="2"/>
-                        <Label Content="-" Grid.Column="1"  Style="{StaticResource darkLabel}" HorizontalAlignment="Center" FontSize="30"/>
-                        <TextBox x:Name="PostCode_TextBox2" Grid.Column="2" Height="25" Width="80" 
-                         Style="{StaticResource darkTextBox }" MaxLength="3"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.25*"/>
+                            <RowDefinition Height="0.25*"/>
+                            <RowDefinition Height="0.25*"/>
+                            <RowDefinition Height="0.25*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="10">
+                            <TextBlock Text="Dane osobowe" TextWrapping="Wrap" Foreground="#dddddd" FontWeight="Bold" FontSize="20" FontFamily="Tahoma"/>
+                        </Label>
+                        <Label Content="Imię:" Grid.Row="1" Style="{StaticResource darkLabel}"/>
+                        <TextBox x:Name="Name_TextBox" Grid.Row="1" Height="25" Width="200"   
+                         Style="{StaticResource darkTextBox }" MaxLength="30"/>
+
+                        <Label Content="Nazwisko:" Grid.Row="2" 
+                       Style="{StaticResource darkLabel}"/>
+                        <TextBox x:Name="Surname_TextBox" Grid.Row="2" Height="25" Width="200" 
+                         Style="{StaticResource darkTextBox }" MaxLength="30"/>
+
+                        <Label Content="Pesel:" Grid.Row="3" Style="{StaticResource darkLabel}"/>
+                        <TextBox x:Name="Pesel_TextBox" Grid.Row="3" Height="25" Width="200" 
+                         Style="{StaticResource darkTextBox }" MaxLength="11"/>
                     </Grid>
                 </Border>
+                <Border Margin="5" BorderBrush="#dddddd" BorderThickness="1" Grid.Row="3" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.8*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="0.2*"/>
+                        </Grid.RowDefinitions>
 
-                <Label Content="Ulica:" Grid.Row="6" 
-                       Style="{StaticResource darkLabel}"/>
-                <TextBox x:Name="Street_TextBox" Grid.Row="6" Height="25" Width="310" 
+                        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="10">
+                            <TextBlock Text="Adres" TextWrapping="Wrap" Foreground="#dddddd" FontWeight="Bold" FontSize="20" FontFamily="Tahoma"/>
+                        </Label>
+                        <Label Content="Miejscowość:" Grid.Row="1" Style="{StaticResource darkLabel}"/>
+                        <TextBox x:Name="City_TextBox" Grid.Row="1" Height="25" Width="200" 
                          Style="{StaticResource darkTextBox }" MaxLength="50"/>
 
-                <Border x:Name="BorderNumber"  Grid.Column="1" Grid.Row="7" VerticalAlignment="Top">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="0.4*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="0.4*"/>
-                            <ColumnDefinition Width="3*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Numer budynku:" Style="{StaticResource darkLabel}"/>
-                        <TextBox x:Name="BuildingNumber_TextBox" Height="25" Width="50" 
+                        <Label Content="Kod pocztowy:" Grid.Row="2" Style="{StaticResource darkLabel}"/>
+                        <Border x:Name="BorderPostCode"  Grid.Column="1" Grid.Row="2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.1*"/>
+                                    <ColumnDefinition Width="0.05*"/>
+                                    <ColumnDefinition Width="0.15*"/>
+                                    <ColumnDefinition Width="0.7*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="PostCode_TextBox1" Grid.Column="0" Height="25" Width="55" 
+                         Style="{StaticResource darkTextBox }" MaxLength="2"/>
+                                <Label Content="-" Grid.Column="1"  Style="{StaticResource darkLabel}" HorizontalAlignment="Center" FontSize="30"/>
+                                <TextBox x:Name="PostCode_TextBox2" Grid.Column="2" Height="25" Width="80" 
+                         Style="{StaticResource darkTextBox }" MaxLength="3"/>
+                            </Grid>
+                        </Border>
+
+                        <Label Content="Ulica:" Grid.Row="3" 
+                       Style="{StaticResource darkLabel}"/>
+                        <TextBox x:Name="Street_TextBox" Grid.Row="3" Height="25" Width="200" 
+                         Style="{StaticResource darkTextBox }" MaxLength="50"/>
+
+                        <Border x:Name="BorderNumber"  Grid.Column="1" Grid.Row="4" VerticalAlignment="Top">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.25*"/>
+                                    <ColumnDefinition Width="0.15*"/>
+                                    <ColumnDefinition Width="0.2*"/>
+                                    <ColumnDefinition Width="0.15*"/>
+                                    <ColumnDefinition Width="0.45*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Numer budynku:" Style="{StaticResource darkLabel}"/>
+                                <TextBox x:Name="BuildingNumber_TextBox" Height="25" Width="50" 
                          Style="{StaticResource darkTextBox }" MaxLength="4"/>
 
-                        <Label Content="Numer lokalu:" Grid.Column="2" Style="{StaticResource darkLabel}"/>
-                        <TextBox x:Name="ApartmentNumber_TextBox" Grid.Column="3" Height="25" Width="50" 
+                                <Label Content="Numer lokalu:" Grid.Column="2" Style="{StaticResource darkLabel}"/>
+                                <TextBox x:Name="ApartmentNumber_TextBox" Grid.Column="3" Height="25" Width="50" 
                          Style="{StaticResource darkTextBox }" MaxLength="4"/>
+                            </Grid>
+                        </Border>
                     </Grid>
                 </Border>
-
-
-                <Label Content="Email:" Grid.Row="1" Style="{StaticResource darkLabelLogin}"/>
-                <TextBox x:Name="Email_TextBox" Grid.Row="1" Height="25" Width="310" 
-                         MaxLength="50" Style="{StaticResource darkTextBoxLogin }"/>
-
-                <Label Content="Login:" Grid.Row="2" Style="{StaticResource darkLabelLogin}"/>
-                <TextBox x:Name="NewLogin_TextBox" Grid.Row="2" Height="25" Width="310" 
-                         Style="{StaticResource darkTextBoxLogin}" MaxLength="50"/>
-
-                <Label Content="Hasło:" Grid.Row="3" Style="{StaticResource darkLabelLogin}"/>
-                <TextBox x:Name="NewPasswd_TextBox" Grid.Row="3" Height="25" Width="310" 
-                         MaxLength="100" Style="{StaticResource darkTextBoxLogin}"/>
-                <Border x:Name="BorderCheck"  Grid.Column="3" Grid.Row="4" >
+                <Border Margin="5" BorderBrush="#dddddd" BorderThickness="1" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.8*"/>
                         </Grid.ColumnDefinitions>
-                        <CheckBox x:Name="IsAdmin" Grid.Column="0" Style="{StaticResource darkCheckBox}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.4*"/>
+                            <RowDefinition Height="0.3*"/>
+                            <RowDefinition Height="0.3*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="10">
+                            <TextBlock Text="Dane kontaktowe" TextWrapping="Wrap" Foreground="#dddddd" FontWeight="Bold" FontSize="20" FontFamily="Tahoma"/>
+                        </Label>
+                        <Label Content="Telefon:" Grid.Row="1" Style="{StaticResource darkLabel}"/>
+                        <TextBox x:Name="Phone_TextBox" Grid.Row="1" Height="25" Width="200" 
+                         Style="{StaticResource darkTextBox }" MaxLength="9"/>
+
+                        <Label Content="Email:" Grid.Row="2" Style="{StaticResource darkLabel}"/>
+                        <TextBox x:Name="Email_TextBox" Grid.Row="2" Height="25" Width="200" 
+                         MaxLength="50" Style="{StaticResource darkTextBox}"/>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="4" BorderThickness="1" BorderBrush="#dddddd" Margin="5"/>
+                <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="10" VerticalAlignment="Center">
+                    <TextBlock Text=" Dane logowania" TextWrapping="Wrap" Foreground="#dddddd" FontWeight="Bold" FontSize="20" FontFamily="Tahoma"/>
+                </Label>
+                <Label Content="Login:" Grid.Row="3" Style="{StaticResource darkLabelLogin}"/>
+                <TextBox x:Name="NewLogin_TextBox" Grid.Row="3" Height="25" Width="310" 
+                         Style="{StaticResource darkTextBoxLogin}" MaxLength="50"
+                         IsEnabled="False"/>
+
+                <Label Content="Hasło:" Grid.Row="4" Style="{StaticResource darkLabelLogin}"/>
+                <TextBox x:Name="NewPasswd_TextBox" Grid.Row="4" Height="25" Width="310" 
+                         MaxLength="100" Style="{StaticResource darkTextBoxLogin}"
+                         IsEnabled="False"/>
+                
+                <Border x:Name="BorderCheck"  Grid.Column="3" Grid.Row="5" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox x:Name="IsAdmin" Grid.Column="0" Style="{StaticResource darkCheckBox}" IsEnabled="False">
                             <TextBlock Text="Funkcja administratora" TextWrapping="Wrap"/>
                         </CheckBox>
-                        <CheckBox x:Name="AsEmployee" IsChecked="True" IsEnabled="False" Grid.Column="1" Style="{StaticResource darkCheckBox}">
+                        <CheckBox x:Name="AsEmployee" Grid.Column="1" Style="{StaticResource darkCheckBox}" Checked="AsEmployee_Checked" Unchecked="AsEmployee_Unchecked">
                             <TextBlock Text="Pracownik" TextWrapping="Wrap"/>
                         </CheckBox>
                     </Grid>

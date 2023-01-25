@@ -33,6 +33,9 @@ namespace FAM_App.Pages
             {
                 if (MessageBox.Show("Czy na pewno chcesz dodać nowego pracownika do bazy danych?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
+                    string? saltString = "";
+                    string? hashPasswdString = "";
+
                     string name = Name_TextBox.Text;
                     string surname = Surname_TextBox.Text;
                     string pesel = Pesel_TextBox.Text;
@@ -46,10 +49,13 @@ namespace FAM_App.Pages
                     string login = NewLogin_TextBox.Text;
                     SqlBoolean employee = (SqlBoolean)AsEmployee.IsChecked;
                     SqlBoolean admin = (SqlBoolean)IsAdmin.IsChecked;
-                    byte[] salt = MakeSalt();
-                    byte[] hashPasswd = MakeHash(NewPasswd_TextBox.Text, salt);
-                    string saltString = Convert.ToBase64String(salt);
-                    string hashPasswdString = Convert.ToBase64String(hashPasswd);
+                    if (employee)
+                    {
+                        byte[] salt = MakeSalt();
+                        byte[] hashPasswd = MakeHash(NewPasswd_TextBox.Text, salt);
+                        saltString = Convert.ToBase64String(salt);
+                        hashPasswdString = Convert.ToBase64String(hashPasswd);
+                    }
 
                     DataBase dataBase = new DataBase();
                     bool check = dataBase.AddEmployeeToBase(name, surname, pesel, phone, email, city, postCode, street, buildingNumber, apartmentNumber, admin, employee, login, hashPasswdString, saltString);
@@ -101,12 +107,14 @@ namespace FAM_App.Pages
         {
             NewLogin_TextBox.IsEnabled= true;
             NewPasswd_TextBox.IsEnabled = true;
+            IsAdmin.IsEnabled = true;
         }
 
         private void AsEmployee_Unchecked(object sender, RoutedEventArgs e)
         {
             NewLogin_TextBox.IsEnabled = false;
             NewPasswd_TextBox.IsEnabled = false;
+            IsAdmin.IsEnabled = false;
         }
     }
 }

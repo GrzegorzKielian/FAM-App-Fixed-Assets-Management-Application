@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FAM_App"
         mc:Ignorable="d"
-        Title="MainMenu" Height="1080" Width="1920" WindowStartupLocation="CenterScreen"
+        Width="{x:Static SystemParameters.PrimaryScreenWidth}"  
+        Height="{x:Static SystemParameters.PrimaryScreenHeight}"
+        WindowStartupLocation="CenterScreen"
         WindowState="Maximized">
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="0.85*"/>
             <ColumnDefinition Width="0.05*"/>
         </Grid.ColumnDefinitions>
 
@@ -41,7 +43,6 @@
                     <MenuItem  x:Name="AddAdress" Header="Dodaj adres" Click="AddAdress_Click" />
                 </MenuItem>
                 <MenuItem Header="Raport" >
-                    <MenuItem Header="Zestawienie" Click="FixedAssetsStatement_Click"/>
                     <MenuItem Header="Karta srodka" Click="FixedAssetCard_Click"/>
                 </MenuItem>
                 <MenuItem x:Name="Employee" Header="Pracownicy" Visibility="Hidden">

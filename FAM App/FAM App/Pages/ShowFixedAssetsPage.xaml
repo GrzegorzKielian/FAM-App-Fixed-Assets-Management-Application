@@ -60,21 +60,22 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>
-            <ColumnDefinition />
+            <ColumnDefinition Width="0.9*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border x:Name="BorderPanel" BorderBrush="WhiteSmoke" BorderThickness="1"  
                 Background="#152238" 
-                Grid.Column="0" Grid.Row="1"/>
+                Grid.Column="0" Grid.Row="1"
+                Margin="1" Padding="1"/>
 
         <Border Grid.Row="1" Margin="2,20">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*"/>
                     <RowDefinition Height="0.5*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="0.2*"/>
                 </Grid.RowDefinitions>
                 <CheckBox x:Name="Depreciation_CheckBox" Grid.Row="0" Checked="Depreciation_CheckBox_Checked" Unchecked="Depreciation_CheckBox_Unchecked" Style="{StaticResource darkCheckBox}">
                     <TextBlock Text="Pokaż tylko środki z amortyzacją." TextWrapping="Wrap"/>
@@ -96,50 +97,63 @@
             </Grid>
         </Border>
 
-        <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+        <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Padding="2">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.5*"/>
-                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition Height="0.85*"/>
                 </Grid.RowDefinitions>
-                <Border x:Name="FiltrSearch" Grid.Row="0" Padding="5">
+                <Border x:Name="FiltrSearch" Grid.Row="0" Padding="5" Margin="5" BorderThickness="1" BorderBrush="#dddddd">
                     <Border x:Name="FixedAssets_Classification" Margin="0,0,40,0">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.3*"/>
-                                <ColumnDefinition Width="0.9*"/>
-                                <ColumnDefinition Width="0.4*"/>
-                                <ColumnDefinition Width="0.9*"/>
-                                <ColumnDefinition Width="0.3*"/>
-                                <ColumnDefinition Width="0.9*"/>
-                                <ColumnDefinition Width="0.8*"/>
-                                <ColumnDefinition Width="1.2*"/>
-                                <ColumnDefinition Width="1.3*"/>
+                                <ColumnDefinition Width="0.05*"/>
+                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.05*"/>
+                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.05*"/>
+                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.05*"/>
+                                <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.1*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Content="Grupa:" Grid.Column="0" Style="{StaticResource darkLabelSelect}"/>
-                            <ComboBox Name="Group" Grid.Column="1" Style="{StaticResource darkCombobox}"
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.4*"/>
+                                <RowDefinition Height="0.6*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.ColumnSpan="7">
+                                <TextBlock Text="Wyszukiwanie danych po klasyfikacji" TextWrapping="Wrap" Foreground="#dddddd" FontWeight="Bold" FontSize="20" FontFamily="Tahoma"/>
+                            </Label>
+                            <Label Content="Grupa:" Grid.Row="1" Grid.Column="0" Style="{StaticResource darkLabelSelect}"/>
+                            <ComboBox Name="Group" Grid.Row="1" Grid.Column="1" Style="{StaticResource darkCombobox}"
                                     Loaded="Group_Loaded"
                                       SelectionChanged="Group_SelectionChanged">
                             </ComboBox>
 
-                            <Label Content="Podgrupa:" Grid.Column="2" Style="{StaticResource darkLabelSelect}"/>
-                            <ComboBox Name="Subgroup" Grid.Column="3" Style="{StaticResource darkCombobox}"
+                            <Label Content="Podgrupa:" Grid.Row="1" Grid.Column="2" Style="{StaticResource darkLabelSelect}"/>
+                            <ComboBox Name="Subgroup" Grid.Row="1" Grid.Column="3" Style="{StaticResource darkCombobox}"
                                   SelectionChanged="Subgroup_SelectionChanged"
                                   IsEnabled="False">
                             </ComboBox>
 
-                            <Label Content="Rodzaj:" Grid.Column="4" Style="{StaticResource darkLabelSelect}"/>
-                            <ComboBox Name="Type" Grid.Column="5" Style="{StaticResource darkCombobox}"
+                            <Label Content="Rodzaj:" Grid.Row="1" Grid.Column="4" Style="{StaticResource darkLabelSelect}"/>
+                            <ComboBox Name="Type" Grid.Row="1" Grid.Column="5" Style="{StaticResource darkCombobox}"
                                   SelectionChanged="Type_SelectionChanged"
                                   IsEnabled="False">
                             </ComboBox>
 
-                            <Label Grid.Column="6" Style="{StaticResource darkLabelSelect}" HorizontalContentAlignment="Right">
+                            <Button Grid.Row="1" Grid.Column="6" x:Name="ClearClassification_Button" Click="ClearClassification_Button_Click" Content="X" FontSize="20" FontFamily="Tahoma" Height="30" Width="30" Visibility="Hidden" Margin="5" Background="Red" Foreground="White" HorizontalAlignment="Left" />
+
+                            <Label Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="3">
+                                <TextBlock Text="Wyszukiwanie danych po użytkowniku" TextWrapping="Wrap" Foreground="#dddddd" FontWeight="Bold" FontSize="20" FontFamily="Tahoma"/>
+                            </Label>
+                            <Label Grid.Column="7" Grid.Row="1" Style="{StaticResource darkLabelSelect}" HorizontalContentAlignment="Right">
                                 <TextBlock Text="Nazwisko osoby użytkującej środek:" TextWrapping="Wrap" HorizontalAlignment="Right"/>
                             </Label>
-                            <TextBox Grid.Column="7" x:Name="UserSearch_TxtBox" Style="{StaticResource darkTextBox}" SelectionChanged="UserSearch_TxtBox_SelectionChanged"/>
-                            <Button Grid.Column="7" x:Name="ClearUserSearch_TxtBox" Content="X" Click="ClearUserSearch_TxtBox_Click" Height="25" Width="25" Visibility="Hidden" Margin="0,0,45,0" Background="Red" Foreground="White" HorizontalAlignment="Right"/>
-                            <Button x:Name="FiltrSearch_Button" Content="Filtruj" Click="FiltrSearch_Button_Click" Grid.Column="8" Height="30" Width="120" HorizontalAlignment="Left"/>
+                            <TextBox Grid.Row="1" Grid.Column="8" x:Name="UserSearch_TxtBox" Style="{StaticResource darkTextBox}" SelectionChanged="UserSearch_TxtBox_SelectionChanged"/>
+                            <Button Grid.Row="1" Grid.Column="8" x:Name="ClearUserSearch_TxtBox" Content="X" Click="ClearUserSearch_TxtBox_Click" Height="25" Width="25" Visibility="Hidden" Margin="0,0,45,0" Background="Red" Foreground="White" HorizontalAlignment="Right"/>
+                            <Button Grid.Row="1" x:Name="FiltrSearch_Button" Content="Filtruj" Click="FiltrSearch_Button_Click" Grid.Column="9" Height="30" Width="120" HorizontalAlignment="Left"/>
                         </Grid>
                     </Border>
                 </Border>

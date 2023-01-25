@@ -40,7 +40,7 @@ namespace FAM_App.Pages
                     bool check = dataBase.AddSupplierToBase(Name, City, PostCode, Street);
                     if (check)
                     {
-                        MessageBox.Show("Dodano do bazy:\n" + Name + "\n" + City + "\n" + PostCode + "\n" + Street);
+                        MessageBox.Show("Dodano do bazy"); //:\n" + Name + "\n" + City + "\n" + PostCode + "\n" + Street);
                         ClearTextBoxes();
                     }
                     else { MessageBox.Show("Błąd przy wstawianiu danych do bazy!"); }

@@ -26,29 +26,31 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>
-            <ColumnDefinition />
+            <ColumnDefinition Width="0.9*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border x:Name="BorderPanel" BorderBrush="WhiteSmoke" BorderThickness="1"  
                 Background="#152238"
-                Grid.Column="0" Grid.Row="1"/>
+                Grid.Column="0" Grid.Row="1"
+                Margin="1" Padding="1">
 
-        <StackPanel Grid.Row="1" Margin="0,50">
-            <ComboBox x:Name="ChooseBox" Style="{StaticResource darkComboBox}">
-                <ComboBoxItem>Wyszykaj po imieniu</ComboBoxItem>
-                <ComboBoxItem>Wyszykaj po nazwisku</ComboBoxItem>
-                <ComboBoxItem>Wyszykaj po nazwie email</ComboBoxItem>
-                <ComboBoxItem>Wyszykaj po miejscu zamieszkania</ComboBoxItem>
-                <ComboBoxItem>Wyszykaj po nazwie ulicy</ComboBoxItem>
-            </ComboBox>
-            <TextBox x:Name="Choose_TxtBox" Style="{StaticResource darkTextBox}"/>
-            <Button x:Name="Search_Button" Content="Wyszukaj" Height="25" FontSize="15" FontFamily="Tahoma" Click="Search_Button_Click"/>
-            <Button x:Name="ShowAll_Button" Content="Pokaż wszystko" Height="25" FontSize="15" FontFamily="Tahoma" Margin="0,15,0,0" Click="ShowAll_Button_Click"/>
-        </StackPanel>
+            <StackPanel Grid.Row="1" Margin="0,50">
+                <ComboBox x:Name="ChooseBox" Style="{StaticResource darkComboBox}">
+                    <ComboBoxItem>Wyszukaj po imieniu</ComboBoxItem>
+                    <ComboBoxItem>Wyszukaj po nazwisku</ComboBoxItem>
+                    <ComboBoxItem>Wyszukaj po nazwie email</ComboBoxItem>
+                    <ComboBoxItem>Wyszukaj po miejscu zamieszkania</ComboBoxItem>
+                    <ComboBoxItem>Wyszukaj po nazwie ulicy</ComboBoxItem>
+                </ComboBox>
+                <TextBox x:Name="Choose_TxtBox" Style="{StaticResource darkTextBox}"/>
+                <Button x:Name="Search_Button" Content="Wyszukaj" Height="35" FontSize="15" FontFamily="Tahoma" Click="Search_Button_Click"/>
+                <Button x:Name="ShowAll_Button" Content="Pokaż wszystko" Height="25" FontSize="15" FontFamily="Tahoma" Margin="0,15,0,0" Click="ShowAll_Button_Click"/>
+            </StackPanel>
+        </Border>
 
-        <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+        <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Padding="2">
             <DataGrid x:Name="EmployeeDataGrid" Style="{StaticResource dark}" d:ItemsSource="{d:SampleData ItemCount=5}">
                 <DataGrid.Resources>
                     <Style TargetType="DataGridRow">

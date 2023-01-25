@@ -29,19 +29,20 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>
-            <ColumnDefinition />
+            <ColumnDefinition Width="0.9*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border x:Name="BorderPanel" BorderBrush="WhiteSmoke" BorderThickness="1"  
                 Background="#152238" 
-                Grid.Column="0" Grid.Row="1"/>
+                Grid.Column="0" Grid.Row="1"
+                Margin="1" Padding="1">
 
-        <StackPanel Grid.Row="1" Margin="0,20">
+            <StackPanel Grid.Row="1" Margin="0,20">
 
-        </StackPanel>
-
+            </StackPanel>
+        </Border>
         <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.RowDefinitions>
@@ -53,7 +54,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.2*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Nazwa:" Grid.Row="0" Style="{StaticResource darkLabel}"/>
@@ -88,7 +89,7 @@
 
 
                 <Button x:Name="AddSupplier_Button" Content="Dodaj dostawce" Grid.Row="5" Grid.Column="1"
-                        Height="30" Width="150" Margin="0,0,50,0" FontFamily="Tahoma" 
+                        Height="40" Width="150" Margin="0,0,50,0" FontFamily="Tahoma" 
                         FontSize="15" HorizontalAlignment="Right" Click="AddSupplier_Click"/>
             </Grid>
         </Border>

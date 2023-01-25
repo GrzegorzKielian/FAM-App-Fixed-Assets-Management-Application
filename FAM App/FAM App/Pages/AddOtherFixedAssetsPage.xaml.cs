@@ -68,7 +68,7 @@ namespace FAM_App.Pages
                         bool check = dataBase.AddOtherFixedAssetsToBase(introduction_date, fixedAsset_Code, supplier, product, adress, status, date_of_aquisition, gros_orig_value, net_orig_value, descritpion, invoice, guarantee, groupID, subgroupID, typeID, user);
                         if (check)
                         {
-                            MessageBox.Show("Dodano do bazy:\n" + introduction_date + "\n" + fixedAsset_Code + "\n" + typeID + "\n" + Supplier.Text + "\n" + Product.Text + "\n" + Adress.Text + "\n" + status + "\n" + date_of_aquisition + "\n" + gros_orig_value + "\n" + net_orig_value + "\n" + descritpion + "\n" + invoice + "\n" + guarantee + "\n");
+                            MessageBox.Show("Dodano do bazy"); //:\n" + introduction_date + "\n" + fixedAsset_Code + "\n" + typeID + "\n" + Supplier.Text + "\n" + Product.Text + "\n" + Adress.Text + "\n" + status + "\n" + date_of_aquisition + "\n" + gros_orig_value + "\n" + net_orig_value + "\n" + descritpion + "\n" + invoice + "\n" + guarantee + "\n");
                             ClearTextBoxes();
                         }
                         else { MessageBox.Show("Błąd przy wstawianiu danych do bazy!"); }
@@ -290,5 +290,19 @@ namespace FAM_App.Pages
             Guarantee.Clear();
         }
 
+        private void Status_Loaded(object sender, RoutedEventArgs e)
+        {
+            Status.Items.Add("W użyciu");
+            Status.Items.Add("Zlikwidowany");
+        }
+
+        private void Status_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Status.Items.Count == 0)
+            {
+                Status.Items.Add("W użyciu");
+                Status.Items.Add("Zlikwidowany");
+            }
+        }
     }
 }
