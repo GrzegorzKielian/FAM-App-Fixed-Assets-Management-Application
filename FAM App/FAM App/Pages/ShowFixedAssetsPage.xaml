@@ -40,7 +40,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontFamily" Value="Tahoma"/>
             <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Width" Value="200"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="Height" Value="25"/>
         </Style>
         <Style x:Key="darkTextBox" TargetType="TextBox">
@@ -48,7 +48,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Width" Value="220"/>
+            <Setter Property="Width" Value="150"/>
             <Setter Property="Height" Value="25"/>
         </Style>
         <ContextMenu x:Key="RightClickMenu">
@@ -83,9 +83,9 @@
                 <Border Grid.Row="1" x:Name="Depreciation_Border" Visibility="Hidden">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="0.5*"/>
-                            <RowDefinition Height="0.5*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition Height="0.7*"/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Style="{StaticResource darkLabel}">
                             <TextBlock Text="Aby wyliczyć amortyzację kliknij prawym przyciskiem myszy na środek trwały." TextWrapping="Wrap" FontSize="12"/>
@@ -101,20 +101,21 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.15*"/>
-                    <RowDefinition Height="0.85*"/>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition Height="0.7*"/>
                 </Grid.RowDefinitions>
                 <Border x:Name="FiltrSearch" Grid.Row="0" Padding="5" Margin="5" BorderThickness="1" BorderBrush="#dddddd">
                     <Border x:Name="FixedAssets_Classification" Margin="0,0,40,0">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.05*"/>
-                                <ColumnDefinition Width="0.15*"/>
-                                <ColumnDefinition Width="0.05*"/>
-                                <ColumnDefinition Width="0.15*"/>
-                                <ColumnDefinition Width="0.05*"/>
-                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition Width="0.1*"/>
                                 <ColumnDefinition Width="0.05*"/>
                                 <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition Width="0.05*"/>
+                                <ColumnDefinition Width="0.15*"/>
                                 <ColumnDefinition Width="0.15*"/>
                                 <ColumnDefinition Width="0.1*"/>
                             </Grid.ColumnDefinitions>
@@ -157,7 +158,31 @@
                         </Grid>
                     </Border>
                 </Border>
-                <DataGrid x:Name="FixedAssetsDataGrid" Grid.Row="1" Style="{StaticResource dark}" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <Border x:Name="StocktakeFiltr" Grid.Row="1" Padding="5" Margin="5" BorderThickness="1" BorderBrush="#dddddd">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.4*"/>
+                            <RowDefinition Height="0.6*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.15*"/>
+                            <ColumnDefinition Width="0.65*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.ColumnSpan="3">
+                            <TextBlock Text="Wyszukiwanie danych z inwentaryzacji" TextWrapping="Wrap" Foreground="#dddddd" FontWeight="Bold" FontSize="20" FontFamily="Tahoma"/>
+                        </Label>
+                        <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource darkLabelSelect}" HorizontalContentAlignment="Right">
+                            <TextBlock Text="Data rozpoczęcia inwentrayzacji: " TextWrapping="Wrap" HorizontalAlignment="Right"/>
+                        </Label>
+                        <ComboBox Grid.Row="1" Grid.Column="1" x:Name="Stocktake_Date_ChooseBox" Style="{StaticResource darkCombobox}"
+                                  Loaded="Stocktake_Date_ChooseBox_Loaded"
+                                  SelectionChanged="Stocktake_Date_ChooseBox_SelectionChanged"/>
+                        <Button Grid.Row="1" Grid.Column="2" Click="ShowStocktake_Click" x:Name="ShowStocktakes" Content="Pokaż" Height="30" Width="80" HorizontalAlignment="Left" IsEnabled="False"/>
+                        <Button Grid.Row="1" Grid.Column="1" Click="ClearStocktake_Button_Click" x:Name="ClearStocktakes_Button" Content="X" FontSize="20" FontFamily="Tahoma" Height="30" Width="30" Visibility="Hidden" Margin="5" Background="Red" Foreground="White" HorizontalAlignment="Right" />
+                    </Grid>
+                </Border>
+                <DataGrid x:Name="FixedAssetsDataGrid" Grid.Row="2" Style="{StaticResource dark}" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <DataGrid.Resources>
                         <Style TargetType="DataGridRow">
                             <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>

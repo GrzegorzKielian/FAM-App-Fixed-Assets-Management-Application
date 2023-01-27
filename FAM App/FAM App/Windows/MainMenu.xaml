@@ -43,7 +43,11 @@
                     <MenuItem  x:Name="AddAdress" Header="Dodaj adres" Click="AddAdress_Click" />
                 </MenuItem>
                 <MenuItem Header="Raport" >
-                    <MenuItem Header="Karta srodka" Click="FixedAssetCard_Click"/>
+                    <MenuItem x:Name="FixedAssetCard" Header="Karta srodka" Click="FixedAssetCard_Click"/>
+                    <MenuItem x:Name="StocktakeList" Header="Wykaz inwentaryzacji" Click="StocktakeList_Click"/>
+                </MenuItem>
+                <MenuItem Header="Inwentaryzacja" >
+                    <MenuItem x:Name="AddStocktake" Header="Dodaj inwentaryzację" Click="AddStocktake_Click"/>
                 </MenuItem>
                 <MenuItem x:Name="Employee" Header="Pracownicy" Visibility="Hidden">
                     <MenuItem  x:Name="ShowEmployee" Header="Przeglądaj pracowników" Click="ShowEmployee_Click"/>

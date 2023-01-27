@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -21,10 +22,9 @@ namespace FAM_App
     internal class DataBase : EmployeeINFO
     {
 
-        SqlConnection sqlConnection;
+        static SqlConnection sqlConnection = new SqlConnection($"Data Source=tcp:192.168.0.3,1433; Initial Catalog=FAMDataBase; User id=FAMAppMobile; Password=123456; Connect Timeout = 10; MultipleActiveResultSets=True "); //DESKTOP-JLN71CE
         private SqlCommand DataBaseConnection()
         {
-            sqlConnection = new SqlConnection($"Data Source=tcp:192.168.0.3,1433; Initial Catalog=FAMDataBase; User id=FAMAppMobile; Password=123456; Connect Timeout = 10; MultipleActiveResultSets=True "); //DESKTOP-JLN71CE
             sqlConnection.Open();
             SqlCommand cmd = sqlConnection.CreateCommand();
             return cmd;
@@ -41,7 +41,7 @@ namespace FAM_App
                 sqlConnection.Close();
                 return true;
             }
-            else { return false; }
+            else { sqlConnection.Close(); return false; }
         }
 
         public string[] GetPasswordData(string login, string[] strings)
@@ -60,7 +60,7 @@ namespace FAM_App
                 }
             }
             else { MessageBox.Show("Brak danych"); }
-
+            sqlConnection.Close();
             return strings;
         }
 
@@ -421,7 +421,7 @@ namespace FAM_App
                 }
             }
             else { MessageBox.Show("Brak danych"); }
-
+            sqlConnection.Close();
             if (isAdmin) { return true; }
             else { return false; }
         }
@@ -438,7 +438,7 @@ namespace FAM_App
             var result = cmd.ExecuteScalar();
             if (result == DBNull.Value) { haveUser = false; }
             else { haveUser = true; }
-
+            sqlConnection.Close();
             if (haveUser) { return true; }
             else { return false; }
         }
@@ -556,5 +556,41 @@ namespace FAM_App
             sqlConnection.Close();
             return dataTable;
         }
+
+        public DataTable DataBaseGetDepreciation(DataTable dataTable)
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = "SELECT ID_Inwentaryzacji, FORMAT(Data_Rozpoczecia, 'yyyy-MM-dd') AS 'Data Rozpoczęcia' " +
+                "FROM    dbo.Inwentaryzacja";
+            cmd.CommandText = data;
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            sda.Fill(dataTable);
+            cmd.Dispose();
+            sqlConnection.Close();
+            return dataTable;
+        }
+
+        public DataTable DataBaseShowFixedAssetsAtDateDepreciation(DataTable dataTable, string dateDepreciation)
+        {
+            SqlCommand cmd = DataBaseConnection();
+            String data = "SELECT dbo.Srodek_Trwaly.ID_Srodka, dbo.Srodek_Trwaly.Kod_Srodka, dbo.Srodek_Trwaly.Nr_Inwentarzowy, dbo.Inwentaryzacja_Srodek.Potwierdzenie, dbo.Srodek_Trwaly.Stan_Status, dbo.Grupa.Nazwa AS Grupa, dbo.Podgrupa.Nazwa AS Podgrupa, dbo.Rodzaj.Nazwa AS Rodzaj, dbo.Produkt.Nazwa AS Produkt, dbo.Srodek_Trwaly.Opis, dbo.Srodek_Trwaly.Data_Nabycia, dbo.Srodek_Trwaly.Data_Likwidacji, dbo.Srodek_Trwaly.Data_Wprowadzenia, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Netto, dbo.Srodek_Trwaly.Wartosc_Poczatkowa_Brutto, dbo.Dostawca.Nazwa AS Dostawca, dbo.Srodek_Trwaly.Faktura, dbo.Srodek_Trwaly.Gwarancja, dbo.Srodek_Trwaly.Stawka_Amortyzacji " +
+                "FROM dbo.Produkt " +
+                "INNER JOIN dbo.Srodek_Trwaly " +
+                "INNER JOIN dbo.Dostawca ON dbo.Srodek_Trwaly.id_dostawcy = dbo.Dostawca.ID_Dostawcy ON dbo.Produkt.ID_Produktu = dbo.Srodek_Trwaly.id_produktu " +
+                "INNER JOIN dbo.Rodzaj ON dbo.Srodek_Trwaly.id_nr_klasyfikacyjny = dbo.Rodzaj.ID_Rodzaju " +
+                "INNER JOIN dbo.Podgrupa " +
+                "INNER JOIN dbo.Grupa ON dbo.Podgrupa.id_grupy = dbo.Grupa.ID_Grupy ON dbo.Rodzaj.id_podgrupy = dbo.Podgrupa.ID_Podgrupy " +
+                "LEFT JOIN dbo.Inwentaryzacja_Srodek ON dbo.Srodek_Trwaly.ID_Srodka = dbo.Inwentaryzacja_Srodek.id_srodka " +
+                "LEFT JOIN dbo.Inwentaryzacja ON dbo.Inwentaryzacja_Srodek.id_inwentaryzacji = dbo.Inwentaryzacja.ID_Inwentaryzacji " +
+                "WHERE (dbo.Inwentaryzacja.Data_Rozpoczecia = '"+dateDepreciation+"');";
+            cmd.CommandText = data;
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            sda.Fill(dataTable);
+            cmd.Dispose();
+            sqlConnection.Close();
+            return dataTable;
+        }
+
+
     }
 }

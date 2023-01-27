@@ -71,8 +71,8 @@ namespace FAM_App.Pages
 
                 if (history.Rows.Count > 0 & fixedAsset.Rows.Count > 0)
                 {
-                    Font tableHeader = FontFactory.GetFont(FontFactory.TIMES_ROMAN, BaseFont.CP1250, 12, Font.BOLD );
-                    Font cellFont = FontFactory.GetFont(FontFactory.TIMES_ROMAN, BaseFont.CP1250, 12, Font.NORMAL);
+                    Font tableHeader = FontFactory.GetFont(FontFactory.TIMES_ROMAN, BaseFont.CP1250, 11, Font.BOLD );
+                    Font cellFont = FontFactory.GetFont(FontFactory.TIMES_ROMAN, BaseFont.CP1250, 11, Font.NORMAL);
 
                     PdfPTable pdfPTable = new PdfPTable(fixedAsset.Columns.Count);
                     pdfPTable.DefaultCell.Padding = 2;
@@ -137,7 +137,7 @@ namespace FAM_App.Pages
                                 MessageBox.Show(filename);
                                 using (myStream = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.Read))
                                 {
-                                    Document document = new Document(PageSize.A4.Rotate(), 8f, 16f, 16f, 8f);
+                                    Document document = new Document(PageSize.A4.Rotate(), 8f, 8f, 16f, 16f);
                                     PdfWriter.GetInstance(document, myStream);
                                     document.Open();
                                     document.Add(pdfPTable);

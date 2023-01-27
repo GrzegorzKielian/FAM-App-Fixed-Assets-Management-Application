@@ -37,11 +37,11 @@ namespace FAM_App
         public ShowFixedAssetsPage()
         {
             InitializeComponent();
-            LoadAllFixedAssets();
+            LoadFixedAssets();
             UserSearch_TxtBox.Text = String.Empty;
         }
 
-        private void LoadAllFixedAssets()
+        private void LoadFixedAssets()
         {
             DataBase dataBase = new DataBase();
             DataTable FixedAssets = new DataTable("emp");
@@ -99,8 +99,8 @@ namespace FAM_App
 
         private void LoadDataToDepreciationTextBlock(decimal[] yearsRates)
         {
-            Depreciation_Box.Text = "Wartość początkowa: " + yearsRates[0] + "\n";
-            Depreciation_Box.Text += "Stawka amortyzacji: " + yearsRates[1] + "\n";
+            Depreciation_Box.Text = "Wartość początkowa:\n" + yearsRates[0] + "\n";
+            Depreciation_Box.Text += "Stawka amortyzacji:\n" + yearsRates[1] + "\n\n";
             for(int i=2;i<yearsRates.Length;i++) 
             {
                 Depreciation_Box.Text += "Rok " + (i - 1) + ": " + yearsRates[i] + "\n";
@@ -143,7 +143,7 @@ namespace FAM_App
         {
             Depreciation_Border.Visibility = Visibility.Hidden;
             Depreciation_Box.Text = string.Empty;
-            LoadAllFixedAssets();
+            LoadFixedAssets();
             IsChecked = false;
         }
         private void UpdateItems(int number)
@@ -325,7 +325,7 @@ namespace FAM_App
         {
             UserSearch_TxtBox.Text = String.Empty;
             ClearUserSearch_TxtBox.Visibility = Visibility.Hidden;
-            LoadAllFixedAssets();
+            LoadFixedAssets();
         }
 
         private void UserSearch_TxtBox_SelectionChanged(object sender, RoutedEventArgs e)
@@ -344,7 +344,50 @@ namespace FAM_App
             Type.SelectedValue = null;
             Type.IsEnabled = false;
             ClearClassification_Button.Visibility = Visibility.Hidden;
-            LoadAllFixedAssets();
+            LoadFixedAssets();
+        }
+
+        private void Stocktake_Date_ChooseBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataBase dataBase = new DataBase();
+            DataTable depreciations = new DataTable();
+            depreciations = dataBase.DataBaseGetDepreciation(depreciations);
+
+            Stocktake_Date_ChooseBox.ItemsSource = depreciations.AsDataView();
+            Stocktake_Date_ChooseBox.DisplayMemberPath = "Data Rozpoczęcia";
+            Stocktake_Date_ChooseBox.SelectedValuePath = "ID_Inwentaryzacji";
+        }
+
+        private void GetFixedAssetsAtDateStocktake()
+        {
+            if(Stocktake_Date_ChooseBox.Text != String.Empty) 
+            {
+                string depreciationDateStart = Stocktake_Date_ChooseBox.Text;
+
+                DataBase dataBase = new DataBase();
+                DataTable FixedAssetsWithDepreciations = new DataTable();
+                FixedAssetsWithDepreciations = dataBase.DataBaseShowFixedAssetsAtDateDepreciation(FixedAssetsWithDepreciations, depreciationDateStart);
+
+                FixedAssetsDataGrid.ItemsSource = FixedAssetsWithDepreciations.DefaultView;
+            }
+        }
+
+        private void ShowStocktake_Click(object sender, RoutedEventArgs e)
+        {
+            GetFixedAssetsAtDateStocktake();
+            ClearStocktakes_Button.Visibility = Visibility.Visible;
+        }
+
+        private void ClearStocktake_Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoadFixedAssets();
+            ShowStocktakes.IsEnabled = false;
+            ClearStocktakes_Button.Visibility = Visibility.Hidden;
+        }
+
+        private void Stocktake_Date_ChooseBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ShowStocktakes.IsEnabled= true;
         }
     }
 

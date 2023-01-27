@@ -80,10 +80,6 @@ namespace FAM_App
             MainFrame.Content = new ShowProductsPage();
         }
 
-        private void FixedAssetsStatement_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void FixedAssetCard_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new FixedAssetCardPage();
@@ -124,6 +120,14 @@ namespace FAM_App
             LogOut.BorderThickness = new Thickness(0);
         }
 
+        private void StocktakeList_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new StockTakeListPage();
+        }
 
+        private void AddStocktake_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

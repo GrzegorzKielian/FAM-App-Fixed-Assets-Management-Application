@@ -75,10 +75,10 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.2*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="0.2*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.4*"/>
                 </Grid.ColumnDefinitions>
                 <Border Margin="5" BorderBrush="#dddddd" BorderThickness="1" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2">
                     <Grid>
@@ -161,11 +161,15 @@
                                     <ColumnDefinition Width="0.15*"/>
                                     <ColumnDefinition Width="0.45*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Content="Numer budynku:" Style="{StaticResource darkLabel}"/>
+                                <Label Style="{StaticResource darkLabel}">
+                                    <TextBlock Text="Numer budynku:" TextWrapping="Wrap"/>
+                                </Label>
                                 <TextBox x:Name="BuildingNumber_TextBox" Height="25" Width="50" 
                          Style="{StaticResource darkTextBox }" MaxLength="4"/>
 
-                                <Label Content="Numer lokalu:" Grid.Column="2" Style="{StaticResource darkLabel}"/>
+                                <Label Grid.Column="2" Style="{StaticResource darkLabel}">
+                                    <TextBlock Text="Numer lokalu:" TextWrapping="Wrap"/>
+                                </Label>
                                 <TextBox x:Name="ApartmentNumber_TextBox" Grid.Column="3" Height="25" Width="50" 
                          Style="{StaticResource darkTextBox }" MaxLength="4"/>
                             </Grid>

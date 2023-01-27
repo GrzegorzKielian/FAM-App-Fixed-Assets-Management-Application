@@ -15,7 +15,7 @@
             <Setter Property="Grid.Column" Value="3"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Width" Value="310"/>
+            <Setter Property="Width" Value="150"/>
             <Setter Property="Height" Value="25"/>
         </Style>
         <Style x:Key="darkTextBoxNumber" TargetType="TextBox">
@@ -23,7 +23,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Width" Value="100"/>
+            <Setter Property="Width" Value="75"/>
             <Setter Property="Height" Value="25"/>
         </Style>
         <Style x:Key="darkLabelEnter" TargetType="Label">
@@ -62,7 +62,7 @@
             <Setter Property="Background" Value="#dddddd"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Width" Value="500"/>
+            <Setter Property="Width" Value="400"/>
             <Setter Property="Height" Value="25"/>
             <Setter Property="FontFamily" Value="Tahoma"/>
             <Setter Property="FontSize" Value="15"/>
@@ -73,7 +73,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.9*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -90,29 +90,31 @@
         <Border x:Name="BorderPage"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition Height="0.15*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.2*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="0.3*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.45*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.35*"/>
                 </Grid.ColumnDefinitions>
                 <Border x:Name="FixedAssets_Data" Grid.Row="0" Grid.ColumnSpan="2">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.25*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.25*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Content="Data wprowadzenia środka:" Grid.Column="0" Style="{StaticResource darkLabelEnter}"/>
+                        <Label Grid.Column="0" Style="{StaticResource darkLabelEnter}">
+                            <TextBlock Text="Data wprowadzenia środka:" TextWrapping="Wrap" TextAlignment="Right"/>
+                        </Label>
                         <TextBox x:Name="Current_Date" Grid.Column="1" Style="{StaticResource darkTextBox}" Width="200" IsEnabled="False"/>
                         <Label Content="Kod środka:" Grid.Column="2" Style="{StaticResource darkLabelEnter}"/>
                         <TextBox x:Name="FixedAsset_Code" Grid.Column="3" Style="{StaticResource darkTextBox}" Width="200" IsEnabled="False"/>
@@ -123,13 +125,12 @@
                 <Border x:Name="FixedAssets_Classification" Grid.Row="1" Grid.ColumnSpan="2" Margin="5" BorderThickness="1" BorderBrush="#dddddd">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.3*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="0.4*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="0.3*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="0.05*"/>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.15*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition Width="0.2*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.4*"/>
@@ -159,10 +160,10 @@
                 <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.3*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.4*"/>
@@ -206,10 +207,10 @@
                 <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.3*"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Adres:" Grid.Column="0" Style="{StaticResource darkLabelSelect}"/>
                         <ComboBox Name="Adress" Grid.Column="1" Style="{StaticResource darkCombobox}" 
@@ -248,7 +249,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.2*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.8*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.4*"/>
@@ -266,17 +267,21 @@
                 </Border>
 
 
-                <Label Content="Data nabycia:" Grid.Row="1" Style="{StaticResource darkLabelEnter}"/>
+                <Label Grid.Row="1" Style="{StaticResource darkLabelEnter}">
+                    <TextBlock Text="Data nabycia:" TextWrapping="Wrap"/>
+                </Label>
                 <DatePicker Name="Date_of_aquisition" Grid.Row="1" Style="{StaticResource darkDatePicker}" />
 
-                <Label Content="Wartość początkowa brutto:" Grid.Row="2" Style="{StaticResource darkLabelEnter}" />
+                <Label Grid.Row="2" Style="{StaticResource darkLabelEnter}">
+                    <TextBlock Text="Wartość początkowa brutto:" TextWrapping="Wrap" TextAlignment="Right"/>
+                </Label>
                 <Border x:Name="Gross_orig_val" Grid.Row="2" Grid.Column="3" >
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.15*"/>
                             <ColumnDefinition Width="0.05*"/>
-                            <ColumnDefinition Width="0.10*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition Width="0.7*"/>
                         </Grid.ColumnDefinitions>
                         <TextBox x:Name="Gross_orig_val1_TxtBox" Grid.Column="0" 
                          Style="{StaticResource darkTextBoxNumber}" MaxLength="18" TextAlignment="Right"/>
@@ -286,14 +291,16 @@
                     </Grid>
                 </Border>
 
-                <Label Content="Wartość początkowa netto:" Grid.Row="3" Style="{StaticResource darkLabelEnter}" />
+                <Label Grid.Row="3" Style="{StaticResource darkLabelEnter}">
+                    <TextBlock Text="Wartość początkowa netto:" TextWrapping="Wrap" TextAlignment="Right"/>
+                </Label>
                 <Border x:Name="Net_orig_val1" Grid.Row="3" Grid.Column="3">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.15*"/>
                             <ColumnDefinition Width="0.05*"/>
-                            <ColumnDefinition Width="0.10*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition Width="0.7*"/>
                         </Grid.ColumnDefinitions>
                         <TextBox x:Name="Net_orig_val1_TxtBox" Grid.Column="0" 
                          Style="{StaticResource darkTextBoxNumber}" MaxLength="18" TextAlignment="Right"/>
@@ -311,9 +318,9 @@
                 <Border x:Name="InvoiceBorder" Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="2" Margin="5" BorderBrush="#dddddd" BorderThickness="1">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.37*"/>
-                            <ColumnDefinition Width="0.8*"/>
-                            <ColumnDefinition Width="0.15*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.6*"/>
+                            <ColumnDefinition Width="0.1*"/>
                             <ColumnDefinition Width="0.1*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
