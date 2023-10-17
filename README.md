@@ -1,4 +1,4 @@
-# FAM-App-Fixed-Assets-Management-Application
+# FAM App - Fixed Assets Management Application
 
 ## What is that?
 This project is an engineering thesis, showing some of the knowledge gained during the studies.
